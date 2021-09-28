@@ -10,5 +10,6 @@ export const Default: Story<ButtonProps> = (args) => <Button {...args} />
 
 Default.args = {
   children: 'Buy now',
-  size: 'medium'
+  size: 'medium',
+  fullWidth: false
 }
