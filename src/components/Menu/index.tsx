@@ -6,6 +6,7 @@ import { Close as CloseIcon } from '@styled-icons/material-outlined/Close'
 
 import * as S from './styles'
 import Logo from 'components/Logo'
+import Button from 'components/Button'
 
 const Menu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -30,6 +31,19 @@ const Menu = () => {
           aria-label="Close Menu"
           onClick={() => setIsMenuOpen(false)}
         />
+        <S.MenuNav>
+          <S.MenuLink href="#">Home</S.MenuLink>
+          <S.MenuLink href="#">Explore</S.MenuLink>
+        </S.MenuNav>
+        <S.RegisterBox>
+          <Button fullWidth size="large">
+            Login now
+          </Button>
+          <span>or</span>
+          <S.CreateAccount href="#" title="Sign Up">
+            Sign Up
+          </S.CreateAccount>
+        </S.RegisterBox>
       </S.MenuFull>
     </S.Wrapper>
   )
