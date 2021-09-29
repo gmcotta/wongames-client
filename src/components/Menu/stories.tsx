@@ -6,9 +6,9 @@ export default {
   component: Menu
 } as Meta
 
-export const Default: Story<MenuProps> = (args) => <Menu {...args} />
+export const Mobile: Story<MenuProps> = (args) => <Menu {...args} />
 
-Default.parameters = {
+Mobile.parameters = {
   layout: 'fullscreen',
   viewport: {
     defaultViewport: 'mobile1'
@@ -18,6 +18,19 @@ Default.parameters = {
   }
 }
 
-Default.args = {
-  username: 'Gustavo'
+Mobile.args = {
+  username: ''
+}
+
+export const Desktop: Story<MenuProps> = (args) => <Menu {...args} />
+
+Desktop.parameters = {
+  layout: 'fullscreen',
+  backgrounds: {
+    default: 'dark'
+  }
+}
+
+Desktop.args = {
+  username: ''
 }
