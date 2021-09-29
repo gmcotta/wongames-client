@@ -34,7 +34,7 @@ describe('<Logo />', () => {
   })
 
   it('should render the logo without label', () => {
-    renderWithTheme(<Logo size="large" hideLabel />)
+    renderWithTheme(<Logo size="large" hideLabelOnMobile />)
     expect(screen.getByLabelText(/Won Games/i).parentElement).toHaveStyleRule(
       'width',
       '5.8rem',

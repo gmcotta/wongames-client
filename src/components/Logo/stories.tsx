@@ -7,3 +7,9 @@ export default {
 } as Meta
 
 export const Default: Story<LogoProps> = (args) => <Logo {...args} />
+
+Default.args = {
+  color: 'white',
+  size: 'normal',
+  hideLabelOnMobile: false
+}
