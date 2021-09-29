@@ -8,17 +8,17 @@ import Logo from 'components/Logo'
 const Menu = () => (
   <S.Wrapper>
     <S.IconWrapper>
-      <MenuIcon />
+      <MenuIcon aria-label="Open Menu" />
     </S.IconWrapper>
     <S.LogoWrapper>
       <Logo hideLabelOnMobile />
     </S.LogoWrapper>
     <S.MenuGroup>
       <S.IconWrapper>
-        <SearchIcon />
+        <SearchIcon aria-label="Search" />
       </S.IconWrapper>
       <S.IconWrapper>
-        <ShoppingCartIcon />
+        <ShoppingCartIcon aria-label="Open Shopping Cart" />
       </S.IconWrapper>
     </S.MenuGroup>
   </S.Wrapper>
