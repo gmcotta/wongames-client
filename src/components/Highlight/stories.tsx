@@ -8,7 +8,8 @@ export default {
     title: 'Red Dead is back',
     subtitle: "Come and see John's new adventures",
     buttonLabel: 'Buy now',
-    buttonlink: '/rdr2'
+    buttonlink: '/rdr2',
+    backgroundImage: '/img/red-dead-img.jpeg'
   }
 } as Meta
 
