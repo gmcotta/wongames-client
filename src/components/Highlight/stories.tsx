@@ -10,18 +10,19 @@ export default {
     buttonLabel: 'Buy now',
     buttonLink: '/rdr2',
     backgroundImage: '/img/red-dead-img.jpeg',
-    floatImage: ''
+    floatImage: '',
+    contentAlignment: 'right'
   }
 } as Meta
 
 export const Default: Story<HighlightProps> = (args) => (
-  <div style={{ maxWidth: '104rem' }}>
+  <div style={{ maxWidth: '104rem', margin: '0 auto' }}>
     <Highlight {...args} />
   </div>
 )
 
 export const WithFloatImage: Story<HighlightProps> = (args) => (
-  <div style={{ maxWidth: '104rem' }}>
+  <div style={{ maxWidth: '104rem', margin: '0 auto' }}>
     <Highlight {...args} />
   </div>
 )
