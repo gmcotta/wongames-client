@@ -8,9 +8,23 @@ export default {
     title: 'Red Dead is back',
     subtitle: "Come and see John's new adventures",
     buttonLabel: 'Buy now',
-    buttonlink: '/rdr2',
-    backgroundImage: '/img/red-dead-img.jpeg'
+    buttonLink: '/rdr2',
+    backgroundImage: '/img/red-dead-img.jpeg',
+    floatImage: ''
   }
 } as Meta
 
-export const Default: Story<HighlightProps> = (args) => <Highlight {...args} />
+export const Default: Story<HighlightProps> = (args) => (
+  <div style={{ maxWidth: '104rem' }}>
+    <Highlight {...args} />
+  </div>
+)
+
+export const WithFloatImage: Story<HighlightProps> = (args) => (
+  <div style={{ maxWidth: '104rem' }}>
+    <Highlight {...args} />
+  </div>
+)
+WithFloatImage.args = {
+  floatImage: '/img/red-dead-float.png'
+}

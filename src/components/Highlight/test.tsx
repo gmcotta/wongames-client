@@ -8,7 +8,8 @@ const props = {
   subtitle: 'Subtitle 1',
   buttonLabel: 'Buy Now',
   buttonLink: '/game1',
-  backgroundImage: '/img/red-dead-img.jpeg'
+  backgroundImage: '/img/red-dead-img.jpeg',
+  floatImage: '/img/red-dead-float.png'
 }
 
 describe('<Highlight />', () => {
@@ -28,5 +29,13 @@ describe('<Highlight />', () => {
     expect(container.firstChild).toHaveStyle({
       'background-image': `url(${props.backgroundImage})`
     })
+  })
+
+  it('should render the float image', () => {
+    renderWithTheme(<Highlight {...props} floatImage={props.floatImage} />)
+    expect(screen.getByRole('img', { name: props.title })).toHaveAttribute(
+      'src',
+      props.floatImage
+    )
   })
 })
