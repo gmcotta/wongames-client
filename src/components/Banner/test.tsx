@@ -22,4 +22,24 @@ describe('<Banner />', () => {
     expect(screen.getByText(/play the new season/i)).toBeInTheDocument()
     expect(container.firstChild).toMatchSnapshot()
   })
+
+  it('should render the banner with ribbon', () => {
+    renderWithTheme(
+      <Banner
+        ribbonText="My Ribbon"
+        ribbonSize="small"
+        ribbonColor="secondary"
+        {...bannerProps}
+      />
+    )
+    const ribbon = screen.getByText(/my ribbon/i)
+    expect(ribbon).toBeInTheDocument()
+    expect(ribbon).toHaveStyle({
+      'background-color': '#3CD3C1'
+    })
+    expect(ribbon).toHaveStyle({
+      height: '2.6rem',
+      'font-size': '1.2rem'
+    })
+  })
 })
