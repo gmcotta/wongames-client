@@ -9,7 +9,11 @@ export default {
     developer: 'Rockstar Games',
     img: '/img/population-zero-img.png',
     price: 'R$ 235,00',
-    promotionalPrice: 'R$ 199,99'
+    promotionalPrice: 'R$ 199,99',
+    favorite: false
+  },
+  argTypes: {
+    onFav: { action: 'clicked' }
   }
 } as Meta
 
