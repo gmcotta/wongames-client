@@ -8,7 +8,8 @@ export default {
     title: 'Population Zero',
     developer: 'Rockstar Games',
     img: '/img/population-zero-img.png',
-    price: 'R$ 235,00'
+    price: 'R$ 235,00',
+    promotionalPrice: 'R$ 199,99'
   }
 } as Meta
 
