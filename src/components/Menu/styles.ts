@@ -47,7 +47,7 @@ export const MenuGroup = styled.div`
 export const MenuFull = styled.nav<MenuFullProps>`
   ${({ theme, isMenuOpen }) => css`
     opacity: ${isMenuOpen ? 1 : 0};
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity ${theme.transition.default};
     pointer-events: ${isMenuOpen ? 'all' : 'none'};
     background: ${theme.colors.white};
     display: flex;
@@ -77,12 +77,12 @@ export const MenuFull = styled.nav<MenuFullProps>`
       font-size: ${theme.font.sizes.xlarge};
       margin-bottom: ${theme.spacings.small};
       transform: ${isMenuOpen ? 'translateY(0)' : 'translateY(3rem)'};
-      transition: transform 0.3s ease-in-out;
+      transition: transform ${theme.transition.default};
     }
 
     ${RegisterBox} {
       transform: ${isMenuOpen ? 'translateY(0)' : 'translateY(3rem)'};
-      transition: transform 0.3s ease-in-out;
+      transition: transform ${theme.transition.default};
     }
 
     ${MenuNav} {
