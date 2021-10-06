@@ -1,4 +1,5 @@
 import { Story, Meta } from '@storybook/react'
+import { FavoriteBorder } from '@styled-icons/material-outlined'
 import { AddShoppingCart } from '@styled-icons/material-outlined/AddShoppingCart'
 
 import Button, { ButtonProps } from '.'
@@ -29,6 +30,15 @@ WithIcon.args = {
   size: 'medium',
   fullWidth: false,
   icon: <AddShoppingCart />
+}
+
+export const Minimal: Story<ButtonProps> = (args) => <Button {...args} />
+Minimal.args = {
+  children: 'Wishlist',
+  size: 'medium',
+  fullWidth: false,
+  minimal: true,
+  icon: <FavoriteBorder />
 }
 
 export const AsLink: Story<ButtonProps> = (args) => <Button {...args} />
