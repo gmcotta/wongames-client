@@ -1,4 +1,6 @@
-import { screen } from '@testing-library/react'
+import { screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+
 import { renderWithTheme } from 'utils/tests/helpers'
 
 import Checkbox from '.'
@@ -27,5 +29,17 @@ describe('<Checkbox />', () => {
     expect(screen.getByRole('checkbox')).toBeInTheDocument()
     expect(screen.getByRole('checkbox')).toHaveAttribute('id', '')
     expect(screen.queryByLabelText(/checkbox label/i)).not.toBeInTheDocument()
+  })
+
+  it('should dispatch onCheck when status changes', async () => {
+    const onCheck = jest.fn()
+    renderWithTheme(
+      <Checkbox label="Checkbox" labelFor="check" onCheck={onCheck} />
+    )
+    expect(onCheck).not.toHaveBeenCalled()
+    userEvent.click(screen.getByRole('checkbox'))
+    await waitFor(() => {
+      expect(onCheck).toHaveBeenCalledTimes(1)
+    })
   })
 })
