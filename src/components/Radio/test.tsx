@@ -41,4 +41,12 @@ describe('<Radio />', () => {
     })
     expect(onCheck).toHaveBeenCalledWith('anyValue')
   })
+
+  it('Should be accessible with tab', () => {
+    renderWithTheme(<Radio label="Radio" labelFor="Radio" />)
+    const radio = screen.getByLabelText('Radio')
+    expect(document.body).toHaveFocus()
+    userEvent.tab()
+    expect(radio).toHaveFocus()
+  })
 })
