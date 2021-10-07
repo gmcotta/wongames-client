@@ -2,12 +2,14 @@ import { InputHTMLAttributes, useState, ChangeEvent } from 'react'
 import * as S from './styles'
 
 export type TextFieldProps = {
+  onInput?: (value: string) => void
   label?: string
   labelFor?: string
   initialValue?: string
 } & InputHTMLAttributes<HTMLInputElement>
 
 const TextField = ({
+  onInput,
   label,
   labelFor = '',
   initialValue = '',
@@ -17,6 +19,8 @@ const TextField = ({
   const onChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const newValue = evt.target.value
     setValue(newValue)
+
+    !!onInput && onInput(newValue)
   }
   return (
     <S.Wrapper>

@@ -1,4 +1,5 @@
-import { screen } from '@testing-library/react'
+import { screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { renderWithTheme } from 'utils/tests/helpers'
 
 import TextField from '.'
@@ -20,5 +21,20 @@ describe('<TextField />', () => {
     renderWithTheme(<TextField id="field" placeholder="example" />)
 
     expect(screen.getByPlaceholderText(/example/i)).toBeInTheDocument()
+  })
+
+  it('should change values when typing', async () => {
+    const onInput = jest.fn()
+    renderWithTheme(
+      <TextField label="label" labelFor="field" id="field" onInput={onInput} />
+    )
+    const input = screen.getByLabelText(/label/i)
+    const text = 'hey you'
+    userEvent.type(input, text)
+    await waitFor(() => {
+      expect(input).toHaveValue(text)
+      expect(onInput).toHaveBeenCalledTimes(text.length)
+    })
+    expect(onInput).toHaveBeenCalledWith(text)
   })
 })
