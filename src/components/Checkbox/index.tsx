@@ -33,7 +33,7 @@ const Checkbox = ({
         id={labelFor}
         type="checkbox"
         onChange={onChange}
-        checked={isChecked}
+        checked={checked}
         value={value}
         {...props}
       />

@@ -34,13 +34,13 @@ export const Input = styled.input`
     &::before {
       content: '';
       width: 0.6rem;
-      height: 0.9rem;
+      height: 1rem;
       border: 0.3rem solid ${theme.colors.white};
       border-top: 0;
       border-left: 0;
       transform: rotate(45deg);
       position: absolute;
-      top: 0;
+      bottom: 0.3rem;
       opacity: 0;
       transition: ${theme.transition.fast};
     }
