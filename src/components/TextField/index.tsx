@@ -1,12 +1,15 @@
 import { InputHTMLAttributes, useState, ChangeEvent, ReactNode } from 'react'
 import * as S from './styles'
 
+export type IconPositionOptions = 'left' | 'right'
+
 export type TextFieldProps = {
   onInput?: (value: string) => void
   label?: string
   labelFor?: string
   initialValue?: string
   icon?: ReactNode
+  iconPosition?: IconPositionOptions
 } & InputHTMLAttributes<HTMLInputElement>
 
 const TextField = ({
@@ -15,6 +18,7 @@ const TextField = ({
   labelFor = '',
   initialValue = '',
   icon,
+  iconPosition = 'left',
   ...props
 }: TextFieldProps) => {
   const [value, setValue] = useState(initialValue)
@@ -27,9 +31,10 @@ const TextField = ({
   return (
     <S.Wrapper>
       {!!label && <S.Label htmlFor={labelFor}>{label}</S.Label>}
-      <S.InputWrapper hasIcon={!!icon}>
-        {icon}
+      <S.InputWrapper hasIcon={!!icon} iconPosition={iconPosition}>
+        {iconPosition === 'left' && icon}
         <S.Input type="text" value={value} onChange={onChange} {...props} />
+        {iconPosition === 'right' && icon}
       </S.InputWrapper>
     </S.Wrapper>
   )

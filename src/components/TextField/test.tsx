@@ -59,4 +59,21 @@ describe('<TextField />', () => {
     expect(screen.getByLabelText(/label/i)).toBeInTheDocument()
     expect(screen.getByTestId('icon')).toBeInTheDocument()
   })
+
+  it('should render with icon on right side', () => {
+    renderWithTheme(
+      <TextField
+        label="label"
+        labelFor="field"
+        id="field"
+        icon={<Email data-testid="icon" />}
+        iconPosition="right"
+      />
+    )
+    expect(screen.getByLabelText(/label/i)).toBeInTheDocument()
+    expect(screen.getByTestId('icon')).toBeInTheDocument()
+    expect(screen.getByTestId('icon')).toHaveStyle({
+      'margin-left': '1.6rem'
+    })
+  })
 })

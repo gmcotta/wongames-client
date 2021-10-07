@@ -1,4 +1,5 @@
 import styled, { css, DefaultTheme } from 'styled-components'
+import { IconPositionOptions } from '.'
 
 export const Wrapper = styled.div`
   display: flex;
@@ -16,6 +17,7 @@ export const Label = styled.label`
 
 type InputWrapperProps = {
   hasIcon?: boolean
+  iconPosition?: IconPositionOptions
 }
 
 const inputWrapperModifiers = {
@@ -23,19 +25,31 @@ const inputWrapperModifiers = {
     svg {
       width: 2.4rem;
       color: ${theme.colors.darkGray};
-      margin-right: ${theme.spacings.xsmall};
+    }
+  `,
+  iconPosition: (theme: DefaultTheme, iconPosition: IconPositionOptions) => css`
+    svg {
+      ${iconPosition === 'left' &&
+      css`
+        margin-right: ${theme.spacings.xsmall};
+      `}
+      ${iconPosition === 'right' &&
+      css`
+        margin-left: ${theme.spacings.xsmall};
+      `}
     }
   `
 }
 
 export const InputWrapper = styled.div<InputWrapperProps>`
-  ${({ theme, hasIcon }) => css`
+  ${({ theme, hasIcon, iconPosition }) => css`
     display: flex;
     background: ${theme.colors.lightGray};
     border-radius: 0.2rem;
     padding: 0 ${theme.spacings.xsmall};
     border: 0.2rem solid ${theme.colors.lightGray};
     ${hasIcon && inputWrapperModifiers.hasIcon(theme)}
+    ${iconPosition && inputWrapperModifiers.iconPosition(theme, iconPosition)}
 
     &:focus-within {
       box-shadow: 0 0 0.5rem ${theme.colors.primary};

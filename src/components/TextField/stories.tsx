@@ -10,7 +10,8 @@ export default {
     labelFor: 'Email',
     id: 'Email',
     initialValue: '',
-    placeholder: 'john.doe@gmail.com'
+    placeholder: 'john.doe@gmail.com',
+    iconPosition: 'left'
   },
   argTypes: {
     onInput: { action: 'changed' },
