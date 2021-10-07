@@ -3,6 +3,7 @@ import { IconPositionOptions } from '.'
 
 type WrapperProps = {
   disabled?: boolean
+  hasError?: boolean
 }
 
 const wrapperModifiers = {
@@ -19,12 +20,30 @@ const wrapperModifiers = {
         color: ${theme.colors.grayDisabled};
       }
     }
+  `,
+  hasError: (theme: DefaultTheme) => css`
+    ${Label},
+    ${InputWrapper},
+    ${Input} {
+      color: ${theme.colors.red};
+      svg {
+        color: ${theme.colors.red};
+      }
+      &::placeholder {
+        color: ${theme.colors.red};
+      }
+    }
+
+    ${InputWrapper} {
+      border-color: ${theme.colors.red};
+    }
   `
 }
 
 export const Wrapper = styled.div<WrapperProps>`
-  ${({ theme, disabled }) => css`
+  ${({ theme, disabled, hasError }) => css`
     ${disabled && wrapperModifiers.disabled(theme)}
+    ${hasError && wrapperModifiers.hasError(theme)}
   `}
 `
 
@@ -91,5 +110,12 @@ export const Input = styled.input`
     border: 0;
     outline: none;
     width: 100%;
+  `}
+`
+
+export const ErrorMessage = styled.span`
+  ${({ theme }) => css`
+    color: ${theme.colors.red};
+    font-size: ${theme.font.sizes.xsmall};
   `}
 `

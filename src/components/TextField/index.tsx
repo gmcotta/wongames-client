@@ -11,6 +11,7 @@ export type TextFieldProps = {
   icon?: ReactNode
   iconPosition?: IconPositionOptions
   disabled?: boolean
+  errorMessage?: string
 } & InputHTMLAttributes<HTMLInputElement>
 
 const TextField = ({
@@ -21,6 +22,7 @@ const TextField = ({
   icon,
   iconPosition = 'left',
   disabled = false,
+  errorMessage = '',
   ...props
 }: TextFieldProps) => {
   const [value, setValue] = useState(initialValue)
@@ -31,7 +33,7 @@ const TextField = ({
     !!onInput && onInput(newValue)
   }
   return (
-    <S.Wrapper disabled={disabled}>
+    <S.Wrapper disabled={disabled} hasError={!!errorMessage}>
       {!!label && <S.Label htmlFor={labelFor}>{label}</S.Label>}
       <S.InputWrapper hasIcon={!!icon} iconPosition={iconPosition}>
         {iconPosition === 'left' && icon}
@@ -44,6 +46,7 @@ const TextField = ({
         />
         {iconPosition === 'right' && icon}
       </S.InputWrapper>
+      {!!errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
     </S.Wrapper>
   )
 }
