@@ -76,4 +76,42 @@ describe('<TextField />', () => {
       'margin-left': '1.6rem'
     })
   })
+
+  it('should render with disabled property', () => {
+    const { container } = renderWithTheme(
+      <TextField label="label" labelFor="field" id="field" disabled />
+    )
+    expect(screen.getByLabelText(/label/i)).toBeInTheDocument()
+    expect(container.firstChild).toMatchSnapshot()
+  })
+
+  it('should not change value when it is disabled', async () => {
+    const onInput = jest.fn()
+    renderWithTheme(
+      <TextField
+        label="label"
+        labelFor="field"
+        id="field"
+        disabled
+        onInput={onInput}
+      />
+    )
+    const input = screen.getByLabelText(/label/i)
+    const text = 'hey you'
+    userEvent.type(input, text)
+    await waitFor(() => {
+      expect(input).not.toHaveValue(text)
+      expect(onInput).not.toHaveBeenCalled()
+    })
+  })
+
+  it('should not be accessible by tab when it is disabled', () => {
+    renderWithTheme(
+      <TextField label="label" labelFor="field" id="field" disabled />
+    )
+    expect(document.body).toHaveFocus()
+    const input = screen.getByLabelText(/label/i)
+    userEvent.tab()
+    expect(input).not.toHaveFocus()
+  })
 })

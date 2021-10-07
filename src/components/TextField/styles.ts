@@ -1,13 +1,36 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 import { IconPositionOptions } from '.'
 
-export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+type WrapperProps = {
+  disabled?: boolean
+}
+
+const wrapperModifiers = {
+  disabled: (theme: DefaultTheme) => css`
+    ${Label},
+    ${InputWrapper},
+    ${Input} {
+      cursor: not-allowed;
+      color: ${theme.colors.grayDisabled};
+      svg {
+        color: ${theme.colors.grayDisabled};
+      }
+      &::placeholder {
+        color: ${theme.colors.grayDisabled};
+      }
+    }
+  `
+}
+
+export const Wrapper = styled.div<WrapperProps>`
+  ${({ theme, disabled }) => css`
+    ${disabled && wrapperModifiers.disabled(theme)}
+  `}
 `
 
 export const Label = styled.label`
   ${({ theme }) => css`
+    display: inline-flex;
     font-size: ${theme.font.sizes.small};
     color: ${theme.colors.black};
     cursor: pointer;
@@ -18,6 +41,7 @@ export const Label = styled.label`
 type InputWrapperProps = {
   hasIcon?: boolean
   iconPosition?: IconPositionOptions
+  disabled?: boolean
 }
 
 const inputWrapperModifiers = {
