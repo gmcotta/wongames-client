@@ -1,3 +1,4 @@
+import { Email } from '@styled-icons/material-outlined'
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithTheme } from 'utils/tests/helpers'
@@ -44,5 +45,18 @@ describe('<TextField />', () => {
     const input = screen.getByLabelText(/label/i)
     userEvent.tab()
     expect(input).toHaveFocus()
+  })
+
+  it('should render with icon on left side', () => {
+    renderWithTheme(
+      <TextField
+        label="label"
+        labelFor="field"
+        id="field"
+        icon={<Email data-testid="icon" />}
+      />
+    )
+    expect(screen.getByLabelText(/label/i)).toBeInTheDocument()
+    expect(screen.getByTestId('icon')).toBeInTheDocument()
   })
 })
