@@ -18,6 +18,11 @@ describe('<Logo />', () => {
     })
   })
 
+  it('should render the logo with id on svg fill', () => {
+    const { container } = renderWithTheme(<Logo id="test" />)
+    expect(container.querySelector('#gradient-test')).toBeInTheDocument()
+  })
+
   it('should render the logo with normal size', () => {
     renderWithTheme(<Logo />)
     expect(screen.getByLabelText(/Won Games/i).parentElement).toHaveStyle({
