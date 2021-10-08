@@ -2,11 +2,16 @@ import styled, { css } from 'styled-components'
 
 import * as HeadingStyles from 'components/Heading/styles'
 import * as LogoStyles from 'components/Logo/styles'
+import media from 'styled-media-query'
 
 export const Wrapper = styled.main`
   display: grid;
   grid-template-columns: 1fr 1fr;
   height: 100vh;
+
+  ${media.lessThan('medium')`
+    grid-template-columns: 1fr;
+  `}
 `
 
 export const BannerSection = styled.section`
@@ -17,6 +22,10 @@ export const BannerSection = styled.section`
     position: relative;
     padding: ${theme.spacings.xxlarge} ${theme.spacings.xxlarge}
       ${theme.spacings.large};
+
+    ${media.lessThan('medium')`
+      display: none;
+    `}
 
     &::after {
       content: '';
@@ -80,5 +89,9 @@ export const ContentWrapper = styled.div`
     ${HeadingStyles.Wrapper} {
       margin-bottom: ${theme.spacings.medium};
     }
+
+    ${media.lessThan('medium')`
+      width: 36rem;
+    `}
   `}
 `
