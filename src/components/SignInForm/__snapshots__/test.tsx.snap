@@ -73,14 +73,6 @@ exports[`<SignInForm /> should render the form 1`] = `
   width: 100%;
 }
 
-.c0 .c1 {
-  margin: 0.8rem 0;
-}
-
-.c0 .c6 {
-  margin: 3.2rem auto 1.6rem;
-}
-
 .c5 {
   display: block;
   font-size: 1.2rem;
@@ -92,6 +84,14 @@ exports[`<SignInForm /> should render the form 1`] = `
 
 .c5:hover {
   color: #8F8F8F;
+}
+
+.c0 .c1 {
+  margin: 0.8rem 0;
+}
+
+.c0 .c6 {
+  margin: 3.2rem auto 1.6rem;
 }
 
 .c8 {
