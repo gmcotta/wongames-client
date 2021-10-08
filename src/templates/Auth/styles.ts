@@ -56,7 +56,7 @@ export const BannerSubtitle = styled.h3`
   ${({ theme }) => css`
     font-size: ${theme.font.sizes.xxlarge};
     font-weight: ${theme.font.light};
-    margin-top: ${theme.spacings.xxsmall};
+    margin-top: ${theme.spacings.xsmall};
     strong {
       color: ${theme.colors.primary};
     }
