@@ -1,9 +1,10 @@
+import SignInForm from 'components/SignInForm'
 import Auth from 'templates/Auth'
 
 export default function SignIn() {
   return (
     <Auth title="Sign In">
-      <h1>Form</h1>
+      <SignInForm />
     </Auth>
   )
 }

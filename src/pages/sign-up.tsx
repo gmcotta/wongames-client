@@ -1,9 +1,10 @@
+import SignUpForm from 'components/SignUpForm'
 import Auth from 'templates/Auth'
 
 export default function SignUp() {
   return (
     <Auth title="Sign Up">
-      <h1>Form</h1>
+      <SignUpForm />
     </Auth>
   )
 }
