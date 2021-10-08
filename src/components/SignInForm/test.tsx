@@ -5,7 +5,7 @@ import SignInForm from '.'
 
 describe('<SignInForm />', () => {
   it('should render the form', () => {
-    renderWithTheme(<SignInForm />)
+    const { container } = renderWithTheme(<SignInForm />)
     expect(screen.getByPlaceholderText(/email/i)).toBeInTheDocument()
     expect(screen.getByPlaceholderText(/password/i)).toBeInTheDocument()
     expect(
@@ -13,6 +13,7 @@ describe('<SignInForm />', () => {
         name: /sign in now/i
       })
     ).toBeInTheDocument()
+    expect(container.firstChild).toMatchSnapshot()
   })
 
   it('should render the forgot password link', () => {
