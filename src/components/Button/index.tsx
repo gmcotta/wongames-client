@@ -1,7 +1,9 @@
 import {
   AnchorHTMLAttributes,
-  ButtonHTMLAttributes
-} from 'hoist-non-react-statics/node_modules/@types/react'
+  ButtonHTMLAttributes,
+  forwardRef,
+  ForwardRefRenderFunction
+} from 'react'
 import * as S from './styles'
 
 type ButtonTypes =
@@ -16,19 +18,23 @@ export type ButtonProps = {
   minimal?: boolean
 } & ButtonTypes
 
-const Button = ({
-  children,
-  size = 'medium',
-  fullWidth = false,
-  icon,
-  minimal = false,
-  ...props
-}: ButtonProps) => (
+const Button: ForwardRefRenderFunction<S.WrapperProps, ButtonProps> = (
+  {
+    children,
+    size = 'medium',
+    fullWidth = false,
+    icon,
+    minimal = false,
+    ...props
+  },
+  ref
+) => (
   <S.Wrapper
     minimal={minimal}
     size={size}
     fullWidth={fullWidth}
     hasIcon={!!icon}
+    ref={ref}
     {...props}
   >
     {icon}
@@ -36,4 +42,4 @@ const Button = ({
   </S.Wrapper>
 )
 
-export default Button
+export default forwardRef(Button)
