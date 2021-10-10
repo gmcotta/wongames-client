@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-
+import Link from 'next/link'
 import Heading from 'components/Heading'
 import Logo from 'components/Logo'
 import * as S from './styles'
@@ -13,7 +13,11 @@ const Auth = ({ title, children }: AuthProps) => (
   <S.Wrapper>
     <S.BannerSection>
       <S.BannerContent>
-        <Logo id="banner" />
+        <Link href="/" passHref>
+          <a>
+            <Logo id="banner" />
+          </a>
+        </Link>
         <div>
           <Heading size="huge">All your favorite games in one place</Heading>
           <S.BannerSubtitle>
@@ -27,7 +31,11 @@ const Auth = ({ title, children }: AuthProps) => (
     </S.BannerSection>
     <S.ContentSection>
       <S.ContentWrapper>
-        <Logo id="content" color="black" size="large" />
+        <Link href="/" passHref>
+          <a>
+            <Logo id="content" color="black" size="large" />
+          </a>
+        </Link>
         <Heading color="black" lineLeft lineColor="secondary">
           {title}
         </Heading>
