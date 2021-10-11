@@ -4,8 +4,6 @@ import media from 'styled-media-query'
 import * as HeadingStyles from 'components/Heading/styles'
 import * as HighlightStyles from 'components/Highlight/styles'
 
-export const Wrapper = styled.main``
-
 export const BannerSection = styled.section`
   ${({ theme }) => css`
     margin: ${theme.spacings.large} calc(-${theme.grid.gutter} / 2);
@@ -47,17 +45,3 @@ export const UpcomingSection = styled.section`
 `
 
 export const FreeGamesSection = styled.section``
-
-export const FooterSection = styled.section`
-  ${({ theme }) => css`
-    margin-top: ${theme.spacings.large};
-    padding-bottom: ${theme.spacings.xsmall};
-    padding-top: ${theme.spacings.xxlarge};
-    background-color: ${theme.colors.white};
-    clip-path: polygon(0 5%, 100% 0%, 100% 100%, 0 100%);
-    ${media.greaterThan('medium')`
-      padding-top: calc(${theme.spacings.xxlarge} * 2);
-      clip-path: polygon(0 15%, 100% 0%, 100% 100%, 0 100%);
-    `}
-  `}
-`
