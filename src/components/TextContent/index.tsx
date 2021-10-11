@@ -10,7 +10,7 @@ const TextContent = ({ title, content }: TextContentProps) => (
   <S.Wrapper>
     {!!title && (
       <Heading lineLeft lineColor="secondary">
-        Description
+        {title}
       </Heading>
     )}
     <div dangerouslySetInnerHTML={{ __html: content }}></div>
