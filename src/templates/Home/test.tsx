@@ -20,34 +20,52 @@ const props = {
   freeHighlight: highlightMock
 }
 
+jest.mock('components/Menu', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="Menu mock"></div>
+    }
+  }
+})
+
+jest.mock('components/Footer', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="Footer mock"></div>
+    }
+  }
+})
+
+jest.mock('components/BannerSlider', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="BannerSlider mock"></div>
+    }
+  }
+})
+
+jest.mock('components/Showcase', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="Showcase mock"></div>
+    }
+  }
+})
+
 describe('<Home />', () => {
   it('should render menu and footer', () => {
     renderWithTheme(<Home {...props} />)
-    const menu = screen.getByLabelText(/open menu/i)
+    const menu = screen.getByTestId(/menu mock/i)
     expect(menu).toBeInTheDocument()
-    const footerHeading = screen.getByRole('heading', { name: /contato/i })
+    const banner = screen.getByTestId(/bannerslider mock/i)
+    expect(banner).toBeInTheDocument
+    const showcases = screen.getAllByTestId(/showcase mock/i)
+    expect(showcases).toHaveLength(5)
+    const footerHeading = screen.getByTestId(/footer mock/i)
     expect(footerHeading).toBeInTheDocument()
-    const logos = screen.getAllByRole('img', { name: /won games/i })
-    expect(logos).toHaveLength(2)
-    const newsSectionHeading = screen.getByRole('heading', { name: /news/i })
-    expect(newsSectionHeading).toBeInTheDocument()
-    const mostPopularSectionHeading = screen.getByRole('heading', {
-      name: /most popular/i
-    })
-    expect(mostPopularSectionHeading).toBeInTheDocument()
-    const upcomingSectionHeading = screen.getByRole('heading', {
-      name: /upcoming/i
-    })
-    expect(upcomingSectionHeading).toBeInTheDocument()
-    const freeGamesSectionHeading = screen.getByRole('heading', {
-      name: /free games/i
-    })
-    expect(freeGamesSectionHeading).toBeInTheDocument()
-    const banner1 = screen.getAllByText(/defy death 1/i)
-    expect(banner1).toHaveLength(1)
-    const allGames = screen.getAllByText(/population zero/i)
-    expect(allGames).toHaveLength(5)
-    const allHighlights = screen.getAllByText(/red dead is back/i)
-    expect(allHighlights).toHaveLength(3)
   })
 })
