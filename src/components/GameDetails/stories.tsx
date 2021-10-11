@@ -13,10 +13,21 @@ export default {
   },
   args: mock,
   argTypes: {
+    releaseDate: {
+      control: {
+        type: 'date'
+      }
+    },
     platforms: {
       control: {
         type: 'inline-check',
         options: ['windows', 'linux', 'mac']
+      }
+    },
+    genres: {
+      control: {
+        type: 'inline-check',
+        options: ['action', 'adventure', 'role-playing', 'sports', 'racing']
       }
     }
   }
