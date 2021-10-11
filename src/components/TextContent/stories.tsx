@@ -14,5 +14,7 @@ export default {
 } as Meta
 
 export const Default: Story<TextContentProps> = (args) => (
-  <TextContent {...args} />
+  <div style={{ maxWidth: '130rem', margin: '0 auto' }}>
+    <TextContent {...args} />
+  </div>
 )
