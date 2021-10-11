@@ -4,7 +4,7 @@ import GameDetails from '.'
 
 describe('<GameDetails />', () => {
   it('should render the heading', () => {
-    renderWithTheme(<GameDetails />)
+    renderWithTheme(<GameDetails platforms={['linux']} />)
 
     expect(
       screen.queryByRole('heading', { name: /games details/i })

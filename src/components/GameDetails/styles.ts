@@ -27,16 +27,31 @@ export const Block = styled.div``
 
 export const Label = styled.h3`
   ${({ theme }) => css`
-    font-size: ${theme.spacings.small};
+    font-size: ${theme.font.sizes.small};
     font-weight: ${theme.font.light};
     color: ${theme.colors.gray};
+    margin-bottom: 1rem;
   `}
 `
 
 export const Description = styled.p`
   ${({ theme }) => css`
-    font-size: ${theme.spacings.medium};
+    font-size: ${theme.font.sizes.medium};
     font-weight: ${theme.font.bold};
     color: ${theme.colors.white};
+  `}
+`
+
+export const IconsWrapper = styled.div`
+  ${({ theme }) => css`
+    color: ${theme.colors.white};
+    display: flex;
+    align-items: center;
+  `}
+`
+
+export const Icon = styled.div`
+  ${({ theme }) => css`
+    margin-right: ${theme.spacings.xxsmall};
   `}
 `
