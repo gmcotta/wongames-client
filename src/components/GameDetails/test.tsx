@@ -35,4 +35,19 @@ describe('<GameDetails />', () => {
     renderWithTheme(<GameDetails {...props} />)
     expect(screen.getByText('Nov 21, 2020')).toBeInTheDocument()
   })
+
+  it('should render free when rating is BR0', () => {
+    renderWithTheme(<GameDetails {...props} rating="BR0" />)
+    expect(screen.getByText(/free/i)).toBeInTheDocument()
+  })
+
+  it('should render 16+ when rating is BR16', () => {
+    renderWithTheme(<GameDetails {...props} rating="BR16" />)
+    expect(screen.getByText('16+')).toBeInTheDocument()
+  })
+
+  it('should render the genres list', () => {
+    renderWithTheme(<GameDetails {...props} />)
+    expect(screen.getByText('Role-playing / Action')).toBeInTheDocument()
+  })
 })

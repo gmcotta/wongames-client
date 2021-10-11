@@ -6,5 +6,5 @@ export default {
   platforms: ['windows', 'linux', 'mac'],
   publisher: 'Walkabout',
   rating: 'BR0',
-  genres: ['role-playing']
+  genres: ['role-playing', 'action']
 } as GameDetailsProps

@@ -5,26 +5,50 @@ import MediaMatch from 'components/MediaMatch'
 import * as S from './styles'
 
 type PlatformOptions = 'windows' | 'linux' | 'mac'
-
+type RatingOptions = 'BR0' | 'BR10' | 'BR12' | 'BR14' | 'BR16' | 'BR18'
 export type GameDetailsProps = {
   developer: string
   releaseDate: string
   platforms: PlatformOptions[]
   publisher: string
-  rating: string
+  rating: RatingOptions
   genres: string[]
 }
 
 const GameDetails = ({
   developer,
   releaseDate,
-  platforms
+  platforms,
+  publisher,
+  rating,
+  genres
 }: GameDetailsProps) => {
   const platformIcons = {
     windows: <Windows title="Windows" size={18} />,
     linux: <Linux title="Linux" size={18} />,
     mac: <Apple title="Mac" size={18} />
   }
+
+  function formatReleaseDate(releaseDate: string) {
+    return new Intl.DateTimeFormat('en-US', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    }).format(new Date(releaseDate))
+  }
+
+  function formatGenres(genres: string[]) {
+    const capitalizedGenres = genres.map(
+      (genre) => genre.charAt(0).toUpperCase() + genre.slice(1)
+    )
+    return capitalizedGenres.join(' / ')
+  }
+
+  function formatRating(rating: string) {
+    const ratingWithNumberAndPlusSign = rating.replace(/BR(.*)/, '$1+')
+    return rating === 'BR0' ? 'FREE' : ratingWithNumberAndPlusSign
+  }
+
   return (
     <S.Wrapper>
       <MediaMatch greaterThan="small">
@@ -39,13 +63,7 @@ const GameDetails = ({
         </S.Block>
         <S.Block>
           <S.Label>Release Date</S.Label>
-          <S.Description>
-            {new Intl.DateTimeFormat('en-US', {
-              day: 'numeric',
-              month: 'short',
-              year: 'numeric'
-            }).format(new Date(releaseDate))}
-          </S.Description>
+          <S.Description>{formatReleaseDate(releaseDate)}</S.Description>
         </S.Block>
         <S.Block>
           <S.Label>Platforms</S.Label>
@@ -57,15 +75,15 @@ const GameDetails = ({
         </S.Block>
         <S.Block>
           <S.Label>Publisher</S.Label>
-          <S.Description>2K</S.Description>
+          <S.Description>{publisher}</S.Description>
         </S.Block>
         <S.Block>
           <S.Label>Rating</S.Label>
-          <S.Description>18+</S.Description>
+          <S.Description>{formatRating(rating)}</S.Description>
         </S.Block>
         <S.Block>
           <S.Label>Genres</S.Label>
-          <S.Description>Action/Adventure+</S.Description>
+          <S.Description>{formatGenres(genres)}</S.Description>
         </S.Block>
       </S.Content>
     </S.Wrapper>
