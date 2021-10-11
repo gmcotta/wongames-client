@@ -7,7 +7,7 @@ describe('<GameDetails />', () => {
     renderWithTheme(<GameDetails />)
 
     expect(
-      screen.getByRole('heading', { name: /GameDetails/i })
-    ).toBeInTheDocument()
+      screen.queryByRole('heading', { name: /games details/i })
+    ).not.toBeInTheDocument()
   })
 })
