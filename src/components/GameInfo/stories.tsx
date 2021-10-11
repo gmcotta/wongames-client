@@ -1,16 +1,22 @@
 import { Story, Meta } from '@storybook/react'
 import GameInfo, { GameInfoProps } from '.'
 
+import gameInfoMock from './mock'
+
 export default {
   title: 'GameInfo',
-  component: GameInfo
+  component: GameInfo,
+  parameters: {
+    backgrounds: {
+      default: 'won-dark'
+    }
+  }
 } as Meta
 
-export const Default: Story<GameInfoProps> = (args) => <GameInfo {...args} />
+export const Default: Story<GameInfoProps> = (args) => (
+  <div style={{ maxWidth: '114rem', margin: '0 auto', padding: '1.6rem' }}>
+    <GameInfo {...args} />
+  </div>
+)
 
-Default.args = {
-  title: 'Borderland 3',
-  description:
-    'Agora é a hora de eliminar Handsome Jack. Reúna seus amigos para correr desenfreadamente pelo mundo coletando milhões de itens.',
-  price: '215.00'
-}
+Default.args = gameInfoMock
