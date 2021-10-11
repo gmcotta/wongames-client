@@ -30,6 +30,5 @@ describe('<Auth />', () => {
       screen.getByText(/Won Games 2020 © Todos os Direitos Reservados/i)
     ).toBeInTheDocument()
     expect(screen.getByRole('textbox')).toBeInTheDocument()
-    screen.logTestingPlaygroundURL()
   })
 })

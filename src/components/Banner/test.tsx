@@ -14,7 +14,6 @@ const bannerProps = {
 describe('<Banner />', () => {
   it('should render the banner', () => {
     const { container } = renderWithTheme(<Banner {...bannerProps} />)
-    // screen.logTestingPlaygroundURL()
     expect(screen.getByRole('img')).toHaveAttribute('src', bannerProps.img)
     expect(
       screen.getByRole('heading', { name: /defy death/i })
