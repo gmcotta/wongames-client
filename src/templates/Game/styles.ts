@@ -6,7 +6,7 @@ import { Container } from 'components/Container'
 export const Wrapper = styled.main`
   margin-top: 20rem;
   ${media.greaterThan('medium')`
-    margin-top: 58rem;
+    margin-top: 36rem;
   `}
 `
 
