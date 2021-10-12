@@ -43,7 +43,7 @@ const modalSettings: SliderSettings = {
   slidesToShow: 1
 }
 
-type GalleryImageProps = {
+export type GalleryImageProps = {
   src: string
   label: string
 }
