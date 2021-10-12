@@ -14,7 +14,8 @@ const props: GameTemplateProps = {
     description:
       'Cyberpunk 2077 is an open-world, action-adventure story set in Night City, a megalopolis obsessed with power, glamour and body modification. You play as V, a mercenary outlaw going after a one-of-a-kind implant that is the key to immortality'
   },
-  gallery: galleryMock
+  gallery: galleryMock.slice(0, 2),
+  description: `<h1>Test</h1>`
 }
 
 describe('<Game />', () => {

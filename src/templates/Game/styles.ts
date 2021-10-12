@@ -47,6 +47,16 @@ export const GallerySection = styled(Section)`
   display: none;
 
   ${media.greaterThan('medium')`
-    display: block;
+  display: block;
+  `}
+`
+
+export const DescriptionSection = styled(Section)`
+  ${({ theme }) => css`
+    .description__copyrights {
+      font-size: ${theme.font.sizes.xsmall};
+      color: ${theme.colors.gray};
+      margin-top: ${theme.spacings.medium};
+    }
   `}
 `
