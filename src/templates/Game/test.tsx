@@ -1,28 +1,136 @@
 import 'match-media-fake'
 import { screen } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helpers'
+
 import galleryMock from 'components/Gallery/mock'
+import textContentMock from 'components/TextContent/mock'
+import gameInfoMock from 'components/GameInfo/mock'
+import gameDetailsMock from 'components/GameDetails/mock'
+import gamesMock from 'components/CardGameSlider/mock'
+import highlightMock from 'components/Highlight/mock'
 
 import Game, { GameTemplateProps } from '.'
 
 const props: GameTemplateProps = {
-  coverSrc:
-    'https://images.gog-statics.com/9717921d3268d2cad294b626756400a3a1f3e46bf153330c5581f91a5c50446a_bg_crop_1366x655.jpg',
-  gameInfo: {
-    title: 'Cyberpunk 2077',
-    price: '59.00',
-    description:
-      'Cyberpunk 2077 is an open-world, action-adventure story set in Night City, a megalopolis obsessed with power, glamour and body modification. You play as V, a mercenary outlaw going after a one-of-a-kind implant that is the key to immortality'
-  },
+  coverSrc: 'image.jpg',
+  gameInfo: gameInfoMock,
   gallery: galleryMock.slice(0, 2),
-  description: `<h1>Test</h1>`
+  description: textContentMock.content,
+  details: gameDetailsMock,
+  upcomingGames: gamesMock,
+  upcomingHighlight: highlightMock,
+  recommendedGames: gamesMock
 }
 
+jest.mock('components/Menu', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="Menu mock"></div>
+    }
+  }
+})
+jest.mock('components/Footer', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="Footer mock"></div>
+    }
+  }
+})
+jest.mock('components/GameInfo', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="GameInfo mock"></div>
+    }
+  }
+})
+
+jest.mock('components/Gallery', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="Gallery mock"></div>
+    }
+  }
+})
+
+jest.mock('components/TextContent', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="TextContent mock"></div>
+    }
+  }
+})
+
+jest.mock('components/GameDetails', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="GameDetails mock"></div>
+    }
+  }
+})
+
+jest.mock('components/Showcase', () => {
+  return {
+    __esModule: true,
+    default: function Mock() {
+      return <div data-testid="Showcase mock"></div>
+    }
+  }
+})
+
 describe('<Game />', () => {
+  it('should render the components', () => {
+    renderWithTheme(<Game {...props} />)
+    expect(screen.getByTestId(/menu mock/i)).toBeInTheDocument()
+    expect(screen.getByTestId(/footer mock/i)).toBeInTheDocument()
+    expect(screen.getByTestId(/gameinfo mock/i)).toBeInTheDocument()
+    expect(screen.getByTestId(/gallery mock/i)).toBeInTheDocument()
+    expect(screen.getByTestId(/textcontent mock/i)).toBeInTheDocument()
+    expect(screen.getByTestId(/gamedetails mock/i)).toBeInTheDocument()
+    expect(screen.getAllByTestId(/showcase mock/i)).toHaveLength(2)
+  })
+
   it('should render the cover image', () => {
     renderWithTheme(<Game {...props} />)
     const cover = screen.getByRole('image', { name: /cover/i })
     expect(cover).toBeInTheDocument()
-    expect(cover).toHaveStyle({ backgroundImage: `url(${props.coverSrc})` })
+    expect(cover).toHaveStyle({
+      backgroundImage: `url(${props.coverSrc})`,
+      height: '39.5rem'
+    })
+    expect(cover).toHaveStyleRule('height', '70rem', {
+      media: '(min-width: 768px)'
+    })
+    expect(cover).toHaveStyleRule(
+      'clip-path',
+      'polygon(0 0,100% 0,100% 100%,0 85%)',
+      {
+        media: '(min-width: 768px)'
+      }
+    )
+  })
+
+  it('should not render the gallery section if no info was given', () => {
+    renderWithTheme(<Game {...props} gallery={undefined} />)
+    expect(screen.queryByTestId(/gallery mock/i)).not.toBeInTheDocument()
+  })
+
+  it('should not render the gallery on mobile', () => {
+    renderWithTheme(<Game {...props} />)
+    expect(screen.getByTestId(/gallery mock/i).parentElement).toHaveStyle({
+      display: 'none'
+    })
+    expect(screen.getByTestId(/gallery mock/i).parentElement).toHaveStyleRule(
+      'display',
+      'block',
+      {
+        media: '(min-width: 768px)'
+      }
+    )
   })
 })

@@ -42,17 +42,13 @@ const Game = ({
         </S.GallerySection>
       )}
 
-      {!!description && (
-        <S.DescriptionSection>
-          <TextContent title="Description" content={description} />
-        </S.DescriptionSection>
-      )}
+      <S.DescriptionSection>
+        <TextContent title="Description" content={description} />
+      </S.DescriptionSection>
 
-      {!!details && (
-        <S.GameDetailsSection>
-          <GameDetails {...details} />
-        </S.GameDetailsSection>
-      )}
+      <S.GameDetailsSection>
+        <GameDetails {...details} />
+      </S.GameDetailsSection>
 
       <Showcase
         title="Upcoming"
