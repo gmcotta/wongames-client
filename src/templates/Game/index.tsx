@@ -1,9 +1,9 @@
-import * as S from './styles'
+import Base from 'templates/Base'
 
 const Game = () => (
-  <S.Wrapper>
+  <Base>
     <h1>Game</h1>
-  </S.Wrapper>
+  </Base>
 )
 
 export default Game

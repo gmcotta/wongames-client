@@ -1,3 +1,5 @@
-export default function Game() {
-  return <h2>Game</h2>
+import Game from 'templates/Game'
+
+export default function Index() {
+  return <Game />
 }
