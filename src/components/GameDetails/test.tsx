@@ -31,6 +31,16 @@ describe('<GameDetails />', () => {
     expect(screen.getByRole('img', { name: /mac/i })).toBeInTheDocument()
   })
 
+  it('should render the publisher', () => {
+    renderWithTheme(<GameDetails {...props} />)
+    expect(screen.getByText('Walkabout')).toBeInTheDocument()
+  })
+
+  it('should render the developer', () => {
+    renderWithTheme(<GameDetails {...props} />)
+    expect(screen.getByText('Different Tales')).toBeInTheDocument()
+  })
+
   it('should render the formatted date', () => {
     renderWithTheme(<GameDetails {...props} />)
     expect(screen.getByText('Nov 21, 2020')).toBeInTheDocument()
