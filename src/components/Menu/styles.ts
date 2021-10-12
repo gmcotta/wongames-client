@@ -12,6 +12,7 @@ export const Wrapper = styled.menu`
     justify-content: space-between;
     padding: ${theme.spacings.small} 0;
     position: relative;
+    z-index: ${theme.layers.menu};
   `}
 `
 
