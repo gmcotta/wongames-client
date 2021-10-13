@@ -12,3 +12,10 @@ export default {
 } as Meta
 
 export const Default: Story<GameItemProps> = (args) => <GameItem {...args} />
+
+export const WithDownloadLink: Story<GameItemProps> = (args) => (
+  <GameItem {...args} />
+)
+WithDownloadLink.args = {
+  downloadLink: 'https://wongames.com/game/39820809280283/download'
+}

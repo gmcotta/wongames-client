@@ -19,4 +19,12 @@ describe('<GameItem />', () => {
     expect(screen.getByRole('heading', { name: /title/i })).toBeInTheDocument()
     expect(screen.getByText(/r\$ 215,00/i)).toBeInTheDocument()
   })
+
+  it('should render the game item with download link', () => {
+    const downloadLink = 'https://game.download.com'
+    renderWithTheme(<GameItem {...props} downloadLink={downloadLink} />)
+    expect(
+      screen.getByRole('link', { name: `Get ${props.title} here` })
+    ).toHaveAttribute('href', downloadLink)
+  })
 })
