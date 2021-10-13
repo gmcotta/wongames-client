@@ -8,7 +8,10 @@ export const Wrapper = styled.section`
   justify-content: space-between;
 `
 export const Content = styled.section`
-  flex: 1 0 auto;
+  ${({ theme }) => css`
+    flex: 1 0 auto;
+    margin-top: ${theme.spacings.large};
+  `}
 `
 
 export const FooterSection = styled.section`
