@@ -7,6 +7,7 @@ import GameDetails, { GameDetailsProps } from 'components/GameDetails'
 import { GameCardProps } from 'components/GameCard'
 import { HighlightProps } from 'components/Highlight'
 import Showcase from 'components/Showcase'
+import Divider from 'components/Divider'
 
 export type GameTemplateProps = {
   coverSrc: string
@@ -48,6 +49,7 @@ const Game = ({
 
       <S.GameDetailsSection>
         <GameDetails {...details} />
+        <Divider />
       </S.GameDetailsSection>
 
       <Showcase
