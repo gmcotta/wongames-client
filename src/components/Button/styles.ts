@@ -1,10 +1,6 @@
 import styled, { css, DefaultTheme } from 'styled-components'
 import { ButtonProps } from '.'
 
-export type WrapperProps = {
-  hasIcon: boolean
-} & Pick<ButtonProps, 'size' | 'fullWidth' | 'minimal'>
-
 const wrapperModifiers = {
   small: (theme: DefaultTheme) => css`
     height: 3rem;
@@ -34,11 +30,21 @@ const wrapperModifiers = {
   minimal: (theme: DefaultTheme) => css`
     background: none;
     color: ${theme.colors.primary};
+  `,
+  disabled: () => css`
+    &:disabled {
+      cursor: not-allowed;
+      filter: saturate(0.3);
+    }
   `
 }
 
+export type WrapperProps = {
+  hasIcon: boolean
+} & Pick<ButtonProps, 'size' | 'fullWidth' | 'minimal'>
+
 export const Wrapper = styled.button<WrapperProps>`
-  ${({ theme, size, fullWidth, hasIcon, minimal }) => css`
+  ${({ theme, size, fullWidth, hasIcon, minimal, disabled }) => css`
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -53,6 +59,7 @@ export const Wrapper = styled.button<WrapperProps>`
     ${fullWidth && wrapperModifiers.fullWidth()};
     ${hasIcon && wrapperModifiers.hasIcon(theme)};
     ${minimal && wrapperModifiers.minimal(theme)};
+    ${disabled && wrapperModifiers.disabled()};
 
     &:hover {
       background: ${minimal
