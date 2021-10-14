@@ -23,18 +23,20 @@ const PaymentOptions = ({ cards, handlePayment }: PaymentOptionsProps) => (
       </Heading>
       <S.CardList>
         {cards?.map((card) => (
-          <S.CardItem key={card.number}>
-            <S.CardInfo>
-              <img src={card.img} alt={card.flag} />
-              <span>{card.number}</span>
-            </S.CardInfo>
-            <Radio
-              name="credit-card"
-              value={card.number}
-              id={card.number}
-              // onCheck={() => {}}
-            />
-          </S.CardItem>
+          <li key={card.number}>
+            <S.CardItem>
+              <S.CardInfo>
+                <img src={card.img} alt={card.flag} />
+                <span>{card.number}</span>
+              </S.CardInfo>
+              <Radio
+                name="credit-card"
+                value={card.number}
+                id={card.number}
+                // onCheck={() => {}}
+              />
+            </S.CardItem>
+          </li>
         ))}
         <S.AddCard role="button">
           <Add size={14} /> Add a new credit card
