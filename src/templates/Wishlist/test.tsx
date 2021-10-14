@@ -37,14 +37,6 @@ jest.mock('components/Showcase', () => {
     }
   }
 })
-jest.mock('components/Showcase', () => {
-  return {
-    __esModule: true,
-    default: function Mock() {
-      return <div data-testid="Showcase mock"></div>
-    }
-  }
-})
 jest.mock('components/Empty', () => {
   return {
     __esModule: true,
