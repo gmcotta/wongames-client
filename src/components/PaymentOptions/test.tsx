@@ -1,4 +1,5 @@
-import { screen } from '@testing-library/react'
+import { screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { renderWithTheme } from 'utils/tests/helpers'
 
 import PaymentOptions, { PaymentOptionsProps } from '.'
@@ -22,5 +23,32 @@ describe('<PaymentOptions />', () => {
     ).toBeInTheDocument()
     expect(screen.getByText(/keep shopping/i)).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /buy now/i })).toBeInTheDocument()
+  })
+
+  it('should select card when click on the label', async () => {
+    renderWithTheme(<PaymentOptions {...props} />)
+    userEvent.click(screen.getByLabelText(/4325/))
+    await waitFor(() => {
+      expect(screen.getByRole('radio', { name: /4325/ })).toBeChecked()
+    })
+  })
+
+  it('should not call handlePayment if buy now button is disabled', () => {
+    const handlePayment = jest.fn()
+    renderWithTheme(
+      <PaymentOptions cards={cardsMock} handlePayment={handlePayment} />
+    )
+    userEvent.click(screen.getByRole('button', { name: /buy now/i }))
+    expect(handlePayment).not.toHaveBeenCalled()
+  })
+
+  it('should call handlePayment if credit card is selected', async () => {
+    const handlePayment = jest.fn()
+    renderWithTheme(
+      <PaymentOptions cards={cardsMock} handlePayment={handlePayment} />
+    )
+    userEvent.click(screen.getByLabelText(/4325/))
+    userEvent.click(screen.getByRole('button', { name: /buy now/i }))
+    await waitFor(() => expect(handlePayment).toHaveBeenCalled())
   })
 })
