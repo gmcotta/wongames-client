@@ -5,10 +5,10 @@ import Profile from '.'
 
 describe('<Profile />', () => {
   it('should render the heading', () => {
-    renderWithTheme(<Profile />)
+    renderWithTheme(<Profile>Content</Profile>)
 
     expect(
-      screen.getByRole('heading', { name: /Profile/i })
+      screen.getByRole('heading', { name: /my profile/i })
     ).toBeInTheDocument()
   })
 })
