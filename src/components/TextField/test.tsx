@@ -7,28 +7,26 @@ import TextField from '.'
 
 describe('<TextField />', () => {
   it('should render with label', () => {
-    renderWithTheme(<TextField label="label" labelFor="field" id="field" />)
+    renderWithTheme(<TextField label="label" name="field" />)
 
     expect(screen.getByLabelText(/label/i)).toBeInTheDocument()
   })
 
   it('should render without label', () => {
-    renderWithTheme(<TextField id="field" />)
+    renderWithTheme(<TextField />)
 
     expect(screen.queryByLabelText(/label/i)).not.toBeInTheDocument()
   })
 
   it('should render with placeholder', () => {
-    renderWithTheme(<TextField id="field" placeholder="example" />)
+    renderWithTheme(<TextField name="field" placeholder="example" />)
 
     expect(screen.getByPlaceholderText(/example/i)).toBeInTheDocument()
   })
 
   it('should change values when typing', async () => {
     const onInput = jest.fn()
-    renderWithTheme(
-      <TextField label="label" labelFor="field" id="field" onInput={onInput} />
-    )
+    renderWithTheme(<TextField label="label" name="field" onInput={onInput} />)
     const input = screen.getByLabelText(/label/i)
     const text = 'hey you'
     userEvent.type(input, text)
@@ -40,7 +38,7 @@ describe('<TextField />', () => {
   })
 
   it('should be accessible by tab', () => {
-    renderWithTheme(<TextField label="label" labelFor="field" id="field" />)
+    renderWithTheme(<TextField label="label" name="field" />)
     expect(document.body).toHaveFocus()
     const input = screen.getByLabelText(/label/i)
     userEvent.tab()
@@ -51,8 +49,7 @@ describe('<TextField />', () => {
     renderWithTheme(
       <TextField
         label="label"
-        labelFor="field"
-        id="field"
+        name="field"
         icon={<Email data-testid="icon" />}
       />
     )
@@ -64,8 +61,7 @@ describe('<TextField />', () => {
     renderWithTheme(
       <TextField
         label="label"
-        labelFor="field"
-        id="field"
+        name="field"
         icon={<Email data-testid="icon" />}
         iconPosition="right"
       />
@@ -79,7 +75,7 @@ describe('<TextField />', () => {
 
   it('should render with disabled property', () => {
     const { container } = renderWithTheme(
-      <TextField label="label" labelFor="field" id="field" disabled />
+      <TextField label="label" name="field" disabled />
     )
     expect(screen.getByLabelText(/label/i)).toBeInTheDocument()
     expect(container.firstChild).toMatchSnapshot()
@@ -88,13 +84,7 @@ describe('<TextField />', () => {
   it('should not change value when it is disabled', async () => {
     const onInput = jest.fn()
     renderWithTheme(
-      <TextField
-        label="label"
-        labelFor="field"
-        id="field"
-        disabled
-        onInput={onInput}
-      />
+      <TextField label="label" name="field" disabled onInput={onInput} />
     )
     const input = screen.getByLabelText(/label/i)
     const text = 'hey you'
@@ -106,9 +96,7 @@ describe('<TextField />', () => {
   })
 
   it('should not be accessible by tab when it is disabled', () => {
-    renderWithTheme(
-      <TextField label="label" labelFor="field" id="field" disabled />
-    )
+    renderWithTheme(<TextField label="label" name="field" disabled />)
     expect(document.body).toHaveFocus()
     const input = screen.getByLabelText(/label/i)
     userEvent.tab()
@@ -117,12 +105,7 @@ describe('<TextField />', () => {
 
   it('should render the error message', () => {
     const { container } = renderWithTheme(
-      <TextField
-        label="label"
-        labelFor="field"
-        id="field"
-        errorMessage="Error message"
-      />
+      <TextField label="label" name="field" errorMessage="Error message" />
     )
     expect(screen.getByText(/error message/i)).toBeInTheDocument()
     expect(container.firstChild).toMatchSnapshot()

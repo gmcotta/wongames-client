@@ -102,6 +102,7 @@ exports[`<TextField /> should render the error message 1`] = `
     <input
       class="c5 c6"
       id="field"
+      name="field"
       type="text"
       value=""
     />
@@ -210,6 +211,7 @@ exports[`<TextField /> should render with disabled property 1`] = `
       class="c5 c6"
       disabled=""
       id="field"
+      name="field"
       type="text"
       value=""
     />
