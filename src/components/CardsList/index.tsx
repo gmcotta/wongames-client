@@ -1,8 +1,23 @@
+import Heading from 'components/Heading'
+import { PaymentCard } from 'components/PaymentOptions'
+
 import * as S from './styles'
 
-const CardsList = () => (
+export type CardsListProps = {
+  cards?: PaymentCard[]
+}
+
+const CardsList = ({ cards }: CardsListProps) => (
   <S.Wrapper>
-    <h1>CardsList</h1>
+    <Heading lineBottom color="black" size="small">
+      My cards
+    </Heading>
+    {cards?.map((card) => (
+      <S.Card key={card.number}>
+        <img key={card.number} src={card.img} alt={card.flag} />
+        <span>{card.number}</span>
+      </S.Card>
+    ))}
   </S.Wrapper>
 )
 

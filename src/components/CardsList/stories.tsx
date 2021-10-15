@@ -1,9 +1,17 @@
 import { Story, Meta } from '@storybook/react'
-import CardsList from '.'
+import CardsList, { CardsListProps } from '.'
+import cardsMock from 'components/PaymentOptions/mock'
 
 export default {
-  title: 'CardsList',
-  component: CardsList
+  title: 'Profile/CardsList',
+  component: CardsList,
+  args: {
+    cards: cardsMock
+  }
 } as Meta
 
-export const Default: Story = () => <CardsList />
+export const Default: Story<CardsListProps> = (args) => (
+  <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
+    <CardsList {...args} />
+  </div>
+)
