@@ -5,6 +5,7 @@ import Checkbox from 'components/Checkbox'
 import Heading from 'components/Heading'
 import Radio from 'components/Radio'
 import * as S from './styles'
+import { Close, FilterList } from '@styled-icons/material-outlined'
 
 export type Field = {
   label: string
@@ -34,48 +35,59 @@ const ExploreSidebar = ({
   onFilter
 }: ExploreSidebarProps) => {
   const [values, setValues] = useState(initialValues)
+  const [isOpen, setIsOpen] = useState(false)
   const handleFilter = () => {
+    setIsOpen(false)
     onFilter(values)
   }
   const handleChange = (name: string, value: boolean | string) => {
     setValues((oldValues) => ({ ...oldValues, [name]: value }))
   }
   return (
-    <S.Wrapper>
-      {items.map((item) => (
-        <div key={item.title}>
-          <Heading lineBottom lineColor="secondary" size="small">
-            {item.title}
-          </Heading>
-          {item.type === 'checkbox' &&
-            item.fields.map((field) => (
-              <Checkbox
-                key={field.name}
-                name={field.name}
-                label={field.label}
-                labelFor={field.name}
-                isChecked={!!values[field.name]}
-                onCheck={(value) => handleChange(field.name, value)}
-              />
-            ))}
-          {item.type === 'radio' &&
-            item.fields.map((field) => (
-              <Radio
-                key={field.name}
-                id={field.name}
-                value={field.name}
-                name={item.name}
-                label={field.label}
-                labelFor={field.name}
-                defaultChecked={field.name === values[item.name]}
-                onChange={() => handleChange(item.name, field.name)}
-              />
-            ))}
-        </div>
-      ))}
-      <Button fullWidth size="medium" onClick={handleFilter}>
-        Filter
-      </Button>
+    <S.Wrapper isOpen={isOpen}>
+      <S.Overlay />
+      <S.IconWrapper>
+        <FilterList aria-label="Open filters" onClick={() => setIsOpen(true)} />
+        <Close aria-label="Close filters" onClick={() => setIsOpen(false)} />
+      </S.IconWrapper>
+      <S.Content>
+        {items.map((item) => (
+          <S.Items key={item.title}>
+            <Heading lineBottom lineColor="secondary" size="small">
+              {item.title}
+            </Heading>
+            {item.type === 'checkbox' &&
+              item.fields.map((field) => (
+                <Checkbox
+                  key={field.name}
+                  name={field.name}
+                  label={field.label}
+                  labelFor={field.name}
+                  isChecked={!!values[field.name]}
+                  onCheck={(value) => handleChange(field.name, value)}
+                />
+              ))}
+            {item.type === 'radio' &&
+              item.fields.map((field) => (
+                <Radio
+                  key={field.name}
+                  id={field.name}
+                  value={field.name}
+                  name={item.name}
+                  label={field.label}
+                  labelFor={field.name}
+                  defaultChecked={field.name === values[item.name]}
+                  onChange={() => handleChange(item.name, field.name)}
+                />
+              ))}
+          </S.Items>
+        ))}
+      </S.Content>
+      <S.Footer>
+        <Button fullWidth size="medium" onClick={handleFilter}>
+          Filter
+        </Button>
+      </S.Footer>
     </S.Wrapper>
   )
 }

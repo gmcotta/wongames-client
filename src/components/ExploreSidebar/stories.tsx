@@ -22,5 +22,7 @@ export default {
 } as Meta
 
 export const Default: Story<ExploreSidebarProps> = (args) => (
-  <ExploreSidebar {...args} />
+  <div style={{ width: '300px' }}>
+    <ExploreSidebar {...args} />
+  </div>
 )
