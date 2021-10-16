@@ -25,11 +25,21 @@ export type CheckedValues = {
 export type ExploreSidebarProps = {
   items: ItemProps[]
   initialValues?: CheckedValues
+  onFilter: (values: CheckedValues) => void
 }
 
-const ExploreSidebar = ({ items, initialValues = {} }: ExploreSidebarProps) => {
+const ExploreSidebar = ({
+  items,
+  initialValues = {},
+  onFilter
+}: ExploreSidebarProps) => {
   const [values, setValues] = useState(initialValues)
-  console.log(setValues)
+  const handleFilter = () => {
+    onFilter(values)
+  }
+  const handleChange = (name: string, value: boolean | string) => {
+    setValues((oldValues) => ({ ...oldValues, [name]: value }))
+  }
   return (
     <S.Wrapper>
       {items.map((item) => (
@@ -45,7 +55,7 @@ const ExploreSidebar = ({ items, initialValues = {} }: ExploreSidebarProps) => {
                 label={field.label}
                 labelFor={field.name}
                 isChecked={!!values[field.name]}
-                onCheck={() => console.log('clique em ', field.name)}
+                onCheck={(value) => handleChange(field.name, value)}
               />
             ))}
           {item.type === 'radio' &&
@@ -53,17 +63,17 @@ const ExploreSidebar = ({ items, initialValues = {} }: ExploreSidebarProps) => {
               <Radio
                 key={field.name}
                 id={field.name}
+                value={field.name}
                 name={item.name}
                 label={field.label}
                 labelFor={field.name}
-                value={field.name}
                 defaultChecked={field.name === values[item.name]}
-                onCheck={() => console.log('clique em ', field.name)}
+                onChange={() => handleChange(item.name, field.name)}
               />
             ))}
         </div>
       ))}
-      <Button fullWidth size="medium">
+      <Button fullWidth size="medium" onClick={handleFilter}>
         Filter
       </Button>
     </S.Wrapper>
