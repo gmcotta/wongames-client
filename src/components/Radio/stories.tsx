@@ -10,9 +10,6 @@ export default {
       default: 'won-dark'
     }
   },
-  args: {
-    labelColor: 'white'
-  },
   argTypes: {
     onCheck: { action: 'checked' }
   }
