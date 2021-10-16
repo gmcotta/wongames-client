@@ -11,7 +11,13 @@ export default {
     }
   },
   args: {
-    items: sidebarMock
+    items: sidebarMock,
+    initialValues: {
+      free: true,
+      sort_by: 'high-to-low',
+      linux: true,
+      rpg: true
+    }
   }
 } as Meta
 
