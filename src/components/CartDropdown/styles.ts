@@ -1,3 +1,9 @@
 import styled from 'styled-components'
 
-export const Wrapper = styled.main``
+import * as CartListStyles from 'components/CartList/styles'
+
+export const Wrapper = styled.div`
+  ${CartListStyles.Wrapper} {
+    width: 56rem;
+  }
+`
