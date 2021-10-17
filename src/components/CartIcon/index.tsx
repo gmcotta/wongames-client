@@ -1,8 +1,14 @@
+import { ShoppingCart } from '@styled-icons/material-outlined'
 import * as S from './styles'
 
-const CartIcon = () => (
+export type CartIconProps = {
+  quantity?: number
+}
+
+const CartIcon = ({ quantity = 0 }: CartIconProps) => (
   <S.Wrapper>
-    <h1>CartIcon</h1>
+    <ShoppingCart aria-label="Shopping cart" />
+    {quantity > 0 && <S.Badge aria-label="Cart items">{quantity}</S.Badge>}
   </S.Wrapper>
 )
 
