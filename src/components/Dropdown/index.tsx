@@ -1,8 +1,16 @@
+import { ReactNode } from 'react'
+
 import * as S from './styles'
 
-const Dropdown = () => (
+export type DropdownProps = {
+  title: ReactNode
+  children: ReactNode
+}
+
+const Dropdown = ({ title, children }: DropdownProps) => (
   <S.Wrapper>
-    <h1>Dropdown</h1>
+    <S.Title>{title}</S.Title>
+    <S.Content>{children}</S.Content>
   </S.Wrapper>
 )
 
