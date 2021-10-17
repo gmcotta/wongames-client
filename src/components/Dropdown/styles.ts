@@ -1,8 +1,33 @@
 import styled, { css } from 'styled-components'
 
-export const Wrapper = styled.div`
-  position: absolute;
-  width: max-content;
+type WrapperProps = {
+  isOpen?: boolean
+}
+
+const wrapperModifiers = {
+  open: () => css`
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  `,
+  close: () => css`
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(2rem);
+  `
+}
+
+export const Wrapper = styled.div<WrapperProps>`
+  ${({ theme, isOpen }) => css`
+    position: absolute;
+    width: max-content;
+
+    ${Content} {
+      transition: transform 0.2s ease-in, opacity ${theme.transition.default};
+      ${isOpen && wrapperModifiers.open()}
+      ${!isOpen && wrapperModifiers.close()}
+    }
+  `}
 `
 
 export const Title = styled.div`
