@@ -21,3 +21,7 @@ export const Default: Story<CartListProps> = (args) => <CartList {...args} />
 export const HasFooterButton: Story<CartListProps> = (args) => (
   <CartList {...args} hasFooterButton />
 )
+
+export const Empty: Story<CartListProps> = () => (
+  <CartList total="0" items={[]} />
+)

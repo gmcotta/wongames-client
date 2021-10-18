@@ -17,4 +17,10 @@ describe('<CartDropdown />', () => {
     expect(screen.getByText('R$ 300,00')).toBeInTheDocument()
     expect(screen.getByText(/Red Dead Redemption 2/i)).toBeInTheDocument()
   })
+
+  it('should render empty component if there are no items', () => {
+    renderWithTheme(<CartDropdown items={[]} total="R$ 300,00" />)
+    expect(screen.getByText(/your cart is empty/i)).toBeInTheDocument()
+    expect(screen.queryByText(/total/i)).not.toBeInTheDocument()
+  })
 })
