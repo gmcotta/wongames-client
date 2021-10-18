@@ -3,34 +3,43 @@ import Menu, { MenuProps } from '.'
 
 export default {
   title: 'Menu',
-  component: Menu
+  component: Menu,
+  parameters: {
+    layout: 'fullscreen',
+    backgrounds: {
+      default: 'won-dark'
+    }
+  }
 } as Meta
 
 export const Mobile: Story<MenuProps> = (args) => <Menu {...args} />
-
 Mobile.parameters = {
-  layout: 'fullscreen',
   viewport: {
     defaultViewport: 'mobile1'
-  },
-  backgrounds: {
-    default: 'won-dark'
   }
 }
-
 Mobile.args = {
   username: ''
 }
 
 export const Desktop: Story<MenuProps> = (args) => <Menu {...args} />
-
-Desktop.parameters = {
-  layout: 'fullscreen',
-  backgrounds: {
-    default: 'won-dark'
-  }
-}
-
 Desktop.args = {
   username: ''
+}
+
+export const MobileWithUsername: Story<MenuProps> = (args) => <Menu {...args} />
+MobileWithUsername.parameters = {
+  viewport: {
+    defaultViewport: 'mobile1'
+  }
+}
+MobileWithUsername.args = {
+  username: 'Gustavo'
+}
+
+export const DesktopWithUsername: Story<MenuProps> = (args) => (
+  <Menu {...args} />
+)
+DesktopWithUsername.args = {
+  username: 'Gustavo'
 }
