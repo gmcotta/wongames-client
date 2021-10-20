@@ -7,7 +7,7 @@ const props = {
   title: 'Population Zero',
   developer: 'Rockstar Games',
   img: '/img/population-zero-img.png',
-  price: '$ 235.00',
+  price: 235,
   slug: 'population-zero'
 }
 
@@ -21,7 +21,7 @@ describe('<GameCard />', () => {
       screen.getByRole('heading', { name: /rockstar games/i })
     ).toBeInTheDocument()
     expect(screen.getByRole('img')).toHaveAttribute('src', props.img)
-    expect(screen.getByText(props.price)).toBeInTheDocument()
+    expect(screen.getByText(/\$235.00/)).toBeInTheDocument()
     expect(screen.getByLabelText(/add to wishlist/i)).toBeInTheDocument()
     expect(screen.getByRole('link', { name: props.title })).toHaveAttribute(
       'href',
@@ -32,23 +32,23 @@ describe('<GameCard />', () => {
 
   it('should render only the default price', () => {
     renderWithTheme(<GameCard {...props} />)
-    expect(screen.getByText(/\$ 235.00/i)).not.toHaveStyle({
+    expect(screen.getByText(/\$235.00/i)).not.toHaveStyle({
       'text-decoration': 'line-through',
       color: '#8F8F8F'
     })
-    expect(screen.getByText(/\$ 235.00/i)).toHaveStyle({
+    expect(screen.getByText(/\$235.00/i)).toHaveStyle({
       color: '#FAFAFA',
       'background-color': '#3CD3C1'
     })
   })
 
   it('should render the promotional price', () => {
-    renderWithTheme(<GameCard {...props} promotionalPrice="$ 200.00" />)
-    expect(screen.getByText(/\$ 235.00/i)).toHaveStyle({
+    renderWithTheme(<GameCard {...props} promotionalPrice={200} />)
+    expect(screen.getByText(/\$235.00/i)).toHaveStyle({
       'text-decoration': 'line-through',
       color: '#8F8F8F'
     })
-    expect(screen.getByText(/\$ 200.00/i)).toHaveStyle({
+    expect(screen.getByText(/\$200.00/i)).toHaveStyle({
       color: '#FAFAFA',
       'background-color': '#3CD3C1'
     })
