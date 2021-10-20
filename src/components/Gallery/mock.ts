@@ -1,4 +1,6 @@
-export default [
+import { GalleryImageProps } from '.'
+
+const mock: GalleryImageProps[] = [
   {
     src: '/img/games/cyberpunk-1.jpeg',
     label: 'Gallery Image 1'
@@ -24,3 +26,5 @@ export default [
     label: 'Gallery Image 6'
   }
 ]
+
+export default mock

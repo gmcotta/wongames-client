@@ -1,6 +1,6 @@
 import { GameItemProps } from 'components/GameItem'
 
-export default [
+const mock: GameItemProps[] = [
   {
     img: 'https://source.unsplash.com/user/willianjusten/151x70',
     title: 'Red Dead Redemption 2',
@@ -25,4 +25,6 @@ export default [
       purchaseDate: 'Purchase made on 08/20/2020 at 21:12'
     }
   }
-] as GameItemProps[]
+]
+
+export default mock

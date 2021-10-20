@@ -1,6 +1,6 @@
 import { BannerProps } from 'components/Banner'
 
-export default [
+const mock: BannerProps[] = [
   {
     img: 'https://source.unsplash.com/user/willianjusten/1042x580',
     title: 'Defy death 1',
@@ -23,4 +23,6 @@ export default [
     buttonLabel: 'Buy now',
     buttonLink: '/games/defy-death'
   }
-] as BannerProps[]
+]
+
+export default mock

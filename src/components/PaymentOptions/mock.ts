@@ -1,6 +1,6 @@
 import { PaymentCard } from '.'
 
-export default [
+const mock: PaymentCard[] = [
   {
     flag: 'visa',
     img: '/img/visa.png',
@@ -11,4 +11,6 @@ export default [
     img: '/img/master-card.png',
     number: '*** *** **** 4326'
   }
-] as PaymentCard[]
+]
+
+export default mock

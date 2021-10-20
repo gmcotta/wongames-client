@@ -1,6 +1,6 @@
 import { ItemProps } from '.'
 
-export default [
+const mock: ItemProps[] = [
   {
     title: 'Price',
     name: 'price',
@@ -105,4 +105,6 @@ export default [
       }
     ]
   }
-] as ItemProps[]
+]
+
+export default mock
