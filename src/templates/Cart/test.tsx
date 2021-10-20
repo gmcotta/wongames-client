@@ -12,7 +12,7 @@ const props: CartTemplateProps = {
   recommendedGames: gamesMock.slice(0, 2),
   recommendedHighlight: highlightMock,
   items: cartListMock,
-  total: 'R$ 430,00'
+  total: '$ 430.00'
 }
 
 jest.mock('templates/Base', () => {

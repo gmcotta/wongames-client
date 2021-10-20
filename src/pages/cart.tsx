@@ -14,7 +14,7 @@ export async function getServerSideProps() {
       recommendedGames: gamesMock,
       recommendedHighlight: highlightMock,
       items: cartListMock,
-      total: 'R$ 430,00',
+      total: '$ 430.00',
       cards: cardsMock
     }
   }

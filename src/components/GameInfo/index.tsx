@@ -18,7 +18,7 @@ const GameInfo = ({ title, description, price }: GameInfoProps) => (
       {title}
     </Heading>
     <S.Description>{description}</S.Description>
-    <Ribbon color="secondary">R$ {price}</Ribbon>
+    <Ribbon color="secondary">{price}</Ribbon>
     <S.ButtonWrapper>
       <Button size="large" icon={<AddShoppingCart />}>
         Add to cart

@@ -6,7 +6,7 @@ import GameItem, { GameItemProps, PaymentInfoProps } from '.'
 const props: GameItemProps = {
   img: 'img.jpg',
   title: 'Title',
-  price: 'R$ 215,00'
+  price: '$ 215.00'
 }
 
 describe('<GameItem />', () => {
@@ -17,7 +17,7 @@ describe('<GameItem />', () => {
       props.img
     )
     expect(screen.getByRole('heading', { name: /title/i })).toBeInTheDocument()
-    expect(screen.getByText(/r\$ 215,00/i)).toBeInTheDocument()
+    expect(screen.getByText(/\$ 215.00/i)).toBeInTheDocument()
   })
 
   it('should render the game item with download link', () => {

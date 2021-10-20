@@ -7,7 +7,7 @@ export default {
   component: CartList,
   args: {
     items: cartListMock,
-    total: 'R$ 430,00'
+    total: '$ 430.00'
   },
   parameters: {
     backgrounds: {
