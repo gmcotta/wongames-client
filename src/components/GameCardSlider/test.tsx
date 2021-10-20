@@ -2,7 +2,7 @@ import 'match-media-fake'
 import { screen } from '@testing-library/react'
 
 import { renderWithTheme } from 'utils/tests/helpers'
-import CardGameSlider from '.'
+import GameCardSlider from '.'
 
 const items = [
   {
@@ -47,14 +47,14 @@ const items = [
   }
 ]
 
-describe('<CardGameSlider />', () => {
+describe('<GameCardSlider />', () => {
   it('should render with 4 items', () => {
-    const { container } = renderWithTheme(<CardGameSlider items={items} />)
+    const { container } = renderWithTheme(<GameCardSlider items={items} />)
     expect(container.querySelectorAll('.slick-active')).toHaveLength(4)
   })
 
   it('should render white arrows', () => {
-    renderWithTheme(<CardGameSlider items={items} color="white" />)
+    renderWithTheme(<GameCardSlider items={items} color="white" />)
     expect(screen.getByLabelText(/previous games/i)).toHaveStyle({
       color: '#FAFAFA'
     })

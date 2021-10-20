@@ -1,5 +1,5 @@
 import CartTemplate, { CartTemplateProps } from 'templates/Cart'
-import gamesMock from 'components/CardGameSlider/mock'
+import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 import cartListMock from 'components/CartList/mock'
 import cardsMock from 'components/PaymentOptions/mock'

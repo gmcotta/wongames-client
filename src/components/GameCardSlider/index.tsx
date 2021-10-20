@@ -44,12 +44,12 @@ const settings: SliderSettings = {
   ]
 }
 
-export type CardGameSliderProps = {
+export type GameCardSliderProps = {
   items: GameCardProps[]
   color?: 'white' | 'black'
 }
 
-const CardGameSlider = ({ items, color }: CardGameSliderProps) => (
+const GameCardSlider = ({ items, color }: GameCardSliderProps) => (
   <S.Wrapper color={color}>
     <Slider settings={settings}>
       {items.map((item) => (
@@ -59,4 +59,4 @@ const CardGameSlider = ({ items, color }: CardGameSliderProps) => (
   </S.Wrapper>
 )
 
-export default CardGameSlider
+export default GameCardSlider

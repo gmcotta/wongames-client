@@ -2,7 +2,7 @@ import 'match-media-fake'
 import { screen } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helpers'
 
-import gamesMock from 'components/CardGameSlider/mock'
+import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 import cartListMock from 'components/CartList/mock'
 

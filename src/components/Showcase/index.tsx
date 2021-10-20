@@ -1,4 +1,4 @@
-import CardGameSlider from 'components/CardGameSlider'
+import GameCardSlider from 'components/GameCardSlider'
 import { GameCardProps } from 'components/GameCard'
 import Heading from 'components/Heading'
 import Highlight, { HighlightProps } from 'components/Highlight'
@@ -18,7 +18,7 @@ const Showcase = ({ title, highlight, games }: ShowcaseProps) => (
         {title}
       </Heading>
     )}
-    {!!games && <CardGameSlider items={games} />}
+    {!!games && <GameCardSlider items={games} />}
     {!!highlight && <Highlight {...highlight} />}
   </S.Wrapper>
 )

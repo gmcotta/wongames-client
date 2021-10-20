@@ -4,7 +4,7 @@ import { renderWithTheme } from 'utils/tests/helpers'
 
 import Showcase from '.'
 
-import gamesMock from 'components/CardGameSlider/mock'
+import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 
 describe('<Showcase />', () => {
