@@ -7,12 +7,13 @@ const props = {
   title: 'Population Zero',
   developer: 'Rockstar Games',
   img: '/img/population-zero-img.png',
-  price: 'R$ 235,00'
+  price: 'R$ 235,00',
+  slug: 'population-zero'
 }
 
 describe('<GameCard />', () => {
   it('should render the game card', () => {
-    renderWithTheme(<GameCard {...props} />)
+    const { container } = renderWithTheme(<GameCard {...props} />)
     expect(
       screen.getByRole('heading', { name: /population zero/i })
     ).toBeInTheDocument()
@@ -22,6 +23,11 @@ describe('<GameCard />', () => {
     expect(screen.getByRole('img')).toHaveAttribute('src', props.img)
     expect(screen.getByText(props.price)).toBeInTheDocument()
     expect(screen.getByLabelText(/add to wishlist/i)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: props.title })).toHaveAttribute(
+      'href',
+      `/game/${props.slug}`
+    )
+    expect(container.firstChild).toMatchSnapshot()
   })
 
   it('should render only the default price', () => {

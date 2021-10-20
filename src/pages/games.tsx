@@ -25,7 +25,8 @@ export async function getStaticProps() {
         price: new Intl.NumberFormat('en', {
           style: 'currency',
           currency: 'USD'
-        }).format(game.price)
+        }).format(game.price),
+        slug: game.slug
       })),
       filterItems: sidebarMock
     },

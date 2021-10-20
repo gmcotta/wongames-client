@@ -6,6 +6,7 @@ export default {
   component: GameCard,
   args: {
     title: 'Population Zero',
+    slug: 'population-zero',
     developer: 'Rockstar Games',
     img: '/img/population-zero-img.png',
     price: 'R$ 235,00',
