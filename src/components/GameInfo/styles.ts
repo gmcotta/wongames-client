@@ -2,12 +2,21 @@ import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 
 import * as RibbonStyles from 'components/Ribbon/styles'
+import * as HeadingStyles from 'components/Heading/styles'
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
     position: relative;
     background-color: ${theme.colors.white};
     padding: ${theme.spacings.small};
+
+    ${HeadingStyles.Wrapper} {
+      max-width: 72%;
+
+      ${media.greaterThan('medium')`
+        max-width: 78%;
+      `}
+    }
 
     ${RibbonStyles.Wrapper} {
       right: -1rem;
