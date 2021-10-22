@@ -6,8 +6,8 @@ export const QUERY_GAMES = gql`
     games(limit: $limit) {
       ...GameFragment
     }
-    ${GameFragment}
   }
+  ${GameFragment}
 `
 
 export const QUERY_GAME_BY_SLUG = gql`
