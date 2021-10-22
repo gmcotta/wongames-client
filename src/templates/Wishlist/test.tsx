@@ -10,7 +10,8 @@ import Wishlist, { WishlistTemplateProps } from '.'
 const props: WishlistTemplateProps = {
   games: gamesMock.slice(0, 2),
   recommendedGames: gamesMock.slice(0, 2),
-  recommendedHighlight: highlightMock
+  recommendedHighlight: highlightMock,
+  recommendedTitle: 'You also will like these games'
 }
 
 jest.mock('components/Menu', () => {
@@ -61,6 +62,7 @@ describe('<Wishlist />', () => {
   it('should render empty component if template has no games', () => {
     renderWithTheme(
       <Wishlist
+        recommendedTitle={props.recommendedTitle}
         recommendedGames={props.recommendedGames}
         recommendedHighlight={props.recommendedHighlight}
       />

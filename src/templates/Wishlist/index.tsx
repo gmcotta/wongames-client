@@ -12,12 +12,14 @@ export type WishlistTemplateProps = {
   games?: GameCardProps[]
   recommendedGames: GameCardProps[]
   recommendedHighlight: HighlightProps
+  recommendedTitle: string
 }
 
 const Wishlist = ({
   games,
   recommendedGames,
-  recommendedHighlight
+  recommendedHighlight,
+  recommendedTitle
 }: WishlistTemplateProps) => (
   <Base>
     <Container>
@@ -26,7 +28,7 @@ const Wishlist = ({
       </Heading>
       {!games?.length && (
         <Empty
-          title="Your wishlist is empty"
+          title={recommendedTitle}
           description="Games added to your wishlist will appear here"
           hasLink
         />
