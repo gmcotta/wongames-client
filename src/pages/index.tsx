@@ -1,10 +1,8 @@
+import { GetStaticProps } from 'next'
 import Home, { HomeTemplateProps } from 'templates/Home'
-import gamesMock from 'components/GameCardSlider/mock'
-import highlightMock from 'components/Highlight/mock'
 import { initializeApollo } from 'utils/apollo'
 import { QUERY_HOME } from 'graphql/queries/home'
 import { QueryHome } from 'graphql/generated/QueryHome'
-import { GetStaticProps } from 'next'
 
 export default function Index(props: HomeTemplateProps) {
   return <Home {...props} />
@@ -36,6 +34,23 @@ export const getStaticProps: GetStaticProps = async () => {
     img: `http://localhost:1337${game.cover?.url}`,
     price: game.price
   }))
+  const popularGamesMapped = sections?.popularGames?.games.map((game) => ({
+    title: game.name,
+    slug: game.slug,
+    developer: game.developers[0].name,
+    img: `http://localhost:1337${game.cover?.url}`,
+    price: game.price
+  }))
+  const popularHighlight = sections?.popularGames?.highlight
+  const popularHighlightMapped = {
+    title: popularHighlight?.title,
+    subtitle: popularHighlight?.subtitle,
+    buttonLabel: popularHighlight?.buttonLabel,
+    buttonLink: popularHighlight?.buttonLink,
+    backgroundImage: `http://localhost:1337${popularHighlight?.background?.url}`,
+    floatImage: `http://localhost:1337${popularHighlight?.floatImage?.url}`,
+    contentAlignment: popularHighlight?.contentAlignment
+  }
   const upcomingGamesMapped = upcomingGames.map((game) => ({
     title: game.name,
     slug: game.slug,
@@ -74,8 +89,8 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       banners: bannersMapped,
       newGames: newGamesMapped,
-      mostPopularHighlight: highlightMock,
-      mostPopularGames: gamesMock,
+      mostPopularHighlight: popularHighlightMapped,
+      mostPopularGames: popularGamesMapped,
       upcomingGames: upcomingGamesMapped,
       upcomingHighlight: upcomingHighlightMapped,
       freeGames: freeGamesMapped,
