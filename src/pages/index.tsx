@@ -13,7 +13,7 @@ export default function Index(props: HomeTemplateProps) {
 export const getStaticProps: GetStaticProps = async () => {
   const apolloClient = initializeApollo()
   const {
-    data: { banners, newGames }
+    data: { banners, newGames, upcomingGames, freeGames, sections }
   } = await apolloClient.query<QueryHome>({
     query: QUERY_HOME
   })
@@ -36,17 +36,50 @@ export const getStaticProps: GetStaticProps = async () => {
     img: `http://localhost:1337${game.cover?.url}`,
     price: game.price
   }))
+  const upcomingGamesMapped = upcomingGames.map((game) => ({
+    title: game.name,
+    slug: game.slug,
+    developer: game.developers[0].name,
+    img: `http://localhost:1337${game.cover?.url}`,
+    price: game.price
+  }))
+  const freeGamesMapped = freeGames.map((game) => ({
+    title: game.name,
+    slug: game.slug,
+    developer: game.developers[0].name,
+    img: `http://localhost:1337${game.cover?.url}`,
+    price: game.price
+  }))
+  const upcomingHighlight = sections?.upcomingGames?.highlight
+  const upcomingHighlightMapped = {
+    title: upcomingHighlight?.title,
+    subtitle: upcomingHighlight?.subtitle,
+    buttonLabel: upcomingHighlight?.buttonLabel,
+    buttonLink: upcomingHighlight?.buttonLink,
+    backgroundImage: `http://localhost:1337${upcomingHighlight?.background?.url}`,
+    floatImage: `http://localhost:1337${upcomingHighlight?.floatImage?.url}`,
+    contentAlignment: upcomingHighlight?.contentAlignment
+  }
+  const freeGamesHighlight = sections?.freeGames?.highlight
+  const freeGamesHighlightMapped = {
+    title: freeGamesHighlight?.title,
+    subtitle: freeGamesHighlight?.subtitle,
+    buttonLabel: freeGamesHighlight?.buttonLabel,
+    buttonLink: freeGamesHighlight?.buttonLink,
+    backgroundImage: `http://localhost:1337${freeGamesHighlight?.background?.url}`,
+    floatImage: `http://localhost:1337${freeGamesHighlight?.floatImage?.url}`,
+    contentAlignment: freeGamesHighlight?.contentAlignment
+  }
   return {
     props: {
       banners: bannersMapped,
       newGames: newGamesMapped,
       mostPopularHighlight: highlightMock,
       mostPopularGames: gamesMock,
-      upcomingGames: gamesMock,
-      upcomingHighlight: highlightMock,
-      upcomingMoreGames: gamesMock,
-      freeGames: gamesMock,
-      freeHighlight: highlightMock
+      upcomingGames: upcomingGamesMapped,
+      upcomingHighlight: upcomingHighlightMapped,
+      freeGames: freeGamesMapped,
+      freeHighlight: freeGamesHighlightMapped
     },
     revalidate: 60
   }
