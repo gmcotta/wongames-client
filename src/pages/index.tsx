@@ -27,6 +27,7 @@ export const getStaticProps: GetStaticProps = async () => {
       ribbonColor: banner.ribbon.color
     })
   }))
+  const newGamesTitle = sections?.newGames?.title
   const newGamesMapped = newGames.map((game) => ({
     title: game.name,
     slug: game.slug,
@@ -34,6 +35,7 @@ export const getStaticProps: GetStaticProps = async () => {
     img: `http://localhost:1337${game.cover?.url}`,
     price: game.price
   }))
+  const popularGamesTitle = sections?.popularGames?.title
   const popularGamesMapped = sections?.popularGames?.games.map((game) => ({
     title: game.name,
     slug: game.slug,
@@ -51,14 +53,8 @@ export const getStaticProps: GetStaticProps = async () => {
     floatImage: `http://localhost:1337${popularHighlight?.floatImage?.url}`,
     contentAlignment: popularHighlight?.contentAlignment
   }
+  const upcomingGamesTitle = sections?.upcomingGames?.title
   const upcomingGamesMapped = upcomingGames.map((game) => ({
-    title: game.name,
-    slug: game.slug,
-    developer: game.developers[0].name,
-    img: `http://localhost:1337${game.cover?.url}`,
-    price: game.price
-  }))
-  const freeGamesMapped = freeGames.map((game) => ({
     title: game.name,
     slug: game.slug,
     developer: game.developers[0].name,
@@ -75,6 +71,14 @@ export const getStaticProps: GetStaticProps = async () => {
     floatImage: `http://localhost:1337${upcomingHighlight?.floatImage?.url}`,
     contentAlignment: upcomingHighlight?.contentAlignment
   }
+  const freeGamesTitle = sections?.freeGames?.title
+  const freeGamesMapped = freeGames.map((game) => ({
+    title: game.name,
+    slug: game.slug,
+    developer: game.developers[0].name,
+    img: `http://localhost:1337${game.cover?.url}`,
+    price: game.price
+  }))
   const freeGamesHighlight = sections?.freeGames?.highlight
   const freeGamesHighlightMapped = {
     title: freeGamesHighlight?.title,
@@ -88,12 +92,16 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       banners: bannersMapped,
+      newGamesTitle: newGamesTitle,
+      mostPopularTitle: popularGamesTitle,
+      upcomingGamesTitle: upcomingGamesTitle,
+      freeGamesTitle: freeGamesTitle,
       newGames: newGamesMapped,
-      mostPopularHighlight: popularHighlightMapped,
       mostPopularGames: popularGamesMapped,
       upcomingGames: upcomingGamesMapped,
-      upcomingHighlight: upcomingHighlightMapped,
       freeGames: freeGamesMapped,
+      mostPopularHighlight: popularHighlightMapped,
+      upcomingHighlight: upcomingHighlightMapped,
       freeHighlight: freeGamesHighlightMapped
     },
     revalidate: 60
