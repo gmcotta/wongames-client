@@ -19,6 +19,7 @@ const props: GameTemplateProps = {
   details: gameDetailsMock,
   upcomingGames: gamesMock,
   upcomingHighlight: highlightMock,
+  recommendedTitle: 'Title',
   recommendedGames: gamesMock
 }
 

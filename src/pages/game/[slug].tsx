@@ -15,6 +15,9 @@ import {
   QueryGameBySlug,
   QueryGameBySlugVariables
 } from 'graphql/generated/QueryGameBySlug'
+import { QueryRecommended } from 'graphql/generated/QueryRecommended'
+import { QUERY_RECOMMENDED } from 'graphql/queries/recommended'
+import { gamesMapper } from 'utils/mappers'
 
 export default function Index(props: GameTemplateProps) {
   const router = useRouter()
@@ -23,10 +26,8 @@ export default function Index(props: GameTemplateProps) {
 }
 
 export async function getStaticPaths() {
-  const { data } = await initializeApollo().query<
-    QueryGames,
-    QueryGamesVariables
-  >({
+  const apolloClient = initializeApollo()
+  const { data } = await apolloClient.query<QueryGames, QueryGamesVariables>({
     query: QUERY_GAMES,
     variables: {
       limit: 9
@@ -42,7 +43,8 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { data } = await initializeApollo().query<
+  const apolloClient = initializeApollo()
+  const { data } = await apolloClient.query<
     QueryGameBySlug,
     QueryGameBySlugVariables
   >({
@@ -56,6 +58,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       notFound: true
     }
   }
+  const { data: recommendedData } = await apolloClient.query<QueryRecommended>({
+    query: QUERY_RECOMMENDED
+  })
   const game = data.games[0]
   const props = {
     coverSrc: `http://localhost:1337${game.cover?.src}`,
@@ -76,7 +81,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       publisher: game.publisher?.name,
       rating: game.rating,
       genres: game.categories.map((category) => category.name)
-    }
+    },
+    recommendedTitle: recommendedData.recommended?.section?.title,
+    recommendedGames: gamesMapper(recommendedData.recommended?.section?.games)
   }
   return {
     revalidate: 60,
