@@ -17,6 +17,7 @@ const props: GameTemplateProps = {
   gallery: galleryMock.slice(0, 2),
   description: textContentMock.content,
   details: gameDetailsMock,
+  upcomingTitle: 'Title',
   upcomingGames: gamesMock,
   upcomingHighlight: highlightMock,
   recommendedTitle: 'Title',

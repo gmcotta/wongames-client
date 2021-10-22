@@ -17,7 +17,9 @@ import {
 } from 'graphql/generated/QueryGameBySlug'
 import { QueryRecommended } from 'graphql/generated/QueryRecommended'
 import { QUERY_RECOMMENDED } from 'graphql/queries/recommended'
-import { gamesMapper } from 'utils/mappers'
+import { gamesMapper, highlightMapper } from 'utils/mappers'
+import { QueryHome, QueryHomeVariables } from 'graphql/generated/QueryHome'
+import { QUERY_HOME } from 'graphql/queries/home'
 
 export default function Index(props: GameTemplateProps) {
   const router = useRouter()
@@ -61,6 +63,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { data: recommendedData } = await apolloClient.query<QueryRecommended>({
     query: QUERY_RECOMMENDED
   })
+  const TODAY_DATE = new Date().toISOString().slice(0, 10)
+  const {
+    data: { upcomingGames, sections }
+  } = await apolloClient.query<QueryHome, QueryHomeVariables>({
+    query: QUERY_HOME,
+    variables: {
+      date: TODAY_DATE
+    }
+  })
   const game = data.games[0]
   const props = {
     coverSrc: `http://localhost:1337${game.cover?.src}`,
@@ -83,7 +94,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       genres: game.categories.map((category) => category.name)
     },
     recommendedTitle: recommendedData.recommended?.section?.title,
-    recommendedGames: gamesMapper(recommendedData.recommended?.section?.games)
+    recommendedGames: gamesMapper(recommendedData.recommended?.section?.games),
+    upcomingTitle: sections?.upcomingGames?.title,
+    upcomingGames: gamesMapper(upcomingGames),
+    upcomingHighlight: highlightMapper(sections?.upcomingGames?.highlight)
   }
   return {
     revalidate: 60,
