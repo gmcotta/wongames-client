@@ -9,6 +9,7 @@ import cartListMock from 'components/CartList/mock'
 import Cart, { CartTemplateProps } from '.'
 
 const props: CartTemplateProps = {
+  recommendedTitle: 'Title',
   recommendedGames: gamesMock.slice(0, 2),
   recommendedHighlight: highlightMock,
   items: cartListMock,
