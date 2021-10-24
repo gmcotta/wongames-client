@@ -26,6 +26,12 @@ export const Wrapper = styled(Container)`
   `}
 `
 
+export const Loading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 export const GridSection = styled.div`
   display: flex;
   flex-direction: column;
