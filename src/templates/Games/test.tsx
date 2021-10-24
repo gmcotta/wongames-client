@@ -1,10 +1,13 @@
 import { screen } from '@testing-library/react'
 import { renderWithTheme } from 'utils/tests/helpers'
+import { MockedProvider } from '@apollo/client/testing'
 
-import gamesMock from 'components/GameCardSlider/mock'
 import sidebarMock from 'components/ExploreSidebar/mock'
 
 import Games from '.'
+import { fetchMoreMock, gamesMock } from './mock'
+import userEvent from '@testing-library/user-event'
+import apolloCache from 'utils/apolloCache'
 
 jest.mock('templates/Base', () => {
   return {
@@ -24,36 +27,40 @@ jest.mock('components/Grid', () => {
   }
 })
 
-jest.mock('components/ExploreSidebar', () => {
-  return {
-    __esModule: true,
-    default: function Mock() {
-      return <div data-testid="ExploreSidebar mock"></div>
-    }
-  }
-})
-
-jest.mock('components/GameCard', () => ({
-  __esModule: true,
-  default: function Mock() {
-    return <div data-testid="Mock GameCard" />
-  }
-}))
-
 describe('<Games />', () => {
-  it('should render the template', () => {
-    renderWithTheme(<Games games={gamesMock} filterItems={sidebarMock} />)
-    expect(screen.getByTestId(/base mock/i)).toBeInTheDocument()
-    expect(screen.getByTestId(/exploresidebar mock/i)).toBeInTheDocument()
+  it('should render the template', async () => {
+    renderWithTheme(
+      <MockedProvider mocks={[gamesMock]} addTypename={false}>
+        <Games filterItems={sidebarMock} />
+      </MockedProvider>
+    )
+
+    expect(screen.getByText(/loading/i)).toBeInTheDocument()
+
+    expect(await screen.findByTestId(/base mock/i)).toBeInTheDocument()
+    expect(await screen.findByText(/Sample Game/i)).toBeInTheDocument()
     expect(
-      screen.getByRole('button', { name: /show more/i })
+      await screen.findByRole('button', { name: /show more/i })
     ).toBeInTheDocument()
   })
 
-  it('should not render the show more button if no games were found', () => {
-    renderWithTheme(<Games filterItems={sidebarMock} />)
-    expect(
-      screen.queryByRole('button', { name: /show more/i })
-    ).not.toBeInTheDocument()
+  it('should render the loading', () => {
+    renderWithTheme(
+      <MockedProvider mocks={[]} addTypename={false}>
+        <Games filterItems={sidebarMock} />
+      </MockedProvider>
+    )
+    expect(screen.getByText(/loading/i)).toBeInTheDocument()
+  })
+
+  it('should show more games if button is pressed', async () => {
+    renderWithTheme(
+      <MockedProvider mocks={[gamesMock, fetchMoreMock]} cache={apolloCache}>
+        <Games filterItems={sidebarMock} />
+      </MockedProvider>
+    )
+    expect(await screen.findByText(/sample game/i)).toBeInTheDocument()
+    userEvent.click(await screen.findByRole('button', { name: /show more/i }))
+    expect(await screen.findByText(/fetch more game/i)).toBeInTheDocument()
   })
 })
