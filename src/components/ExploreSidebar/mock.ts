@@ -48,8 +48,8 @@ const mock: ItemProps[] = [
     ]
   },
   {
-    title: 'System',
-    name: 'system',
+    title: 'Platforms',
+    name: 'platforms',
     type: 'checkbox',
     fields: [
       {

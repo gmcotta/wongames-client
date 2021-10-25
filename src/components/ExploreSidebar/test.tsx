@@ -14,7 +14,9 @@ describe('<ExploreSidebar />', () => {
     expect(
       screen.getByRole('heading', { name: /sort by/i })
     ).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: /system/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: /platforms/i })
+    ).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: /genre/i })).toBeInTheDocument()
   })
 
@@ -43,7 +45,7 @@ describe('<ExploreSidebar />', () => {
     renderWithTheme(
       <ExploreSidebar
         items={sidebarMock}
-        initialValues={{ windows: true, sort_by: 'high-to-low' }}
+        initialValues={{ platforms: ['windows'], sort_by: 'high-to-low' }}
         onFilter={jest.fn}
       />
     )
@@ -53,7 +55,7 @@ describe('<ExploreSidebar />', () => {
 
   it('should filter with initial values', () => {
     const onFilter = jest.fn()
-    const initialValues = { windows: true, sort_by: 'high-to-low' }
+    const initialValues = { platforms: ['windows'], sort_by: 'high-to-low' }
     renderWithTheme(
       <ExploreSidebar
         items={sidebarMock}
@@ -69,15 +71,15 @@ describe('<ExploreSidebar />', () => {
     const onFilter = jest.fn()
     renderWithTheme(<ExploreSidebar items={sidebarMock} onFilter={onFilter} />)
     userEvent.click(screen.getByLabelText(/free/i))
-    userEvent.click(screen.getByLabelText(/windows/i))
+    userEvent.click(screen.getByLabelText(/linux/i))
     userEvent.click(screen.getByLabelText(/low to high/i))
     userEvent.click(screen.getByLabelText(/indie/i))
     userEvent.click(screen.getByRole('button', { name: /filter/i }))
     expect(onFilter).toHaveBeenCalledWith({
-      free: true,
-      windows: true,
+      price: ['free'],
+      platforms: ['linux'],
       sort_by: 'low-to-high',
-      indie: true
+      genre: ['indie']
     })
   })
 

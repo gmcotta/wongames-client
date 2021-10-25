@@ -15,7 +15,7 @@ export default {
     initialValues: {
       free: true,
       sort_by: 'high-to-low',
-      linux: true,
+      platforms: ['linux', 'macos'],
       rpg: true
     }
   }
