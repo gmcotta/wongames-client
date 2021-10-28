@@ -88,4 +88,15 @@ describe('<Games />', () => {
       query: { platforms: ['windows', 'linux'], sort_by: 'low-to-high' }
     })
   })
+
+  it('should show Empty component if no games were found', async () => {
+    renderWithTheme(
+      <MockedProvider mocks={[]}>
+        <Games filterItems={filterItemsMock} />
+      </MockedProvider>
+    )
+    expect(
+      await screen.findByText(/we didn't find any games with this filter/i)
+    ).toBeInTheDocument()
+  })
 })
