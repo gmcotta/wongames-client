@@ -17,7 +17,8 @@ export default {
       sort_by: 'high-to-low',
       platforms: ['linux', 'macos'],
       rpg: true
-    }
+    },
+    onFilter: () => ({})
   }
 } as Meta
 

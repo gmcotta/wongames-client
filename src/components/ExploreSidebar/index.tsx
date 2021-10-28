@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import Button from 'components/Button'
 import Checkbox from 'components/Checkbox'
@@ -36,10 +36,13 @@ const ExploreSidebar = ({
 }: ExploreSidebarProps) => {
   const [values, setValues] = useState(initialValues)
   const [isOpen, setIsOpen] = useState(false)
-  const handleFilter = () => {
+  const handleFilterMenu = () => {
     setIsOpen(false)
-    onFilter(values)
   }
+  useEffect(() => {
+    onFilter(values)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values])
   const handleCheckbox = (name: string, value: string) => {
     const currentList = (values[name] as []) || []
     setValues((s) => ({ ...s, [name]: xor(currentList, [value]) }))
@@ -92,7 +95,7 @@ const ExploreSidebar = ({
         ))}
       </S.Content>
       <S.Footer>
-        <Button fullWidth size="medium" onClick={handleFilter}>
+        <Button fullWidth size="medium" onClick={handleFilterMenu}>
           Filter
         </Button>
       </S.Footer>

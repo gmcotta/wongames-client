@@ -36,10 +36,10 @@ describe('<ExploreSidebar />', () => {
     ).toBeInTheDocument()
   })
 
-  it('should render the filter button', () => {
-    renderWithTheme(<ExploreSidebar items={sidebarMock} onFilter={jest.fn} />)
-    expect(screen.getByRole('button', { name: /filter/i })).toBeInTheDocument()
-  })
+  // it('should render the filter button', () => {
+  //   renderWithTheme(<ExploreSidebar items={sidebarMock} onFilter={jest.fn} />)
+  //   expect(screen.getByRole('button', { name: /filter/i })).toBeInTheDocument()
+  // })
 
   it('should check initial values', () => {
     renderWithTheme(
@@ -63,7 +63,6 @@ describe('<ExploreSidebar />', () => {
         onFilter={onFilter}
       />
     )
-    userEvent.click(screen.getByRole('button', { name: /filter/i }))
     expect(onFilter).toHaveBeenCalledWith(initialValues)
   })
 
@@ -74,7 +73,7 @@ describe('<ExploreSidebar />', () => {
     userEvent.click(screen.getByLabelText(/linux/i))
     userEvent.click(screen.getByLabelText(/low to high/i))
     userEvent.click(screen.getByLabelText(/indie/i))
-    userEvent.click(screen.getByRole('button', { name: /filter/i }))
+    expect(onFilter).toHaveBeenCalledTimes(5)
     expect(onFilter).toHaveBeenCalledWith({
       price: ['free'],
       platforms: ['linux'],
@@ -88,7 +87,6 @@ describe('<ExploreSidebar />', () => {
     renderWithTheme(<ExploreSidebar items={sidebarMock} onFilter={onFilter} />)
     userEvent.click(screen.getByLabelText(/high to low/i))
     userEvent.click(screen.getByLabelText(/low to high/i))
-    userEvent.click(screen.getByRole('button', { name: /filter/i }))
     expect(onFilter).toHaveBeenCalledWith({
       sort_by: 'low-to-high'
     })
@@ -112,6 +110,9 @@ describe('<ExploreSidebar />', () => {
     userEvent.click(screen.getByLabelText(/open filters/i))
     expect(overlay).toHaveStyleRule('opacity', '1', mobileOptions)
     userEvent.click(screen.getByLabelText(/close filters/i))
+    expect(overlay).not.toHaveStyleRule('opacity', '1', mobileOptions)
+    userEvent.click(screen.getByLabelText(/open filters/i))
+    userEvent.click(screen.getByRole('button', { name: /filter/i }))
     expect(overlay).not.toHaveStyleRule('opacity', '1', mobileOptions)
   })
 })
