@@ -7,7 +7,7 @@ import apolloCache from 'utils/apolloCache'
 
 import filterItemsMock from 'components/ExploreSidebar/mock'
 
-import { fetchMoreMock, gamesMock } from './mock'
+import { fetchMoreMock, gamesMock, noGamesMock } from './mock'
 import Games from '.'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -80,7 +80,7 @@ describe('<Games />', () => {
 
   it('should show Empty component if no games were found', async () => {
     renderWithTheme(
-      <MockedProvider mocks={[]}>
+      <MockedProvider mocks={[noGamesMock]}>
         <Games filterItems={filterItemsMock} />
       </MockedProvider>
     )
