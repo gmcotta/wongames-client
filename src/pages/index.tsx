@@ -18,7 +18,8 @@ export const getStaticProps: GetStaticProps = async () => {
     query: QUERY_HOME,
     variables: {
       date: TODAY_DATE
-    }
+    },
+    fetchPolicy: 'no-cache'
   })
   const popularGames = sections?.popularGames?.games
   const popularHighlight = sections?.popularGames?.highlight
