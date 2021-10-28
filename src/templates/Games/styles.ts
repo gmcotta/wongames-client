@@ -38,6 +38,13 @@ export const GridSection = styled.div`
 `
 
 export const ShowMore = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10rem;
+`
+
+export const ShowMoreButton = styled.div`
   ${({ theme }) => css`
     display: inline-block;
     text-align: center;
@@ -55,4 +62,7 @@ export const ShowMore = styled.div`
       font-size: ${theme.font.sizes.medium};
     }
   `}
+`
+export const ShowMoreLoading = styled.img`
+  width: 4rem;
 `
