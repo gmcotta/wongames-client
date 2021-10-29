@@ -105,7 +105,6 @@ describe('<ExploreSidebar />', () => {
       )
     }
     const overlay = container.firstChild
-    console.log(overlay)
     expect(overlay).not.toHaveStyleRule('opacity', '1', mobileOptions)
     userEvent.click(screen.getByLabelText(/open filters/i))
     expect(overlay).toHaveStyleRule('opacity', '1', mobileOptions)
