@@ -23,6 +23,7 @@ export type CartContextData = {
   items: CartItem[] | undefined
   quantity: number
   total: string
+  isInCart: (id: string) => boolean
 }
 export type CartProviderProps = {
   children: ReactNode
@@ -31,7 +32,8 @@ export type CartProviderProps = {
 export const CartContextDefaultValue = {
   items: [],
   quantity: 0,
-  total: '$0.00'
+  total: '$0.00',
+  isInCart: () => false
 }
 export const CartContext = createContext<CartContextData>(
   CartContextDefaultValue
@@ -53,13 +55,17 @@ const CartProvider = ({ children }: CartProviderProps) => {
   const total = data?.games.reduce((acc, game) => {
     return acc + game.price
   }, 0)
+  const isInCart = (id: string) => {
+    return id ? cartItems.includes(id) : false
+  }
 
   return (
     <CartContext.Provider
       value={{
         items: cartMapper(data?.games),
         quantity: cartItems.length,
-        total: formatPrice(total || 0)
+        total: formatPrice(total || 0),
+        isInCart
       }}
     >
       {children}

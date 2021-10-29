@@ -23,4 +23,18 @@ describe('useCart', () => {
     expect(result.current.quantity).toStrictEqual(2)
     expect(result.current.total).toStrictEqual('$21.00')
   })
+
+  it('should check if item is already in cart', () => {
+    setStorageItem('cartItems', ['1'])
+    const wrapper = ({ children }: CartProviderProps) => (
+      <MockedProvider mocks={[gamesMock]}>
+        <CartProvider>{children}</CartProvider>
+      </MockedProvider>
+    )
+    const { result } = renderHook(() => useCart(), {
+      wrapper
+    })
+    expect(result.current.isInCart('1')).toBe(true)
+    expect(result.current.isInCart('2')).toBe(false)
+  })
 })
