@@ -1,9 +1,11 @@
 import { ItemProps } from 'components/ExploreSidebar'
 import { ParsedUrlQueryInput } from 'querystring'
 
+export type FilterItemProps = Pick<ItemProps, 'name' | 'type'>
+
 type ParseArgs = {
   queryString: ParsedUrlQueryInput
-  filterItems: ItemProps[]
+  filterItems: FilterItemProps[]
 }
 
 export const parseQueryStringToWhere = ({
