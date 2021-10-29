@@ -25,6 +25,7 @@ export type CartContextData = {
   total: string
   isInCart: (id: string) => boolean
   addToCart: (id: string) => void
+  removeFromCart: (id: string) => void
 }
 export type CartProviderProps = {
   children: ReactNode
@@ -35,7 +36,8 @@ export const CartContextDefaultValue = {
   quantity: 0,
   total: '$0.00',
   isInCart: () => false,
-  addToCart: () => null
+  addToCart: () => null,
+  removeFromCart: () => null
 }
 export const CartContext = createContext<CartContextData>(
   CartContextDefaultValue
@@ -60,10 +62,17 @@ const CartProvider = ({ children }: CartProviderProps) => {
   const isInCart = (id: string) => {
     return id ? cartItems.includes(id) : false
   }
+  const saveCart = (newCartItems: string[]) => {
+    setCartItems(newCartItems)
+    setStorageItem(CART_KEY, newCartItems)
+  }
   const addToCart = (id: string) => {
-    const newItems = [...cartItems, id]
-    setCartItems(newItems)
-    setStorageItem(CART_KEY, newItems)
+    const newCartItems = [...cartItems, id]
+    saveCart(newCartItems)
+  }
+  const removeFromCart = (id: string) => {
+    const newCartItems = cartItems.filter((itemId) => itemId !== id)
+    saveCart(newCartItems)
   }
 
   return (
@@ -73,7 +82,8 @@ const CartProvider = ({ children }: CartProviderProps) => {
         quantity: cartItems.length,
         total: formatPrice(total || 0),
         isInCart,
-        addToCart
+        addToCart,
+        removeFromCart
       }}
     >
       {children}
