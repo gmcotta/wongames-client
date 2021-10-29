@@ -8,7 +8,7 @@ import {
 
 import { useQueryGames } from 'graphql/queries/games'
 import { getStorageItem } from 'utils/localStorage'
-import formatPrice from 'utils/formatPrice'
+import { cartMapper } from 'utils/mappers'
 
 const CART_KEY = 'cartItems'
 
@@ -45,12 +45,7 @@ const CartProvider = ({ children }: CartProviderProps) => {
   return (
     <CartContext.Provider
       value={{
-        items: data?.games.map((game) => ({
-          id: game.id,
-          img: `http://localhost:1337${game.cover?.url}`,
-          title: game.name,
-          price: formatPrice(game.price)
-        }))
+        items: cartMapper(data?.games)
       }}
     >
       {children}
