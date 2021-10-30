@@ -1,3 +1,5 @@
+import userEvent from '@testing-library/user-event'
+import { CartContextDefaultValue } from 'hooks/use-cart'
 import { screen, render } from 'utils/testUtils'
 
 import GameItem, { GameItemProps, PaymentInfoProps } from '.'
@@ -18,6 +20,17 @@ describe('<GameItem />', () => {
     )
     expect(screen.getByRole('heading', { name: /title/i })).toBeInTheDocument()
     expect(screen.getByText(/\$ 215.00/i)).toBeInTheDocument()
+  })
+
+  it('should remove the game item from cart list', () => {
+    const cartProviderProps = {
+      ...CartContextDefaultValue,
+      isInCart: () => true,
+      removeFromCart: jest.fn()
+    }
+    render(<GameItem {...props} />, { cartProviderProps })
+    userEvent.click(screen.getByText(/remover/i))
+    expect(cartProviderProps.removeFromCart).toHaveBeenCalledWith('1')
   })
 
   it('should render the game item with download link', () => {
