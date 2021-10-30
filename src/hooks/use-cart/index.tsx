@@ -23,6 +23,7 @@ export type CartContextData = {
   items: CartItem[] | undefined
   quantity: number
   total: string
+  loading: boolean
   isInCart: (id: string) => boolean
   addToCart: (id: string) => void
   removeFromCart: (id: string) => void
@@ -36,6 +37,7 @@ export const CartContextDefaultValue = {
   items: [],
   quantity: 0,
   total: '$0.00',
+  loading: false,
   isInCart: () => false,
   addToCart: () => null,
   removeFromCart: () => null,
@@ -54,7 +56,7 @@ const CartProvider = ({ children }: CartProviderProps) => {
       setCartItems(data)
     }
   }, [])
-  const { data } = useQueryGames({
+  const { data, loading } = useQueryGames({
     skip: !cartItems?.length,
     variables: { where: { id: cartItems } }
   })
@@ -86,6 +88,7 @@ const CartProvider = ({ children }: CartProviderProps) => {
         items: cartMapper(data?.games),
         quantity: cartItems.length,
         total: formatPrice(total || 0),
+        loading,
         isInCart,
         addToCart,
         removeFromCart,
