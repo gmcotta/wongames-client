@@ -162,6 +162,37 @@ exports[`<CartList /> should render the cart list 1`] = `
       </div>
     </div>
   </div>
+  <div
+    class="c1"
+  >
+    <div
+      class="c2"
+    >
+      <div
+        class="c3"
+      >
+        <img
+          alt="Borderlands 3"
+          src="https://source.unsplash.com/user/willianjusten/151x70"
+        />
+      </div>
+      <div
+        class="c4"
+      >
+        <h3
+          class="c5"
+        >
+          Borderlands 3
+           
+        </h3>
+        <p
+          class="c6"
+        >
+          $ 215.00
+        </p>
+      </div>
+    </div>
+  </div>
   <footer
     class="c7"
   >
@@ -171,7 +202,7 @@ exports[`<CartList /> should render the cart list 1`] = `
     <div
       class="c8"
     >
-      $ 430.00
+      $430.00
     </div>
   </footer>
 </div>
