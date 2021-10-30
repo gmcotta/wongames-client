@@ -4,7 +4,7 @@ import items from './mock'
 import CartList from '.'
 import { CartContextDefaultValue } from 'hooks/use-cart'
 
-const cartProviderProps = {
+let cartProviderProps = {
   ...CartContextDefaultValue,
   items,
   total: '$430.00'
@@ -22,6 +22,17 @@ describe('<CartList />', () => {
   it('should render the footer button', () => {
     render(<CartList hasFooterButton />, { cartProviderProps })
     expect(screen.getByText(/buy now/i)).toBeInTheDocument()
+  })
+
+  it('should render the loading', () => {
+    cartProviderProps = {
+      ...CartContextDefaultValue,
+      items,
+      total: '$430.00',
+      loading: true
+    }
+    render(<CartList />, { cartProviderProps })
+    expect(screen.getByTitle(/loading/i)).toBeInTheDocument()
   })
 
   it('should render Empty component', () => {
