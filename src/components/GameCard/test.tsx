@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from 'utils/testUtils'
 import GameCard from '.'
 
 const props = {
+  id: '1',
   title: 'Population Zero',
   developer: 'Rockstar Games',
   img: '/img/population-zero-img.png',
