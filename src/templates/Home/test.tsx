@@ -1,6 +1,5 @@
 import 'match-media-fake'
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { screen, render } from 'utils/testUtils'
 
 import bannersMock from 'components/BannerSlider/mock'
 import gamesMock from 'components/GameCardSlider/mock'
@@ -43,7 +42,7 @@ jest.mock('components/Showcase', () => {
 
 describe('<Home />', () => {
   it('should render home content', () => {
-    renderWithTheme(<Home {...props} />)
+    render(<Home {...props} />)
     const banner = screen.getByTestId(/bannerslider mock/i)
     expect(banner).toBeInTheDocument
     const showcases = screen.getAllByTestId(/showcase mock/i)

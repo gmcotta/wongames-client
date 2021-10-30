@@ -1,12 +1,11 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { screen, render } from 'utils/testUtils'
 
-import CartList from '.'
 import cartListMock from './mock'
+import CartList from '.'
 
 describe('<CartList />', () => {
   it('should render the cart list', () => {
-    const { container } = renderWithTheme(
+    const { container } = render(
       <CartList items={[cartListMock[0]]} total="$ 430.00" />
     )
     expect(screen.getAllByRole('heading')).toHaveLength(1)
@@ -16,7 +15,7 @@ describe('<CartList />', () => {
   })
 
   it('should render the footer button', () => {
-    renderWithTheme(
+    render(
       <CartList items={[cartListMock[0]]} total="$ 430.00" hasFooterButton />
     )
     expect(screen.getByText(/buy now/i)).toBeInTheDocument()

@@ -1,5 +1,4 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { screen, render } from 'utils/testUtils'
 
 import Profile from '.'
 
@@ -27,7 +26,7 @@ jest.mock('components/ProfileMenu', () => {
 
 describe('<Profile />', () => {
   it('should render the template', () => {
-    renderWithTheme(<Profile>Content</Profile>)
+    render(<Profile>Content</Profile>)
     expect(screen.getByTestId(/base mock/i)).toBeInTheDocument()
     expect(screen.getByTestId(/profilemenu mock/i)).toBeInTheDocument()
     expect(

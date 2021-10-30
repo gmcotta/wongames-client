@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+
+import { screen, render } from 'utils/testUtils'
 
 import OrdersList from '.'
 import mock from './mock'
@@ -25,7 +25,7 @@ jest.mock('components/Empty', () => {
 
 describe('<OrdersList />', () => {
   it('should render the component with game items', () => {
-    renderWithTheme(<OrdersList items={mock} />)
+    render(<OrdersList items={mock} />)
     expect(
       screen.getByRole('heading', { name: /my orders/i })
     ).toBeInTheDocument()
@@ -33,7 +33,7 @@ describe('<OrdersList />', () => {
   })
 
   it('should render the component with empty component', () => {
-    renderWithTheme(<OrdersList />)
+    render(<OrdersList />)
     expect(
       screen.getByRole('heading', { name: /my orders/i })
     ).toBeInTheDocument()

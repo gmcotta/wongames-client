@@ -1,25 +1,24 @@
-import { screen } from '@testing-library/react'
+import { render, screen } from 'utils/testUtils'
 
-import { renderWithTheme } from 'utils/tests/helpers'
 import Heading from '.'
 
 describe('<Heading />', () => {
   it('should render the heading with white text', () => {
-    renderWithTheme(<Heading>Won Games</Heading>)
+    render(<Heading>Won Games</Heading>)
     expect(screen.getByRole('heading', { name: /won games/i })).toHaveStyle({
       color: '#FAFAFA'
     })
   })
 
   it('should render the heading with black text', () => {
-    renderWithTheme(<Heading color="black">Won Games</Heading>)
+    render(<Heading color="black">Won Games</Heading>)
     expect(screen.getByRole('heading', { name: /won games/i })).toHaveStyle({
       color: '#030517'
     })
   })
 
   it('should render the heading with line on the left side', () => {
-    renderWithTheme(
+    render(
       <Heading color="black" lineLeft lineColor="secondary">
         Won Games
       </Heading>
@@ -30,7 +29,7 @@ describe('<Heading />', () => {
   })
 
   it('should render the heading with line at the bottom', () => {
-    renderWithTheme(
+    render(
       <Heading color="black" lineBottom>
         Won Games
       </Heading>
@@ -43,7 +42,7 @@ describe('<Heading />', () => {
   })
 
   it('should render the heading with a small size', () => {
-    renderWithTheme(<Heading size="small">Won Games</Heading>)
+    render(<Heading size="small">Won Games</Heading>)
     expect(screen.getByRole('heading', { name: /won games/i })).toHaveStyle({
       'font-size': '1.6rem'
     })
@@ -55,14 +54,14 @@ describe('<Heading />', () => {
   })
 
   it('should render the heading with a huge size', () => {
-    renderWithTheme(<Heading size="huge">Won Games</Heading>)
+    render(<Heading size="huge">Won Games</Heading>)
     expect(screen.getByRole('heading', { name: /won games/i })).toHaveStyle({
       'font-size': '5.2rem'
     })
   })
 
   it('should render the heading with the secondary line color', () => {
-    renderWithTheme(
+    render(
       <Heading lineColor="secondary" lineLeft lineBottom>
         Won Games
       </Heading>

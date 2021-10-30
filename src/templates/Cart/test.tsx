@@ -1,6 +1,5 @@
 import 'match-media-fake'
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { screen, render } from 'utils/testUtils'
 
 import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
@@ -72,7 +71,7 @@ jest.mock('components/Empty', () => {
 
 describe('<Cart />', () => {
   it('should render the heading', () => {
-    renderWithTheme(<Cart {...props} />)
+    render(<Cart {...props} />)
     expect(
       screen.getByRole('heading', { name: /my cart/i })
     ).toBeInTheDocument()
@@ -82,7 +81,7 @@ describe('<Cart />', () => {
   })
 
   it('should render Empty component if tempate has no items', () => {
-    renderWithTheme(<Cart {...props} items={[]} />)
+    render(<Cart {...props} items={[]} />)
     expect(screen.getByTestId(/Empty mock/i)).toBeInTheDocument()
   })
 })

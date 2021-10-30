@@ -1,6 +1,5 @@
 import 'match-media-fake'
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { screen, render } from 'utils/testUtils'
 
 import Showcase from '.'
 
@@ -9,7 +8,7 @@ import highlightMock from 'components/Highlight/mock'
 
 describe('<Showcase />', () => {
   it('should render the full showcase', () => {
-    renderWithTheme(
+    render(
       <Showcase
         title="Title"
         highlight={highlightMock}
@@ -24,9 +23,7 @@ describe('<Showcase />', () => {
   })
 
   it('should render the showcase without title', () => {
-    renderWithTheme(
-      <Showcase highlight={highlightMock} games={[gamesMock[0]]} />
-    )
+    render(<Showcase highlight={highlightMock} games={[gamesMock[0]]} />)
     expect(
       screen.queryByRole('heading', { name: /Title/i })
     ).not.toBeInTheDocument()
@@ -37,7 +34,7 @@ describe('<Showcase />', () => {
   })
 
   it('should render the showcase without games', () => {
-    renderWithTheme(<Showcase title="Title" highlight={highlightMock} />)
+    render(<Showcase title="Title" highlight={highlightMock} />)
     expect(screen.getByRole('heading', { name: /Title/i })).toBeInTheDocument()
     const allHighlights = screen.getAllByText(/red dead is back/i)
     expect(allHighlights).toHaveLength(1)
@@ -46,7 +43,7 @@ describe('<Showcase />', () => {
   })
 
   it('should render the showcase without highlight', () => {
-    renderWithTheme(<Showcase title="Title" games={[gamesMock[0]]} />)
+    render(<Showcase title="Title" games={[gamesMock[0]]} />)
     expect(screen.getByRole('heading', { name: /Title/i })).toBeInTheDocument()
     const allGames = screen.getAllByText(/population zero/i)
     expect(allGames).toHaveLength(1)

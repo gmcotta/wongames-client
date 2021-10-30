@@ -1,6 +1,5 @@
 import 'match-media-fake'
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { screen, render } from 'utils/testUtils'
 
 import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
@@ -49,7 +48,7 @@ jest.mock('components/Empty', () => {
 
 describe('<Wishlist />', () => {
   it('should render the template', () => {
-    renderWithTheme(<Wishlist {...props} />)
+    render(<Wishlist {...props} />)
     expect(
       screen.getByRole('heading', { name: /Wishlist/i })
     ).toBeInTheDocument()
@@ -60,7 +59,7 @@ describe('<Wishlist />', () => {
   })
 
   it('should render empty component if template has no games', () => {
-    renderWithTheme(
+    render(
       <Wishlist
         recommendedTitle={props.recommendedTitle}
         recommendedGames={props.recommendedGames}

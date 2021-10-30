@@ -1,5 +1,4 @@
-import { screen, fireEvent } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen, fireEvent } from 'utils/testUtils'
 
 import GameCard from '.'
 
@@ -13,7 +12,7 @@ const props = {
 
 describe('<GameCard />', () => {
   it('should render the game card', () => {
-    const { container } = renderWithTheme(<GameCard {...props} />)
+    const { container } = render(<GameCard {...props} />)
     expect(
       screen.getByRole('heading', { name: /population zero/i })
     ).toBeInTheDocument()
@@ -31,7 +30,7 @@ describe('<GameCard />', () => {
   })
 
   it('should render only the default price', () => {
-    renderWithTheme(<GameCard {...props} />)
+    render(<GameCard {...props} />)
     expect(screen.getByText(/\$235.00/i)).not.toHaveStyle({
       'text-decoration': 'line-through',
       color: '#8F8F8F'
@@ -43,7 +42,7 @@ describe('<GameCard />', () => {
   })
 
   it('should render the promotional price', () => {
-    renderWithTheme(<GameCard {...props} promotionalPrice={200} />)
+    render(<GameCard {...props} promotionalPrice={200} />)
     expect(screen.getByText(/\$235.00/i)).toHaveStyle({
       'text-decoration': 'line-through',
       color: '#8F8F8F'
@@ -55,19 +54,19 @@ describe('<GameCard />', () => {
   })
 
   it('should render filled favorite icon when favorite is true', () => {
-    renderWithTheme(<GameCard {...props} favorite />)
+    render(<GameCard {...props} favorite />)
     expect(screen.getByLabelText(/remove from wishlist/i)).toBeInTheDocument()
   })
 
   it('should call onFav method when favorite icon is clicked', () => {
     const onFav = jest.fn()
-    renderWithTheme(<GameCard {...props} favorite onFav={onFav} />)
+    render(<GameCard {...props} favorite onFav={onFav} />)
     fireEvent.click(screen.getAllByRole('button')[0])
     expect(onFav).toBeCalled()
   })
 
   it('should render the game card with ribbon', () => {
-    renderWithTheme(
+    render(
       <GameCard
         ribbonText="My Ribbon"
         ribbonSize="small"

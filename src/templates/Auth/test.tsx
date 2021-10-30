@@ -1,11 +1,10 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { screen, render } from 'utils/testUtils'
 
 import Auth from '.'
 
 describe('<Auth />', () => {
   it('should render the auth template', () => {
-    renderWithTheme(
+    render(
       <Auth title="Auth template">
         <form>
           <input type="text" />

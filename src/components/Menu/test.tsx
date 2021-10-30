@@ -1,11 +1,10 @@
-import { screen, fireEvent } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen, fireEvent } from 'utils/testUtils'
 
 import Menu from '.'
 
 describe('<Menu />', () => {
   it('should render the menu', () => {
-    renderWithTheme(<Menu />)
+    render(<Menu />)
     expect(screen.getByLabelText(/open menu/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/search/i)).toBeInTheDocument()
     expect(screen.getAllByLabelText(/shopping cart/i)).toHaveLength(2)
@@ -13,7 +12,7 @@ describe('<Menu />', () => {
   })
 
   it('should toggle the menu options', () => {
-    renderWithTheme(<Menu />)
+    render(<Menu />)
     const fullMenuElement = screen.getByRole('navigation', { hidden: true })
     expect(fullMenuElement.getAttribute('aria-hidden')).toBe('true')
     expect(fullMenuElement).toHaveStyle({ opacity: '0' })
@@ -26,7 +25,7 @@ describe('<Menu />', () => {
   })
 
   it('should render register box when logged out', () => {
-    renderWithTheme(<Menu />)
+    render(<Menu />)
     expect(screen.queryByText(/my profile/i)).not.toBeInTheDocument()
     expect(screen.queryByText(/wishlist/i)).not.toBeInTheDocument()
     expect(screen.getByText(/login now/i)).toBeInTheDocument()
@@ -34,7 +33,7 @@ describe('<Menu />', () => {
   })
 
   it('should render account and wishlist when logged in', () => {
-    renderWithTheme(<Menu username="Gustavo" />)
+    render(<Menu username="Gustavo" />)
     expect(screen.queryByText(/login now/i)).not.toBeInTheDocument()
     expect(screen.queryByText(/sign up/i)).not.toBeInTheDocument()
     expect(screen.getAllByText(/my profile/i)).toHaveLength(2)

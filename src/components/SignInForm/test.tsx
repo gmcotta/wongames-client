@@ -1,11 +1,10 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { screen, render } from 'utils/testUtils'
 
 import SignInForm from '.'
 
 describe('<SignInForm />', () => {
   it('should render the form', () => {
-    const { container } = renderWithTheme(<SignInForm />)
+    const { container } = render(<SignInForm />)
     expect(screen.getByPlaceholderText(/email/i)).toBeInTheDocument()
     expect(screen.getByPlaceholderText(/password/i)).toBeInTheDocument()
     expect(
@@ -17,14 +16,14 @@ describe('<SignInForm />', () => {
   })
 
   it('should render the forgot password link', () => {
-    renderWithTheme(<SignInForm />)
+    render(<SignInForm />)
     expect(
       screen.getByRole('link', { name: /forgot your password\?/i })
     ).toBeInTheDocument()
   })
 
   it('should render the text and link for sign up', () => {
-    renderWithTheme(<SignInForm />)
+    render(<SignInForm />)
     expect(screen.getByText(/Don't have an account\?/i)).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /sign up/i })).toBeInTheDocument()
   })

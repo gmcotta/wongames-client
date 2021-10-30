@@ -1,11 +1,10 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { screen, render } from 'utils/testUtils'
 
 import Footer from '.'
 
 describe('<Footer />', () => {
   it('should render the footer with 4 columns', () => {
-    const { container } = renderWithTheme(<Footer />)
+    const { container } = render(<Footer />)
     expect(
       screen.getByRole('heading', { name: /contato/i })
     ).toBeInTheDocument()
