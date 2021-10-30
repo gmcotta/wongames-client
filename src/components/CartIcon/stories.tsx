@@ -1,5 +1,5 @@
 import { Story, Meta } from '@storybook/react'
-import CartIcon, { CartIconProps } from '.'
+import CartIcon from '.'
 
 export default {
   title: 'CartIcon',
@@ -8,10 +8,10 @@ export default {
     backgrounds: {
       default: 'won-dark'
     }
-  },
-  args: {
-    quantity: 10
   }
 } as Meta
 
-export const Default: Story<CartIconProps> = (args) => <CartIcon {...args} />
+export const Default: Story = (args) => <CartIcon {...args} />
+Default.args = {
+  quantity: 3
+}
