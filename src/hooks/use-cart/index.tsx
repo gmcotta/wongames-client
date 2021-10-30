@@ -67,7 +67,6 @@ const CartProvider = ({ children }: CartProviderProps) => {
     return id ? cartItems.includes(id) : false
   }
   const saveCart = (newCartItems: string[]) => {
-    console.log('saveCart')
     setCartItems(newCartItems)
     setStorageItem(CART_KEY, newCartItems)
   }
