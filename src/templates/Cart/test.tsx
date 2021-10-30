@@ -6,13 +6,12 @@ import highlightMock from 'components/Highlight/mock'
 import cartListMock from 'components/CartList/mock'
 
 import Cart, { CartTemplateProps } from '.'
+import { CartContextDefaultValue } from 'hooks/use-cart'
 
 const props: CartTemplateProps = {
   recommendedTitle: 'Title',
   recommendedGames: gamesMock.slice(0, 2),
-  recommendedHighlight: highlightMock,
-  items: cartListMock,
-  total: '$ 430.00'
+  recommendedHighlight: highlightMock
 }
 
 jest.mock('templates/Base', () => {
@@ -70,18 +69,15 @@ jest.mock('components/Empty', () => {
 })
 
 describe('<Cart />', () => {
-  it('should render the heading', () => {
-    render(<Cart {...props} />)
+  it('should render the template', () => {
+    render(<Cart {...props} />, {
+      cartProviderProps: { ...CartContextDefaultValue, items: cartListMock }
+    })
     expect(
       screen.getByRole('heading', { name: /my cart/i })
     ).toBeInTheDocument()
     expect(screen.getByTestId(/Showcase mock/i)).toBeInTheDocument()
     expect(screen.getByTestId(/CartList mock/i)).toBeInTheDocument()
     expect(screen.getByTestId(/PaymentOptions mock/i)).toBeInTheDocument()
-  })
-
-  it('should render Empty component if tempate has no items', () => {
-    render(<Cart {...props} items={[]} />)
-    expect(screen.getByTestId(/Empty mock/i)).toBeInTheDocument()
   })
 })

@@ -3,6 +3,7 @@ import { screen, render } from 'utils/testUtils'
 import GameItem, { GameItemProps, PaymentInfoProps } from '.'
 
 const props: GameItemProps = {
+  id: '1',
   img: 'img.jpg',
   title: 'Title',
   price: '$ 215.00'
