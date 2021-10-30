@@ -23,9 +23,9 @@ function App({ Component, pageProps }: AppProps) {
             <meta name="theme-color" content="#06092B" />
             <meta name="description" content="The best online game store" />
           </Head>
+          <GlobalStyles />
+          <Component {...pageProps} />
         </CartProvider>
-        <GlobalStyles />
-        <Component {...pageProps} />
       </ThemeProvider>
     </ApolloProvider>
   )

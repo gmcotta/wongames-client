@@ -28,7 +28,7 @@ const CartButton = ({
       }
       size={size}
       onClick={() => {
-        isInCart(id) ? removeFromCart(id) : addToCart(id)
+        return isInCart(id) ? removeFromCart(id) : addToCart(id)
       }}
     >
       {hasText && buttonText}
