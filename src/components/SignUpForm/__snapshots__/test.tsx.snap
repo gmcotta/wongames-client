@@ -136,8 +136,8 @@ exports[`<SignUpForm /> should render the form 1`] = `
         </svg>
         <input
           class="c4"
-          name="name"
-          placeholder="Full Name"
+          name="username"
+          placeholder="Username"
           type="text"
           value=""
         />
@@ -252,6 +252,7 @@ exports[`<SignUpForm /> should render the form 1`] = `
     </div>
     <button
       class="c5 c6"
+      type="submit"
     >
       <span>
         Sign up now

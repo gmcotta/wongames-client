@@ -4,7 +4,7 @@ import * as S from './styles'
 export type IconPositionOptions = 'left' | 'right'
 
 export type TextFieldProps = {
-  onInput?: (value: string) => void
+  onInputChange?: (value: string) => void
   label?: string
   initialValue?: string
   icon?: ReactNode
@@ -14,7 +14,7 @@ export type TextFieldProps = {
 } & InputHTMLAttributes<HTMLInputElement>
 
 const TextField = ({
-  onInput,
+  onInputChange,
   label,
   initialValue = '',
   icon,
@@ -29,7 +29,7 @@ const TextField = ({
     const newValue = evt.target.value
     setValue(newValue)
 
-    !!onInput && onInput(newValue)
+    !!onInputChange && onInputChange(newValue)
   }
   return (
     <S.Wrapper disabled={disabled} hasError={!!errorMessage}>

@@ -25,16 +25,18 @@ describe('<TextField />', () => {
   })
 
   it('should change values when typing', async () => {
-    const onInput = jest.fn()
-    render(<TextField label="label" name="field" onInput={onInput} />)
+    const onInputChange = jest.fn()
+    render(
+      <TextField label="label" name="field" onInputChange={onInputChange} />
+    )
     const input = screen.getByLabelText(/label/i)
     const text = 'hey you'
     userEvent.type(input, text)
     await waitFor(() => {
       expect(input).toHaveValue(text)
-      expect(onInput).toHaveBeenCalledTimes(text.length)
+      expect(onInputChange).toHaveBeenCalledTimes(text.length)
     })
-    expect(onInput).toHaveBeenCalledWith(text)
+    expect(onInputChange).toHaveBeenCalledWith(text)
   })
 
   it('should be accessible by tab', () => {
