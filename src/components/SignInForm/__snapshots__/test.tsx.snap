@@ -151,7 +151,7 @@ exports[`<SignInForm /> should render the form 1`] = `
           class="c4"
           name="email"
           placeholder="Email"
-          type="email"
+          type="text"
           value=""
         />
       </div>
