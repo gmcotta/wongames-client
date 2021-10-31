@@ -1,8 +1,9 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
+import NextjsProgressbar from 'nextjs-progressbar'
 import { ThemeProvider } from 'styled-components'
 import { ApolloProvider } from '@apollo/client'
-import NextjsProgressbar from 'nextjs-progressbar'
+import { Provider as AuthProvider } from 'next-auth/client'
 
 import { CartProvider } from 'hooks/use-cart'
 import { useApollo } from 'utils/apollo'
@@ -13,28 +14,30 @@ function App({ Component, pageProps }: AppProps) {
   const client = useApollo(pageProps.initialApolloState)
 
   return (
-    <ApolloProvider client={client}>
-      <ThemeProvider theme={theme}>
-        <CartProvider>
-          <Head>
-            <title>Won Games</title>
-            <link rel="shortcut icon" href="/img/icon-512.png" />
-            <link rel="apple-touch-icon" href="/img/icon-512.png" />
-            <link rel="manifest" href="/manifest.json" />
-            <meta name="theme-color" content="#06092B" />
-            <meta name="description" content="The best online game store" />
-          </Head>
-          <GlobalStyles />
-          <NextjsProgressbar
-            color={theme.colors.primary}
-            startPosition={0.3}
-            stopDelayMs={200}
-            height={3}
-          />
-          <Component {...pageProps} />
-        </CartProvider>
-      </ThemeProvider>
-    </ApolloProvider>
+    <AuthProvider session={pageProps.session}>
+      <ApolloProvider client={client}>
+        <ThemeProvider theme={theme}>
+          <CartProvider>
+            <Head>
+              <title>Won Games</title>
+              <link rel="shortcut icon" href="/img/icon-512.png" />
+              <link rel="apple-touch-icon" href="/img/icon-512.png" />
+              <link rel="manifest" href="/manifest.json" />
+              <meta name="theme-color" content="#06092B" />
+              <meta name="description" content="The best online game store" />
+            </Head>
+            <GlobalStyles />
+            <NextjsProgressbar
+              color={theme.colors.primary}
+              startPosition={0.3}
+              stopDelayMs={200}
+              height={3}
+            />
+            <Component {...pageProps} />
+          </CartProvider>
+        </ThemeProvider>
+      </ApolloProvider>
+    </AuthProvider>
   )
 }
 
