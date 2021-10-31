@@ -91,6 +91,7 @@ export const InputWrapper = styled.div<InputWrapperProps>`
     border-radius: 0.2rem;
     padding: 0 ${theme.spacings.xsmall};
     border: 0.2rem solid ${theme.colors.lightGray};
+    height: 5rem;
     ${hasIcon && inputWrapperModifiers.hasIcon(theme)}
     ${iconPosition && inputWrapperModifiers.iconPosition(theme, iconPosition)}
 
@@ -110,6 +111,12 @@ export const Input = styled.input`
     border: 0;
     outline: none;
     width: 100%;
+
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 ${theme.spacings.small}
+        ${theme.colors.lightGray} inset;
+      filter: none;
+    }
   `}
 `
 

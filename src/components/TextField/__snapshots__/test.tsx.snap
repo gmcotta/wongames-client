@@ -61,6 +61,7 @@ exports[`<TextField /> should render the error message 1`] = `
   border-radius: 0.2rem;
   padding: 0 1.6rem;
   border: 0.2rem solid #EAEAEA;
+  height: 5rem;
 }
 
 .c4 svg {
@@ -80,6 +81,12 @@ exports[`<TextField /> should render the error message 1`] = `
   border: 0;
   outline: none;
   width: 100%;
+}
+
+.c6:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 2.4rem #EAEAEA inset;
+  -webkit-filter: none;
+  filter: none;
 }
 
 .c7 {
@@ -173,6 +180,7 @@ exports[`<TextField /> should render with disabled property 1`] = `
   border-radius: 0.2rem;
   padding: 0 1.6rem;
   border: 0.2rem solid #EAEAEA;
+  height: 5rem;
 }
 
 .c4 svg {
@@ -192,6 +200,12 @@ exports[`<TextField /> should render with disabled property 1`] = `
   border: 0;
   outline: none;
   width: 100%;
+}
+
+.c6:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 2.4rem #EAEAEA inset;
+  -webkit-filter: none;
+  filter: none;
 }
 
 <div
