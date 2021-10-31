@@ -1,6 +1,10 @@
-import CardsList, { CardsListProps } from 'components/CardsList'
+import { GetServerSidePropsContext } from 'next'
+
+import protectedRoutes from 'utils/protectedRoutes'
+
 import Profile from 'templates/Profile'
 
+import CardsList, { CardsListProps } from 'components/CardsList'
 import cardsMock from 'components/PaymentOptions/mock'
 
 export default function Cards(props: CardsListProps) {
@@ -11,10 +15,12 @@ export default function Cards(props: CardsListProps) {
   )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await protectedRoutes(context)
   return {
     props: {
-      cards: cardsMock
+      cards: cardsMock,
+      session
     }
   }
 }
