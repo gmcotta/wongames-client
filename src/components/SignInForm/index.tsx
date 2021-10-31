@@ -1,35 +1,67 @@
+import { useState, FormEvent } from 'react'
+import { signIn } from 'next-auth/client'
 import Link from 'next/link'
 import { Email, Lock } from '@styled-icons/material-outlined'
 
 import Button from 'components/Button'
 import TextField from 'components/TextField'
-import * as S from './styles'
 import { FormLink, FormWrapper } from 'components/Form'
+import * as S from './styles'
+import { useRouter } from 'next/router'
 
-const SignInForm = () => (
-  <FormWrapper>
-    <form>
-      <TextField
-        name="email"
-        placeholder="Email"
-        type="email"
-        icon={<Email />}
-      />
-      <TextField
-        name="password"
-        placeholder="Password"
-        type="password"
-        icon={<Lock />}
-      />
-      <S.ForgotPassword href="#">Forgot your password?</S.ForgotPassword>
-      <Button size="large" fullWidth>
-        Sign in now
-      </Button>
-      <FormLink>
-        Don&apos;t have an account? <Link href="/sign-up">Sign up</Link>
-      </FormLink>
-    </form>
-  </FormWrapper>
-)
+type SignInValues = {
+  email: string
+  password: string
+}
+
+const SignInForm = () => {
+  const [values, setValues] = useState<SignInValues>({
+    email: '',
+    password: ''
+  })
+  const { push } = useRouter()
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault()
+    const result = await signIn('credentials', {
+      redirect: false,
+      callbackUrl: '/',
+      ...values
+    })
+    if (result?.url) {
+      return push(result?.url)
+    }
+    console.log(result)
+  }
+  const handleInputChange = (field: string, value: string) => {
+    setValues((oldValues) => ({ ...oldValues, [field]: value }))
+  }
+  return (
+    <FormWrapper>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          name="email"
+          placeholder="Email"
+          type="email"
+          icon={<Email />}
+          onInputChange={(value) => handleInputChange('email', value)}
+        />
+        <TextField
+          name="password"
+          placeholder="Password"
+          type="password"
+          icon={<Lock />}
+          onInputChange={(value) => handleInputChange('password', value)}
+        />
+        <S.ForgotPassword href="#">Forgot your password?</S.ForgotPassword>
+        <Button type="submit" size="large" fullWidth>
+          Sign in now
+        </Button>
+        <FormLink>
+          Don&apos;t have an account? <Link href="/sign-up">Sign up</Link>
+        </FormLink>
+      </form>
+    </FormWrapper>
+  )
+}
 
 export default SignInForm

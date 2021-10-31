@@ -80,19 +80,6 @@ exports[`<SignInForm /> should render the form 1`] = `
   filter: none;
 }
 
-.c5 {
-  display: block;
-  font-size: 1.2rem;
-  color: #030517;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-align: right;
-}
-
-.c5:hover {
-  color: #8F8F8F;
-}
-
 .c0 .c1 {
   margin: 0.8rem 0;
 }
@@ -119,6 +106,19 @@ exports[`<SignInForm /> should render the form 1`] = `
 .c8 a:hover {
   -webkit-filter: brightness(0.9);
   filter: brightness(0.9);
+}
+
+.c5 {
+  display: block;
+  font-size: 1.2rem;
+  color: #030517;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-align: right;
+}
+
+.c5:hover {
+  color: #8F8F8F;
 }
 
 <div
@@ -202,6 +202,7 @@ exports[`<SignInForm /> should render the form 1`] = `
     </a>
     <button
       class="c6 c7"
+      type="submit"
     >
       <span>
         Sign in now

@@ -37,6 +37,7 @@ const options = {
     session: async (session: GenericObject, user: GenericObject) => {
       session.jwt = user.jwt
       session.id = user.id
+
       return Promise.resolve(session)
     },
     jwt: async (token: GenericObject, user: GenericObject) => {
@@ -46,13 +47,13 @@ const options = {
         token.name = user.username
         token.jwt = user.jwt
       }
+
       return Promise.resolve(token)
     }
   }
 }
 
-const Auth = (req: NextApiRequest, res: NextApiResponse) => {
+const Auth = (req: NextApiRequest, res: NextApiResponse) =>
   NextAuth(req, res, options)
-}
 
 export default Auth
