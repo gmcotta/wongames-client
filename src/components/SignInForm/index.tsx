@@ -5,7 +5,7 @@ import { Email, Lock } from '@styled-icons/material-outlined'
 
 import Button from 'components/Button'
 import TextField from 'components/TextField'
-import { FormLink, FormWrapper } from 'components/Form'
+import { FormLink, FormLoading, FormWrapper } from 'components/Form'
 import * as S from './styles'
 import { useRouter } from 'next/router'
 
@@ -19,9 +19,11 @@ const SignInForm = () => {
     email: '',
     password: ''
   })
+  const [loading, setLoading] = useState(false)
   const { push } = useRouter()
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
+    setLoading(true)
     const result = await signIn('credentials', {
       redirect: false,
       callbackUrl: '/',
@@ -30,7 +32,7 @@ const SignInForm = () => {
     if (result?.url) {
       return push(result?.url)
     }
-    console.log(result)
+    setLoading(false)
   }
   const handleInputChange = (field: string, value: string) => {
     setValues((oldValues) => ({ ...oldValues, [field]: value }))
@@ -53,8 +55,8 @@ const SignInForm = () => {
           onInputChange={(value) => handleInputChange('password', value)}
         />
         <S.ForgotPassword href="#">Forgot your password?</S.ForgotPassword>
-        <Button type="submit" size="large" fullWidth>
-          Sign in now
+        <Button type="submit" size="large" fullWidth disabled={loading}>
+          {loading ? <FormLoading /> : <span>Sign in now</span>}
         </Button>
         <FormLink>
           Don&apos;t have an account? <Link href="/sign-up">Sign up</Link>
