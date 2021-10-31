@@ -1,5 +1,7 @@
 import { useState, FormEvent } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { signIn } from 'next-auth/client'
 import { useMutation } from '@apollo/client'
 import { AccountCircle, Email, Lock } from '@styled-icons/material-outlined'
 
@@ -8,7 +10,7 @@ import { MUTATION_REGISTER } from 'graphql/mutations/register'
 
 import Button from 'components/Button'
 import TextField from 'components/TextField'
-import { FormLink, FormWrapper } from 'components/Form'
+import { FormLink, FormLoading, FormWrapper } from 'components/Form'
 
 const SignUpForm = () => {
   const [values, setValues] = useState<UsersPermissionsRegisterInput>({
@@ -16,7 +18,23 @@ const SignUpForm = () => {
     email: '',
     password: ''
   })
-  const [createUser] = useMutation(MUTATION_REGISTER)
+  const { push } = useRouter()
+  const [createUser, { loading, error }] = useMutation(MUTATION_REGISTER, {
+    onError: (err) => console.error(err),
+    onCompleted: async () => {
+      if (!error) {
+        const result = await signIn('credentials', {
+          redirect: false,
+          callbackUrl: '/',
+          email: values.email,
+          password: values.password
+        })
+        if (result?.url) {
+          return push(result?.url)
+        }
+      }
+    }
+  })
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
     createUser({
@@ -63,8 +81,8 @@ const SignUpForm = () => {
           icon={<Lock />}
           onInputChange={(value) => handleInputChange('confirmPassword', value)}
         />
-        <Button type="submit" size="large" fullWidth>
-          Sign up now
+        <Button type="submit" size="large" fullWidth disabled={loading}>
+          {loading ? <FormLoading /> : <span>Sign up now</span>}
         </Button>
         <FormLink>
           Already have an account? <Link href="/sign-in">Sign in</Link>

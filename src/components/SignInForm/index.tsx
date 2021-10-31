@@ -1,13 +1,13 @@
 import { useState, FormEvent } from 'react'
-import { signIn } from 'next-auth/client'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { signIn } from 'next-auth/client'
 import { Email, Lock } from '@styled-icons/material-outlined'
 
 import Button from 'components/Button'
 import TextField from 'components/TextField'
 import { FormLink, FormLoading, FormWrapper } from 'components/Form'
 import * as S from './styles'
-import { useRouter } from 'next/router'
 
 type SignInValues = {
   email: string
