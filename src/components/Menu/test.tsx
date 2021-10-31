@@ -39,4 +39,12 @@ describe('<Menu />', () => {
     expect(screen.getAllByText(/my profile/i)).toHaveLength(2)
     expect(screen.getAllByText(/wishlist/i)).toHaveLength(2)
   })
+
+  it('should not render sign in button or profile dropdown when loading', () => {
+    render(<Menu username="Gustavo" loading />)
+    expect(screen.queryByText(/login now/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/sign up/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/my profile/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/wishlist/i)).not.toBeInTheDocument()
+  })
 })
