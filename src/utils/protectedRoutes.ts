@@ -5,7 +5,7 @@ async function protectedRoutes(context: GetServerSidePropsContext) {
   const session = await getSession(context)
   if (!session) {
     context.res.writeHead(302, {
-      location: '/sign-in'
+      location: `/sign-in?callbackUrl=${context.resolvedUrl}`
     })
     context.res.end()
   }

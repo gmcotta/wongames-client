@@ -28,7 +28,8 @@ const SignInForm = () => {
   const [fieldError, setFieldError] = useState<FieldErrors>()
   const [formError, setFormError] = useState('')
   const [loading, setLoading] = useState(false)
-  const { push } = useRouter()
+  const router = useRouter()
+  const { push, query } = router
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
     setLoading(true)
@@ -41,7 +42,7 @@ const SignInForm = () => {
     setFieldError({})
     const result = await signIn('credentials', {
       redirect: false,
-      callbackUrl: '/',
+      callbackUrl: `${window.location.origin}${query?.callbackUrl || ''}`,
       ...values
     })
     if (result?.url) {
