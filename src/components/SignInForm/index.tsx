@@ -4,15 +4,15 @@ import { useRouter } from 'next/router'
 import { signIn } from 'next-auth/client'
 import { Email, Lock } from '@styled-icons/material-outlined'
 
+import { UsersPermissionsRegisterInput } from 'graphql/generated/globalTypes'
+
 import Button from 'components/Button'
 import TextField from 'components/TextField'
 import { FormLink, FormLoading, FormWrapper } from 'components/Form'
+
 import * as S from './styles'
 
-type SignInValues = {
-  email: string
-  password: string
-}
+export type SignInValues = Omit<UsersPermissionsRegisterInput, 'username'>
 
 const SignInForm = () => {
   const [values, setValues] = useState<SignInValues>({
