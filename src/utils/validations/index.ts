@@ -1,6 +1,9 @@
 import joi from 'joi'
+
 import { SignInValues } from 'components/SignInForm'
-import { UsersPermissionsRegisterInput } from 'graphql/generated/globalTypes'
+import { ForgotPasswordValues } from 'components/ForgotPasswordForm'
+import { SignUpValues } from 'components/SignUpForm'
+import { ResetPasswordValues } from 'components/ResetPasswordForm'
 
 const fieldValidations = {
   username: joi.string().min(5).required(),
@@ -32,7 +35,19 @@ export function signInValidate(values: SignInValues) {
   return getFieldErrors(schema.validate(values, { abortEarly: false }))
 }
 
-export function signUpValidate(values: UsersPermissionsRegisterInput) {
+export function signUpValidate(values: SignUpValues) {
   const schema = joi.object(fieldValidations)
+  return getFieldErrors(schema.validate(values, { abortEarly: false }))
+}
+
+export function forgotPasswordValidate(values: ForgotPasswordValues) {
+  const { email } = fieldValidations
+  const schema = joi.object({ email })
+  return getFieldErrors(schema.validate(values, { abortEarly: false }))
+}
+
+export function resetPasswordValidate(values: ResetPasswordValues) {
+  const { password, confirmPassword } = fieldValidations
+  const schema = joi.object({ password, confirmPassword })
   return getFieldErrors(schema.validate(values, { abortEarly: false }))
 }

@@ -8,9 +8,9 @@ import TextField from 'components/TextField'
 import { FormLoading, FormWrapper, FormErrorMessage } from 'components/Form'
 import { FieldErrors } from 'utils/validations'
 
-export type ResetPasswordValues = Omit<
+export type ResetPasswordValues = Pick<
   UsersPermissionsRegisterInput,
-  'username' | 'email'
+  'password'
 > & { confirmPassword: string }
 
 const ResetPasswordForm = () => {

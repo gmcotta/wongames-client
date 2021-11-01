@@ -23,8 +23,10 @@ import {
 } from 'components/Form'
 import { FieldErrors, signUpValidate } from 'utils/validations'
 
+export type SignUpValues = UsersPermissionsRegisterInput
+
 const SignUpForm = () => {
-  const [values, setValues] = useState<UsersPermissionsRegisterInput>({
+  const [values, setValues] = useState<SignUpValues>({
     username: '',
     email: '',
     password: ''

@@ -8,13 +8,10 @@ import TextField from 'components/TextField'
 import { FormLoading, FormWrapper, FormErrorMessage } from 'components/Form'
 import { FieldErrors } from 'utils/validations'
 
-export type SignInValues = Omit<
-  UsersPermissionsRegisterInput,
-  'username' | 'password'
->
+export type ForgotPasswordValues = Pick<UsersPermissionsRegisterInput, 'email'>
 
 const ForgotPasswordForm = () => {
-  const [values, setValues] = useState<SignInValues>({
+  const [values, setValues] = useState<ForgotPasswordValues>({
     email: ''
   })
   const [fieldError, setFieldError] = useState<FieldErrors>()
