@@ -6,7 +6,7 @@ import { UsersPermissionsRegisterInput } from 'graphql/generated/globalTypes'
 import Button from 'components/Button'
 import TextField from 'components/TextField'
 import { FormLoading, FormWrapper, FormErrorMessage } from 'components/Form'
-import { FieldErrors } from 'utils/validations'
+import { FieldErrors, resetPasswordValidate } from 'utils/validations'
 
 export type ResetPasswordValues = Pick<
   UsersPermissionsRegisterInput,
@@ -23,6 +23,11 @@ const ResetPasswordForm = () => {
   const [loading, setLoading] = useState(false)
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
+    const errors = resetPasswordValidate(values)
+    if (Object.keys(errors).length) {
+      setFieldError(errors)
+      return
+    }
     setFieldError({})
     setFormError('')
     setLoading(false)
