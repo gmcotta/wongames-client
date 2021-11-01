@@ -196,7 +196,7 @@ exports[`<SignInForm /> should render the form 1`] = `
     </div>
     <a
       class="c5"
-      href="#"
+      href="/forgot-password"
     >
       Forgot your password?
     </a>
