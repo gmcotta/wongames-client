@@ -36,7 +36,6 @@ const SignUpForm = () => {
   const { push } = useRouter()
   const [createUser, { loading, error }] = useMutation(MUTATION_REGISTER, {
     onError: (err) => {
-      console.log(err.graphQLErrors)
       setFormError(
         err?.graphQLErrors[0]?.extensions?.exception.data.message[0].messages[0]
           .message
