@@ -5,10 +5,10 @@ module.exports = {
   collectCoverageFrom: [
     'src/**/*.ts(x)?',
     '!src/**/stories.tsx',
+    '!src/pages/**/*.ts',
     '!src/pages/**/*.tsx',
     '!src/styles/**.ts',
-    '!src/utils/apollo.ts',
-    '!src/utils/apolloCache.ts',
+    '!src/utils/*.ts',
     '!src/types/**/*.d.ts',
     '!src/graphql/**/*.ts',
     '!src/**/mock.ts'
