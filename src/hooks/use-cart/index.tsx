@@ -12,6 +12,7 @@ import { cartMapper } from 'utils/mappers'
 import formatPrice from 'utils/formatPrice'
 
 const CART_KEY = 'cartItems'
+const nullFunction = () => null
 
 type CartItem = {
   id: string
@@ -39,9 +40,9 @@ export const CartContextDefaultValue = {
   total: '$0.00',
   loading: false,
   isInCart: () => false,
-  addToCart: () => null,
-  removeFromCart: () => null,
-  clearCart: () => null
+  addToCart: nullFunction,
+  removeFromCart: nullFunction,
+  clearCart: nullFunction
 }
 export const CartContext = createContext<CartContextData>(
   CartContextDefaultValue

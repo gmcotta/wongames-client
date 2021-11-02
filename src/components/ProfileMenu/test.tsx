@@ -1,5 +1,6 @@
 import userEvent from '@testing-library/user-event'
 import { signOut } from 'next-auth/client'
+
 import { screen, render, waitFor } from 'utils/testUtils'
 
 import ProfileMenu from '.'

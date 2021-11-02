@@ -1,8 +1,14 @@
 import userEvent from '@testing-library/user-event'
+import { signOut } from 'next-auth/client'
 
-import { render, screen } from 'utils/testUtils'
+import { render, screen, waitFor } from 'utils/testUtils'
 
 import UserDropdown from '.'
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+jest.mock('next-auth/client', () => ({
+  signOut: jest.fn()
+}))
 
 describe('<UserDropdown />', () => {
   it('should render the username', () => {
@@ -20,5 +26,14 @@ describe('<UserDropdown />', () => {
     expect(
       screen.getByRole('button', { name: /sign out/i })
     ).toBeInTheDocument()
+  })
+
+  it('should call signOut', async () => {
+    render(<UserDropdown username="Username" />)
+    userEvent.click(screen.getByText(/username/i))
+    userEvent.click(screen.getByRole('button', { name: /sign out/i }))
+    await waitFor(() => {
+      expect(signOut).toHaveBeenCalled()
+    })
   })
 })
