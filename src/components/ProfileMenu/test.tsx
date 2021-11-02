@@ -1,6 +1,13 @@
-import { screen, render } from 'utils/testUtils'
+import userEvent from '@testing-library/user-event'
+import { signOut } from 'next-auth/client'
+import { screen, render, waitFor } from 'utils/testUtils'
 
 import ProfileMenu from '.'
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+jest.mock('next-auth/client', () => ({
+  signOut: jest.fn()
+}))
 
 describe('<ProfileMenu />', () => {
   it('should render the component', () => {
@@ -21,6 +28,14 @@ describe('<ProfileMenu />', () => {
     expect(screen.getByRole('link', { name: /my profile/i })).toHaveStyle({
       color: '#FAFAFA',
       'background-color': '#F231A5'
+    })
+  })
+
+  it('should call signOut', async () => {
+    render(<ProfileMenu />)
+    userEvent.click(screen.getByRole('button', { name: /sign out/i }))
+    await waitFor(() => {
+      expect(signOut).toHaveBeenCalled()
     })
   })
 })
