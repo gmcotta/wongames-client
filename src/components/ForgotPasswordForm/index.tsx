@@ -33,7 +33,7 @@ const ForgotPasswordForm = () => {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
-    setLoading(false)
+    setLoading(true)
     const errors = forgotPasswordValidate(values)
     if (Object.keys(errors).length) {
       setFieldError(errors)
