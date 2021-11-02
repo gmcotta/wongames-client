@@ -1,4 +1,5 @@
 import { useState, FormEvent } from 'react'
+import { useRouter } from 'next/router'
 import {
   CheckCircle,
   Email,
@@ -21,8 +22,9 @@ import {
 export type ForgotPasswordValues = Pick<UsersPermissionsRegisterInput, 'email'>
 
 const ForgotPasswordForm = () => {
+  const { query } = useRouter()
   const [values, setValues] = useState<ForgotPasswordValues>({
-    email: ''
+    email: (query.email as string) || ''
   })
   const [fieldError, setFieldError] = useState<FieldErrors>()
   const [formError, setFormError] = useState('')
@@ -83,6 +85,7 @@ const ForgotPasswordForm = () => {
               icon={<Email />}
               errorMessage={fieldError?.email}
               onInputChange={(value) => handleInputChange('email', value)}
+              initialValue={values.email}
             />
             <Button type="submit" size="large" fullWidth disabled={loading}>
               {loading ? <FormLoading /> : <span>Send email</span>}
