@@ -16,6 +16,8 @@ export type ResetPasswordValues = Pick<
 > & { confirmPassword: string }
 
 const ResetPasswordForm = () => {
+  const { query } = useRouter()
+
   const [values, setValues] = useState<ResetPasswordValues>({
     password: '',
     confirmPassword: ''
@@ -23,13 +25,14 @@ const ResetPasswordForm = () => {
   const [fieldError, setFieldError] = useState<FieldErrors>()
   const [formError, setFormError] = useState('')
   const [loading, setLoading] = useState(false)
-  const router = useRouter()
-  const { query } = router
+
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
+    setLoading(true)
     const errors = resetPasswordValidate(values)
     if (Object.keys(errors).length) {
       setFieldError(errors)
+      setLoading(false)
       return
     }
     setFieldError({})
@@ -53,7 +56,6 @@ const ResetPasswordForm = () => {
     if (data.error) {
       setFormError(data.message[0].messages[0].message)
     } else {
-      console.log(data)
       signIn('credentials', {
         email: data.user.email,
         password: values.password,
