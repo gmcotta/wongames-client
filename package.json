@@ -30,6 +30,7 @@
   "dependencies": {
     "@apollo/client": "^3.4.16",
     "@types/next-auth": "3.7.1",
+    "dotenv": "^10.0.0",
     "graphql": "^15.6.1",
     "joi": "^17.4.2",
     "lodash.xor": "^4.5.0",
