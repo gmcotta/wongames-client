@@ -1,5 +1,5 @@
 import userEvent from '@testing-library/user-event'
-import { CartContextDefaultValue } from 'hooks/use-cart'
+import { CartContextDefaultValues } from 'hooks/use-cart'
 import { render, screen } from 'utils/testUtils'
 
 import CartButton from '.'
@@ -7,7 +7,7 @@ import CartButton from '.'
 describe('<CartButton />', () => {
   it('should render the button to add item', () => {
     const cartProviderProps = {
-      ...CartContextDefaultValue,
+      ...CartContextDefaultValues,
       isInCart: () => false,
       addToCart: jest.fn()
     }
@@ -20,7 +20,7 @@ describe('<CartButton />', () => {
 
   it('should render the button to remove item', () => {
     const cartProviderProps = {
-      ...CartContextDefaultValue,
+      ...CartContextDefaultValues,
       isInCart: () => true,
       removeFromCart: jest.fn()
     }

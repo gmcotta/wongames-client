@@ -1,5 +1,5 @@
 import userEvent from '@testing-library/user-event'
-import { CartContextDefaultValue } from 'hooks/use-cart'
+import { CartContextDefaultValues } from 'hooks/use-cart'
 import { screen, render } from 'utils/testUtils'
 
 import GameItem, { GameItemProps, PaymentInfoProps } from '.'
@@ -24,7 +24,7 @@ describe('<GameItem />', () => {
 
   it('should remove the game item from cart list', () => {
     const cartProviderProps = {
-      ...CartContextDefaultValue,
+      ...CartContextDefaultValues,
       isInCart: () => true,
       removeFromCart: jest.fn()
     }

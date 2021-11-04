@@ -6,7 +6,7 @@ import highlightMock from 'components/Highlight/mock'
 import cartListMock from 'components/CartList/mock'
 
 import Cart, { CartTemplateProps } from '.'
-import { CartContextDefaultValue } from 'hooks/use-cart'
+import { CartContextDefaultValues } from 'hooks/use-cart'
 
 const props: CartTemplateProps = {
   recommendedTitle: 'Title',
@@ -71,7 +71,7 @@ jest.mock('components/Empty', () => {
 describe('<Cart />', () => {
   it('should render the template', () => {
     render(<Cart {...props} />, {
-      cartProviderProps: { ...CartContextDefaultValue, items: cartListMock }
+      cartProviderProps: { ...CartContextDefaultValues, items: cartListMock }
     })
     expect(
       screen.getByRole('heading', { name: /my cart/i })

@@ -34,7 +34,7 @@ export type CartProviderProps = {
   children: ReactNode
 }
 
-export const CartContextDefaultValue = {
+export const CartContextDefaultValues = {
   items: [],
   quantity: 0,
   total: '$0.00',
@@ -45,11 +45,11 @@ export const CartContextDefaultValue = {
   clearCart: nullFunction
 }
 export const CartContext = createContext<CartContextData>(
-  CartContextDefaultValue
+  CartContextDefaultValues
 )
 const CartProvider = ({ children }: CartProviderProps) => {
   const [cartItems, setCartItems] = useState<string[]>(
-    CartContextDefaultValue.items
+    CartContextDefaultValues.items
   )
   useEffect(() => {
     const data = getStorageItem(CART_KEY)

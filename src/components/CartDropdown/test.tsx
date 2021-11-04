@@ -2,10 +2,10 @@ import { render, screen } from 'utils/testUtils'
 
 import itemsMock from 'components/CartList/mock'
 import CartDropdown from '.'
-import { CartContextDefaultValue } from 'hooks/use-cart'
+import { CartContextDefaultValues } from 'hooks/use-cart'
 
 const cartProviderProps = {
-  ...CartContextDefaultValue,
+  ...CartContextDefaultValues,
   items: itemsMock,
   quantity: itemsMock.length,
   total: '$300.00'

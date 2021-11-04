@@ -2,10 +2,10 @@ import { screen, render } from 'utils/testUtils'
 
 import items from './mock'
 import CartList from '.'
-import { CartContextDefaultValue } from 'hooks/use-cart'
+import { CartContextDefaultValues } from 'hooks/use-cart'
 
 let cartProviderProps = {
-  ...CartContextDefaultValue,
+  ...CartContextDefaultValues,
   items,
   total: '$430.00'
 }
@@ -26,7 +26,7 @@ describe('<CartList />', () => {
 
   it('should render the loading', () => {
     cartProviderProps = {
-      ...CartContextDefaultValue,
+      ...CartContextDefaultValues,
       items,
       total: '$430.00',
       loading: true

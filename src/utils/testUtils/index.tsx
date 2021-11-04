@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components'
 import {
   CartContext,
   CartContextData,
-  CartContextDefaultValue
+  CartContextDefaultValues
 } from 'hooks/use-cart'
 import theme from 'styles/theme'
 
@@ -16,7 +16,7 @@ type CustomRenderProps = {
 const customRender = (
   ui: ReactElement,
   {
-    cartProviderProps = CartContextDefaultValue,
+    cartProviderProps = CartContextDefaultValues,
     ...renderOptions
   }: CustomRenderProps = {}
 ) =>
