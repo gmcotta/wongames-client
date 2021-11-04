@@ -9,17 +9,14 @@ export const MUTATION_CREATE_WISHLIST = gql`
         games {
           ...GameFragment
         }
-        user {
-          username
-          id
-        }
       }
     }
   }
   ${GameFragment}
 `
+
 export const MUTATION_UPDATE_WISHLIST = gql`
-  mutation MutationUpdateWishlist($input: updateWishlistInput!) {
+  mutation MutationUpdateWishlist($input: updateWishlistInput) {
     updateWishlist(input: $input) {
       wishlist {
         id

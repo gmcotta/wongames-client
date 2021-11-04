@@ -1,13 +1,17 @@
+import {
+  MUTATION_CREATE_WISHLIST,
+  MUTATION_UPDATE_WISHLIST
+} from 'graphql/mutations/wishlist'
 import { QUERY_WISHLIST } from 'graphql/queries/wishlist'
 
 const gameMock = (id: string) => ({
   id,
-  name: `Game ${id}`,
-  slug: `slug-game-${id}`,
-  price: 30.3,
-  developers: [{ name: 'developer' }],
+  name: `Sample Game ${id}`,
+  slug: `sample-game-${id}`,
+  price: 10.5,
+  developers: [{ name: 'sample developer' }],
   cover: {
-    url: `/game${id}.jpg`
+    url: '/sample-game.jpg'
   },
   __typename: 'Game'
 })
@@ -15,50 +19,93 @@ const gameMock = (id: string) => ({
 export const wishlistMock = {
   request: {
     query: QUERY_WISHLIST,
+    context: { session: { jwt: '123' } },
     variables: {
-      identifier: 'email@email.com'
-    },
-    context: {
-      session: {
-        jwt: 'token'
-      }
+      identifier: 'lorem@ipsum.com'
     }
   },
   result: {
     data: {
       wishlists: [
         {
-          id: '1',
-          games: [gameMock('1'), gameMock('2'), gameMock('3')]
+          id: 1,
+          games: [gameMock('1'), gameMock('2')]
         }
       ]
     }
   }
 }
 
-export const wishlistItemsMock = [
+export const createWishlistMock = {
+  request: {
+    query: MUTATION_CREATE_WISHLIST,
+    context: { session: { jwt: '123' } },
+    variables: {
+      input: {
+        data: {
+          games: ['3']
+        }
+      }
+    }
+  },
+  result: {
+    data: {
+      createWishlist: {
+        wishlist: {
+          id: 1,
+          games: [gameMock('3')]
+        }
+      }
+    }
+  }
+}
+
+export const updateWishlistMock = {
+  request: {
+    query: MUTATION_UPDATE_WISHLIST,
+    context: { session: { jwt: '123' } },
+    variables: {
+      input: {
+        where: { id: 1 },
+        data: { games: ['1', '2', '3'] }
+      }
+    }
+  },
+  result: {
+    data: {
+      updateWishlist: {
+        wishlist: {
+          id: 1,
+          games: [gameMock('1'), gameMock('2'), gameMock('3')]
+        }
+      }
+    }
+  }
+}
+
+export const wishlistItems = [
   {
     id: '1',
-    title: `Game 1`,
-    slug: `slug-game-1`,
-    price: 30.3,
-    developer: 'developer',
-    img: 'http://localhost:1337/game1.jpg'
+    title: 'Sample Game 1',
+    slug: 'sample-game-1',
+    developer: 'sample developer',
+    img: 'http://localhost:1337/sample-game.jpg',
+    price: 10.5
   },
   {
     id: '2',
-    title: `Game 2`,
-    slug: `slug-game-2`,
-    price: 30.3,
-    developer: 'developer',
-    img: 'http://localhost:1337/game2.jpg'
+    title: 'Sample Game 2',
+    slug: 'sample-game-2',
+    developer: 'sample developer',
+    img: 'http://localhost:1337/sample-game.jpg',
+    price: 10.5
   },
   {
     id: '3',
-    title: `Game 3`,
-    slug: `slug-game-3`,
-    price: 30.3,
-    developer: 'developer',
-    img: 'http://localhost:1337/game3.jpg'
+    title: 'Sample Game 3',
+    slug: 'sample-game-3',
+    developer: 'sample developer',
+    img: 'http://localhost:1337/sample-game.jpg',
+    price: 10.5
   }
 ]

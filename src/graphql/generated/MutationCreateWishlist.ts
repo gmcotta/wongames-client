@@ -29,17 +29,10 @@ export interface MutationCreateWishlist_createWishlist_wishlist_games {
   price: number;
 }
 
-export interface MutationCreateWishlist_createWishlist_wishlist_user {
-  __typename: "UsersPermissionsUser";
-  username: string;
-  id: string;
-}
-
 export interface MutationCreateWishlist_createWishlist_wishlist {
   __typename: "Wishlist";
   id: string;
   games: MutationCreateWishlist_createWishlist_wishlist_games[];
-  user: MutationCreateWishlist_createWishlist_wishlist_user | null;
 }
 
 export interface MutationCreateWishlist_createWishlist {
