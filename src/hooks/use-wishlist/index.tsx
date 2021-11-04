@@ -51,7 +51,7 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
     QueryWishlist_wishlists_games[]
   >([])
 
-  const { data, loading } = useQueryWishlist({
+  const { data, loading: queryLoading } = useQueryWishlist({
     skip: !session?.user?.email,
     context: { session },
     variables: {
@@ -59,20 +59,26 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
     }
   })
 
-  const [createList] = useMutation(MUTATION_CREATE_WISHLIST, {
-    context: { session },
-    onCompleted: (data) => {
-      setWishlistItems(data?.createWishlist?.wishlist?.games || [])
-      setWishlistId(data?.createWishlist?.wishlist?.id)
+  const [createList, { loading: createLoading }] = useMutation(
+    MUTATION_CREATE_WISHLIST,
+    {
+      context: { session },
+      onCompleted: (data) => {
+        setWishlistItems(data?.createWishlist?.wishlist?.games || [])
+        setWishlistId(data?.createWishlist?.wishlist?.id)
+      }
     }
-  })
+  )
 
-  const [updateList] = useMutation(MUTATION_UPDATE_WISHLIST, {
-    context: { session },
-    onCompleted: (data) => {
-      setWishlistItems(data?.updateWishlist?.wishlist?.games || [])
+  const [updateList, { loading: updateLoading }] = useMutation(
+    MUTATION_UPDATE_WISHLIST,
+    {
+      context: { session },
+      onCompleted: (data) => {
+        setWishlistItems(data?.updateWishlist?.wishlist?.games || [])
+      }
     }
-  })
+  )
 
   useEffect(() => {
     setWishlistItems(data?.wishlists[0]?.games || [])
@@ -104,16 +110,25 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
     })
   }
 
-  const removeFromWishlist = () => null
+  const removeFromWishlist = (id: string) => {
+    return updateList({
+      variables: {
+        input: {
+          where: { id: wishlistId },
+          data: { games: wishlistGameIds.filter((gameId) => gameId !== id) }
+        }
+      }
+    })
+  }
 
   return (
     <WishlistContext.Provider
       value={{
         items: gamesMapper(wishlistItems),
+        loading: queryLoading || createLoading || updateLoading,
         isInWishlist,
         addToWishlist,
-        removeFromWishlist,
-        loading
+        removeFromWishlist
       }}
     >
       {children}
