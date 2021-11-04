@@ -7,7 +7,7 @@ const gameMock = (id: string) => ({
   price: 30.3,
   developers: [{ name: 'developer' }],
   cover: {
-    src: `/game${id}.jpg`
+    url: `/game${id}.jpg`
   },
   __typename: 'Game'
 })
