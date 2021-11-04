@@ -26,4 +26,20 @@ describe('useWishlist()', () => {
     await waitForNextUpdate()
     expect(result.current.items).toStrictEqual(wishlistItemsMock)
   })
+
+  it('should check if games are in wishlist or not', async () => {
+    const wrapper = ({ children }: { children: ReactNode }) => {
+      return (
+        <MockedProvider mocks={[wishlistMock]}>
+          <WishlistProvider>{children}</WishlistProvider>
+        </MockedProvider>
+      )
+    }
+    const { result, waitForNextUpdate } = renderHook(() => useWishlist(), {
+      wrapper
+    })
+    await waitForNextUpdate()
+    expect(result.current.isInWishlist('1')).toBe(true)
+    expect(result.current.isInWishlist('4')).toBe(false)
+  })
 })

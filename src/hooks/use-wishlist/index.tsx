@@ -36,7 +36,6 @@ export type WishlistProviderProps = {
 }
 
 const WishlistProvider = ({ children }: WishlistProviderProps) => {
-  const isInWishlist = () => false
   const addToWishlist = () => null
   const removeFromWishlist = () => null
   const [session] = useSession()
@@ -53,6 +52,8 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
   useEffect(() => {
     setItems(gamesMapper(data?.wishlists[0].games))
   }, [data])
+
+  const isInWishlist = (id: string) => !!items.find((item) => item.id === id)
 
   return (
     <wishlistContext.Provider
