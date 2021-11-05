@@ -41,6 +41,10 @@ exports[`<GameInfo /> should render the game info 1`] = `
   margin-left: 0.8rem;
 }
 
+.c7:focus {
+  outline: 1px dashed;
+}
+
 .c7:hover {
   background: linear-gradient(180deg,#e35565 0%,#d958a6 50%);
 }
@@ -79,6 +83,10 @@ exports[`<GameInfo /> should render the game info 1`] = `
 
 .c9 svg + span {
   margin-left: 0.8rem;
+}
+
+.c9:focus {
+  outline: 1px dashed;
 }
 
 .c9:hover {
