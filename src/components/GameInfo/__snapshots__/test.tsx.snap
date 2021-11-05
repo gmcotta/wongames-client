@@ -296,6 +296,7 @@ exports[`<GameInfo /> should render the game info 1`] = `
     >
       <svg
         aria-hidden="true"
+        aria-label="Add to Wishlist"
         class="c8"
         fill="currentColor"
         focusable="false"
@@ -311,7 +312,7 @@ exports[`<GameInfo /> should render the game info 1`] = `
         />
       </svg>
       <span>
-        Wish list
+        Add to Wishlist
       </span>
     </button>
   </div>
