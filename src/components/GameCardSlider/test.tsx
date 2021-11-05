@@ -1,4 +1,5 @@
 import 'match-media-fake'
+import 'session.mock'
 
 import { render, screen } from 'utils/testUtils'
 

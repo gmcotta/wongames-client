@@ -1,4 +1,5 @@
 import 'match-media-fake'
+import 'session.mock'
 import { screen, render } from 'utils/testUtils'
 
 import gamesMock from 'components/GameCardSlider/mock'
