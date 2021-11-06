@@ -1,3 +1,4 @@
+import { CardElement } from '@stripe/react-stripe-js'
 import { ShoppingCart } from '@styled-icons/material-outlined'
 import Button from 'components/Button'
 import Heading from 'components/Heading'
@@ -16,6 +17,7 @@ const PaymentForm = () => {
         <Heading color="black" size="small" lineBottom>
           Payment
         </Heading>
+        <CardElement options={{ hidePostalCode: true }} />
       </S.Body>
       <S.Footer>
         <Button as="a" fullWidth minimal>
