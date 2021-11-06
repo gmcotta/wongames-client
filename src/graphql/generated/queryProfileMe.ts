@@ -7,12 +7,17 @@
 // GraphQL query operation: queryProfileMe
 // ====================================================
 
-export interface queryProfileMe_me {
-  __typename: "UsersPermissionsMe";
-  username: string;
+export interface queryProfileMe_user {
+  __typename: "UsersPermissionsUser";
+  id: string;
   email: string;
+  username: string;
 }
 
 export interface queryProfileMe {
-  me: queryProfileMe_me | null;
+  user: queryProfileMe_user | null;
+}
+
+export interface queryProfileMeVariables {
+  identifier: string;
 }
