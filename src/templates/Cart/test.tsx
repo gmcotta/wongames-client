@@ -50,11 +50,11 @@ jest.mock('components/CartList', () => {
   }
 })
 
-jest.mock('components/PaymentOptions', () => {
+jest.mock('components/PaymentForm', () => {
   return {
     __esModule: true,
     default: function Mock() {
-      return <div data-testid="PaymentOptions mock"></div>
+      return <div data-testid="PaymentForm mock"></div>
     }
   }
 })
@@ -78,6 +78,6 @@ describe('<Cart />', () => {
     ).toBeInTheDocument()
     expect(screen.getByTestId(/Showcase mock/i)).toBeInTheDocument()
     expect(screen.getByTestId(/CartList mock/i)).toBeInTheDocument()
-    expect(screen.getByTestId(/PaymentOptions mock/i)).toBeInTheDocument()
+    expect(screen.getByTestId(/PaymentForm mock/i)).toBeInTheDocument()
   })
 })
