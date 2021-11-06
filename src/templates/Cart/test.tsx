@@ -9,6 +9,7 @@ import Cart, { CartTemplateProps } from '.'
 import { CartContextDefaultValues } from 'hooks/use-cart'
 
 const props: CartTemplateProps = {
+  session: undefined,
   recommendedTitle: 'Title',
   recommendedGames: gamesMock.slice(0, 2),
   recommendedHighlight: highlightMock
