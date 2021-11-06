@@ -29,6 +29,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.4.16",
+    "@stripe/react-stripe-js": "^1.6.0",
+    "@stripe/stripe-js": "^1.21.1",
     "@types/next-auth": "3.7.1",
     "dotenv": "^10.0.0",
     "graphql": "^15.6.1",
