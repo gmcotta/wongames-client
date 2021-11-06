@@ -1,4 +1,5 @@
 import { useState, useEffect, FormEvent } from 'react'
+import { useRouter } from 'next/router'
 import { Session } from 'next-auth/client'
 import {
   StripeCardElementChangeEvent,
@@ -22,15 +23,15 @@ export type PaymentFormProps = {
 }
 
 const PaymentForm = ({ session }: PaymentFormProps) => {
-  const { items } = useCart()
+  const { items, clearCart } = useCart()
   const stripe = useStripe()
   const elements = useElements()
+  const { push } = useRouter()
   const [error, setError] = useState<string | undefined>()
   const [disabled, setDisabled] = useState(true)
   const [freeGames, setFreeGames] = useState(false)
   const [clientSecret, setClientSecret] = useState('')
   const [loading, setLoading] = useState(false)
-  console.log(clientSecret)
 
   useEffect(() => {
     async function setPaymentMode() {
@@ -39,7 +40,6 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
         if (data.freeGames) {
           setClientSecret('')
           setFreeGames(true)
-          console.log(data.freeGames)
           return
         }
         if (data.error) {
@@ -48,7 +48,6 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
         }
         setFreeGames(false)
         setClientSecret(data.client_secret)
-        console.log(data.client_secret)
       } else {
         setFreeGames(false)
         setClientSecret('')
@@ -64,6 +63,11 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
     setLoading(true)
+    if (freeGames) {
+      push('/success')
+      clearCart()
+      return
+    }
     const payload = await stripe!.confirmCardPayment(clientSecret, {
       payment_method: {
         card: elements!.getElement(CardElement) as StripeCardElement
@@ -74,7 +78,8 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
       setError(`Payment failed: ${payload.error.message}`)
     } else {
       setError('')
-      console.log('compra feita com sucesso')
+      clearCart()
+      push('/success')
     }
   }
 

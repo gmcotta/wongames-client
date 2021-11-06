@@ -1,5 +1,8 @@
+import { useEffect } from 'react'
 import { Done } from '@styled-icons/material-outlined/Done'
 import Link from 'next/link'
+
+import { useCart } from 'hooks/use-cart'
 
 import Base from 'templates/Base'
 
@@ -21,6 +24,11 @@ const Success = ({
   recommendedGames,
   recommendedHighlight
 }: SuccessTemplateProps) => {
+  const { clearCart } = useCart()
+  useEffect(() => {
+    clearCart()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <Base>
       <Container>
