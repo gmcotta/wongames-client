@@ -1,20 +1,48 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { StripeCardElementChangeEvent } from '@stripe/stripe-js'
 import { CardElement } from '@stripe/react-stripe-js'
 import { ErrorOutline, ShoppingCart } from '@styled-icons/material-outlined'
 import Button from 'components/Button'
 import Heading from 'components/Heading'
 import * as S from './styles'
+import { useCart } from 'hooks/use-cart'
+import { createPaymentIntent } from 'utils/stripe/methods'
+import { Session } from 'next-auth/client'
 
-export type PaymentCard = {
-  number: string
-  flag: string
-  img: string
+export type PaymentFormProps = {
+  session: Session
 }
 
-const PaymentForm = () => {
-  const [error, setError] = useState<string | undefined>('')
+const PaymentForm = ({ session }: PaymentFormProps) => {
+  const { items } = useCart()
+  const [error, setError] = useState<string | undefined>()
+  const [disabled, setDisabled] = useState(true)
+  const [freeGames, setFreeGames] = useState(false)
+  const [clientSecret, setClientSecret] = useState('')
+  console.log(freeGames, clientSecret)
+
+  useEffect(() => {
+    async function setPaymentMode() {
+      if (items?.length) {
+        const data = await createPaymentIntent({ items, token: session.jwt })
+        if (data.freeGames) {
+          setFreeGames(true)
+          console.log(data.freeGames)
+          return
+        }
+        if (data.error) {
+          setError(data.error)
+          return
+        }
+        setClientSecret(data.client_secret)
+        console.log(data.client_secret)
+      }
+    }
+    setPaymentMode()
+  }, [items, session])
+
   const handleChange = async (event: StripeCardElementChangeEvent) => {
+    setDisabled(event.empty)
     setError(event.error?.message)
   }
   return (
@@ -41,7 +69,11 @@ const PaymentForm = () => {
         <Button as="a" fullWidth minimal>
           Keep shopping
         </Button>
-        <Button icon={<ShoppingCart size={16} />} fullWidth>
+        <Button
+          icon={<ShoppingCart size={16} />}
+          fullWidth
+          disabled={disabled || !!error}
+        >
           Buy now
         </Button>
       </S.Footer>
