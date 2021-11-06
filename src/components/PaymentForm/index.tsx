@@ -26,6 +26,7 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
       if (items?.length) {
         const data = await createPaymentIntent({ items, token: session.jwt })
         if (data.freeGames) {
+          setClientSecret('')
           setFreeGames(true)
           console.log(data.freeGames)
           return
@@ -34,9 +35,12 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
           setError(data.error)
           return
         }
+        setFreeGames(false)
         setClientSecret(data.client_secret)
         console.log(data.client_secret)
       }
+      setFreeGames(false)
+      setClientSecret('')
     }
     setPaymentMode()
   }, [items, session])
@@ -51,13 +55,19 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
         <Heading color="black" size="small" lineBottom>
           Payment
         </Heading>
-        <CardElement
-          options={{
-            hidePostalCode: true,
-            style: { base: { fontSize: '16px' } }
-          }}
-          onChange={handleChange}
-        />
+        {freeGames ? (
+          <S.FreeGamesMessage>
+            Just click to buy now and enjoy!
+          </S.FreeGamesMessage>
+        ) : (
+          <CardElement
+            options={{
+              hidePostalCode: true,
+              style: { base: { fontSize: '16px' } }
+            }}
+            onChange={handleChange}
+          />
+        )}
         {!!error && (
           <S.ErrorMessage>
             <ErrorOutline size={24} />
@@ -72,7 +82,7 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
         <Button
           icon={<ShoppingCart size={16} />}
           fullWidth
-          disabled={disabled || !!error}
+          disabled={!freeGames && (disabled || !!error)}
         >
           Buy now
         </Button>

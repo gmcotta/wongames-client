@@ -40,3 +40,9 @@ export const ErrorMessage = styled.p`
     }
   `}
 `
+
+export const FreeGamesMessage = styled.p`
+  ${({ theme }) => css`
+    color: ${theme.colors.black};
+  `}
+`
