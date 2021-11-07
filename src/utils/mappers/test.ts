@@ -3,7 +3,14 @@ import {
   QueryHome_banners,
   QueryHome_sections_freeGames_highlight
 } from 'graphql/generated/QueryHome'
-import { bannerMapper, cartMapper, gamesMapper, highlightMapper } from '.'
+import { QueryOrders_orders } from 'graphql/generated/QueryOrders'
+import {
+  bannerMapper,
+  cartMapper,
+  gamesMapper,
+  highlightMapper,
+  orderMapper
+} from '.'
 
 describe('bannerMapper()', () => {
   it('should return correctly', () => {
@@ -138,6 +145,110 @@ describe('cartMapper()', () => {
         title: 'Game',
         img: `http://localhost:1337/cover.png`,
         price: '$10.00'
+      }
+    ])
+  })
+})
+
+describe('ordersMapper()', () => {
+  it('should return empty array if no orders', () => {
+    expect(orderMapper(undefined)).toStrictEqual([])
+  })
+
+  it('should return correctly', () => {
+    const orders = [
+      {
+        __typename: 'Order',
+        id: '1',
+        card_brand: 'visa',
+        card_last4: '4242',
+        created_at: '2021-11-07T10:19:00.000Z',
+        games: [
+          {
+            id: '1',
+            name: 'game',
+            developers: [
+              {
+                name: 'developer'
+              }
+            ],
+            slug: 'game',
+            cover: {
+              url: '/image.png'
+            },
+            price: 10.9
+          }
+        ]
+      }
+    ] as QueryOrders_orders[]
+    expect(orderMapper(orders)).toStrictEqual([
+      {
+        id: '1',
+        paymentInfo: {
+          flag: 'visa',
+          img: '/img/cards/visa.png',
+          number: '**** **** **** 4242',
+          purchaseDate: 'Purchase made on Nov 7, 2021'
+        },
+        games: [
+          {
+            id: '1',
+            title: 'game',
+            downloadLink:
+              'https://wongames.com/game/download/iyoiOIhourohjFLJHA',
+            img: 'http://localhost:1337/image.png',
+            price: '$10.90'
+          }
+        ]
+      }
+    ])
+  })
+
+  it('should return correctly when game is free', () => {
+    const orders = [
+      {
+        __typename: 'Order',
+        id: '1',
+        card_brand: null,
+        card_last4: null,
+        created_at: '2021-11-07T10:19:00.000Z',
+        games: [
+          {
+            id: '1',
+            name: 'game',
+            developers: [
+              {
+                name: 'developer'
+              }
+            ],
+            slug: 'game',
+            cover: {
+              url: '/image.png'
+            },
+            price: 0
+          }
+        ]
+      }
+    ] as QueryOrders_orders[]
+    expect(orderMapper(orders)).toStrictEqual([
+      {
+        id: '1',
+        paymentInfo: {
+          flag: null,
+          img: null,
+          number: 'Free Game',
+          purchaseDate: 'Purchase made on Nov 7, 2021'
+        },
+        games: [
+          {
+            id: '1',
+            title: 'game',
+            downloadLink:
+              'https://wongames.com/game/download/iyoiOIhourohjFLJHA',
+            img: 'http://localhost:1337/image.png',
+            price: 'FREE'
+          }
+        ]
       }
     ])
   })
