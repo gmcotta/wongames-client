@@ -119,6 +119,7 @@ exports[`<GameInfo /> should render the game info 1`] = `
   padding: 0.6rem 4rem;
   position: absolute;
   top: 1.6rem;
+  z-index: 10;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
