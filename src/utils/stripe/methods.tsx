@@ -13,7 +13,7 @@ type HTTPPostRequestParams = {
 }
 
 type CreatePaymentParams = {
-  items: CartItem[]
+  items: CartItem[] | undefined
   paymentIntent?: PaymentIntent
   token: string
 }
