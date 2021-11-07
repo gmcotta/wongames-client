@@ -1,14 +1,18 @@
+import Image from 'next/image'
 import { NextSeo } from 'next-seo'
+
 import Base from 'templates/Base'
-import GameInfo, { GameInfoProps } from 'components/GameInfo'
-import * as S from './styles'
-import Gallery, { GalleryImageProps } from 'components/Gallery'
-import TextContent from 'components/TextContent'
-import GameDetails, { GameDetailsProps } from 'components/GameDetails'
+
+import Divider from 'components/Divider'
 import { GameCardProps } from 'components/GameCard'
+import GameDetails, { GameDetailsProps } from 'components/GameDetails'
+import GameInfo, { GameInfoProps } from 'components/GameInfo'
+import Gallery, { GalleryImageProps } from 'components/Gallery'
 import { HighlightProps } from 'components/Highlight'
 import Showcase from 'components/Showcase'
-import Divider from 'components/Divider'
+import TextContent from 'components/TextContent'
+
+import * as S from './styles'
 
 export type GameTemplateProps = {
   slug: string
@@ -55,7 +59,9 @@ const Game = ({
           ]
         }}
       />
-      <S.Cover src={coverSrc} role="image" aria-label="Cover" />
+      <S.Cover>
+        <Image src={coverSrc} alt={gameInfo.title} layout="fill" />
+      </S.Cover>
       <S.Wrapper>
         <S.GameInfoSection>
           <GameInfo {...gameInfo} />

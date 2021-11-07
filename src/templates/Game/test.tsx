@@ -20,7 +20,8 @@ const props: GameTemplateProps = {
   upcomingGames: gamesMock,
   upcomingHighlight: highlightMock,
   recommendedTitle: 'Title',
-  recommendedGames: gamesMock
+  recommendedGames: gamesMock,
+  slug: 'slug'
 }
 
 jest.mock('templates/Base', () => ({
@@ -88,15 +89,9 @@ describe('<Game />', () => {
 
   it('should render the cover image', () => {
     render(<Game {...props} />)
-    const cover = screen.getByRole('image', { name: /cover/i })
-    expect(cover).toBeInTheDocument()
-    expect(cover).toHaveStyle({
-      backgroundImage: `url(${props.coverSrc})`,
-      height: '39.5rem'
-    })
-    expect(cover).toHaveStyleRule('height', '70rem', {
-      media: '(min-width: 768px)'
-    })
+    const image = screen.getByRole('img', { name: /Borderland 3/i })
+    const cover = image.parentElement
+    expect(image).toHaveAttribute('src', props.coverSrc)
     expect(cover).toHaveStyleRule(
       'clip-path',
       'polygon(0 0,100% 0,100% 100%,0 85%)',
