@@ -8,7 +8,7 @@ const props = {
   subtitle: 'Subtitle 1',
   buttonLabel: 'Buy Now',
   buttonLink: '/game1',
-  backgroundImage: '/img/red-dead-img.jpeg',
+  backgroundImage: '/img/red-dead-img.png',
   floatImage: '/img/red-dead-float.png'
 }
 
@@ -25,18 +25,17 @@ describe('<Highlight />', () => {
   })
 
   it('should render the background image', () => {
-    const { container } = render(<Highlight {...props} />)
-    expect(container.firstChild).toHaveStyle({
-      'background-image': `url(${props.backgroundImage})`
-    })
+    render(<Highlight {...props} />)
+    expect(
+      screen.getByRole('img', { name: /Heading 1-background/i })
+    ).toHaveAttribute('src', props.backgroundImage)
   })
 
   it('should render the float image', () => {
-    render(<Highlight {...props} floatImage={props.floatImage} />)
-    expect(screen.getByRole('img', { name: props.title })).toHaveAttribute(
-      'src',
-      props.floatImage
-    )
+    render(<Highlight {...props} />)
+    expect(
+      screen.getByRole('img', { name: /Heading 1-float/i })
+    ).toHaveAttribute('src', props.floatImage)
   })
 
   it('should render content with right alignment by default', () => {
@@ -68,7 +67,7 @@ describe('<Highlight />', () => {
       modifier: `${S.Content}`
     })
     expect(container.firstChild).toHaveStyleRule('justify-self', 'end', {
-      modifier: `${S.FloatImage}`
+      modifier: `${S.FloatImageWrapper}`
     })
   })
 })
