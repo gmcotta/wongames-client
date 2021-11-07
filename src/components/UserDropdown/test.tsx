@@ -7,7 +7,15 @@ import UserDropdown from '.'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 jest.mock('next-auth/client', () => ({
-  signOut: jest.fn()
+  signOut: jest.fn().mockResolvedValue({
+    url: '/'
+  })
+}))
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const useRouter = jest.spyOn(require('next/router'), 'useRouter')
+useRouter.mockImplementation(() => ({
+  push: jest.fn()
 }))
 
 describe('<UserDropdown />', () => {
