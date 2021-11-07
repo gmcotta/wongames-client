@@ -9,7 +9,7 @@ import {
   cartMapper,
   gamesMapper,
   highlightMapper,
-  orderMapper
+  ordersMapper
 } from '.'
 
 describe('bannerMapper()', () => {
@@ -152,7 +152,7 @@ describe('cartMapper()', () => {
 
 describe('ordersMapper()', () => {
   it('should return empty array if no orders', () => {
-    expect(orderMapper(undefined)).toStrictEqual([])
+    expect(ordersMapper(undefined)).toStrictEqual([])
   })
 
   it('should return correctly', () => {
@@ -181,7 +181,7 @@ describe('ordersMapper()', () => {
         ]
       }
     ] as QueryOrders_orders[]
-    expect(orderMapper(orders)).toStrictEqual([
+    expect(ordersMapper(orders)).toStrictEqual([
       {
         id: '1',
         paymentInfo: {
@@ -230,7 +230,7 @@ describe('ordersMapper()', () => {
         ]
       }
     ] as QueryOrders_orders[]
-    expect(orderMapper(orders)).toStrictEqual([
+    expect(ordersMapper(orders)).toStrictEqual([
       {
         id: '1',
         paymentInfo: {

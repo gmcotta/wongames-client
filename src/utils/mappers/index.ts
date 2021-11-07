@@ -64,7 +64,7 @@ export function cartMapper(games: QueryGames_games[] | null | undefined) {
     : []
 }
 
-export function orderMapper(orders: QueryOrders_orders[] | null | undefined) {
+export function ordersMapper(orders: QueryOrders_orders[] | null | undefined) {
   return orders
     ? orders.map((order) => ({
         id: order.id,
