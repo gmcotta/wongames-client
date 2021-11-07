@@ -3,16 +3,18 @@ import { ParsedUrlQueryInput } from 'querystring'
 import { useRouter } from 'next/router'
 
 import { useQueryGames } from 'graphql/queries/games'
+
 import { parseQueryStringToFilter, parseQueryStringToWhere } from 'utils/filter'
+import { getImageUrl } from 'utils/getImageUrl'
 
 import Base from 'templates/Base'
 
 import ExploreSidebar, { ItemProps } from 'components/ExploreSidebar'
 import GameCard from 'components/GameCard'
 import Grid from 'components/Grid'
+import Empty from 'components/Empty'
 
 import * as S from './styles'
-import Empty from 'components/Empty'
 
 export type GamesTemplateProps = {
   filterItems: ItemProps[]
@@ -66,7 +68,7 @@ const Games = ({ filterItems }: GamesTemplateProps) => {
                     title={game.name}
                     slug={game.slug}
                     developer={game.developers[0].name}
-                    img={`http://localhost:1337${game.cover!.url}`}
+                    img={`${getImageUrl(game.cover!.url)}`}
                     price={game.price}
                   />
                 ))}

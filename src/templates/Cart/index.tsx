@@ -22,7 +22,7 @@ export type CartTemplateProps = {
   recommendedHighlight: HighlightProps
 } & CartListProps
 
-const stripe = loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_PUBLISABLE_KEY}`)
+const stripe = loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`)
 
 const Cart = ({
   session,
