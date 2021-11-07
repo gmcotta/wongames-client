@@ -11,7 +11,10 @@ describe('<Auth />', () => {
         </form>
       </Auth>
     )
-    expect(screen.getAllByRole('img', { name: /won games/i })).toHaveLength(2)
+    expect(screen.getAllByRole('img', { name: /won games/i })).toHaveLength(3)
+    expect(
+      screen.getByRole('img', { name: 'Won Games Auth Page' })
+    ).toBeInTheDocument()
     expect(
       screen.getByRole('heading', {
         name: /All your favorite games in one place/i

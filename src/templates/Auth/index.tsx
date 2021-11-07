@@ -1,7 +1,10 @@
 import { ReactNode } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+
 import Heading from 'components/Heading'
 import Logo from 'components/Logo'
+
 import * as S from './styles'
 
 export type AuthProps = {
@@ -12,6 +15,12 @@ export type AuthProps = {
 const Auth = ({ title, children }: AuthProps) => (
   <S.Wrapper>
     <S.BannerSection>
+      <Image
+        src="/img/auth-img.png"
+        alt="Won Games Auth Page"
+        layout="fill"
+        objectFit="cover"
+      />
       <S.BannerContent>
         <Link href="/" passHref>
           <a>
