@@ -1,5 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/cypress-io/cypress/develop/cli/schema/cypress.schema.json",
   "video": false,
-  "integrationFolder": "cypress/e2e"
+  "integrationFolder": "cypress/e2e",
+  "baseUrl": "http://localhost:3000"
 }
