@@ -1,5 +1,10 @@
 /// <reference types="cypress" />
 
+type ShowcaseAttributes = {
+  name: string
+  highlight?: boolean
+}
+
 declare namespace Cypress {
   interface Chainable {
     /**
@@ -12,5 +17,12 @@ declare namespace Cypress {
      * @example cy.shouldRenderBanner()
      */
     shouldRenderBanner(): Chainable<JQuery<HTMLElement>>
+    /**
+     * Custom command to check showcase in page
+     * @example cy.shouldRenderShowcase()
+     */
+    shouldRenderShowcase(
+      attrs: ShowcaseAttributes
+    ): Chainable<JQuery<HTMLElement>>
   }
 }
