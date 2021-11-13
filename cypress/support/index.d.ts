@@ -18,6 +18,11 @@ declare namespace Cypress {
      */
     shouldRenderBanner(): Chainable<JQuery<HTMLElement>>
     /**
+     * Custom command to get data-cy attribute
+     * @example cy.getByDataCy('selector')
+     */
+    getByDataCy(selector: string): Chainable<JQuery<HTMLElement>>
+    /**
      * Custom command to check showcase in page
      * @example cy.shouldRenderShowcase()
      */
