@@ -7,8 +7,11 @@ import {
   priceFields
 } from '../../src/utils/filter/fields'
 describe('Explore Page', () => {
-  it('should render filter columns', () => {
+  before(() => {
     cy.visit('/games')
+  })
+
+  it('should render filter columns', () => {
     cy.findByRole('heading', { name: /sort by price/i }).should('exist')
     cy.searchForFields(sortFields)
     cy.findByRole('heading', { name: /^price/i }).should('exist')
@@ -17,5 +20,11 @@ describe('Explore Page', () => {
     cy.searchForFields(platformFields)
     cy.findByRole('heading', { name: /genres/i }).should('exist')
     cy.searchForFields(genreFields)
+  })
+
+  it('should render 15 games and show 30 games when show more button is clicked', () => {
+    cy.getByDataCy('game-card').should('have.length', 15)
+    cy.findByRole('button', { name: /show more/i }).click()
+    cy.getByDataCy('game-card').should('have.length', 30)
   })
 })
