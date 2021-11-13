@@ -1,4 +1,9 @@
-export const priceFields = [
+export type Field = {
+  label: string
+  name: string | number
+}
+
+export const priceFields: Field[] = [
   { label: 'Free', name: 0 },
   { label: 'Under $50', name: 50 },
   { label: 'Under $100', name: 100 },
@@ -7,18 +12,18 @@ export const priceFields = [
   { label: 'Under $500', name: 500 }
 ]
 
-export const platformFields = [
+export const platformFields: Field[] = [
   { label: 'Windows', name: 'windows' },
   { label: 'Linux', name: 'linux' },
   { label: 'Mac OS', name: 'mac' }
 ]
 
-export const sortFields = [
+export const sortFields: Field[] = [
   { label: 'Lowest to highest', name: 'price:asc' },
   { label: 'Highest to lowest', name: 'price:desc' }
 ]
 
-export const genreFields = [
+export const genreFields: Field[] = [
   { label: 'Action', name: 'action' },
   { label: 'Adventure', name: 'adventure' },
   { label: 'Sports', name: 'sports' },

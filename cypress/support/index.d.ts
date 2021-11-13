@@ -1,5 +1,10 @@
 /// <reference types="cypress" />
 
+type Field = {
+  label: string
+  name: string | number
+}
+
 type ShowcaseAttributes = {
   name: string
   highlight?: boolean
@@ -29,5 +34,10 @@ declare namespace Cypress {
     shouldRenderShowcase(
       attrs: ShowcaseAttributes
     ): Chainable<JQuery<HTMLElement>>
+    /**
+     * Custom command to search for fields
+     * @example cy.searchForFields(priceFields)
+     */
+    searchForFields(fields: Field[]): void
   }
 }
