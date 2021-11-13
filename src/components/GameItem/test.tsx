@@ -29,7 +29,7 @@ describe('<GameItem />', () => {
       removeFromCart: jest.fn()
     }
     render(<GameItem {...props} />, { cartProviderProps })
-    userEvent.click(screen.getByText(/remover/i))
+    userEvent.click(screen.getByText(/remove/i))
     expect(cartProviderProps.removeFromCart).toHaveBeenCalledWith('1')
   })
 

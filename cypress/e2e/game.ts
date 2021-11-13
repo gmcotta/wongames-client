@@ -2,8 +2,10 @@
 /// <reference path="../support/index.d.ts" />
 
 describe('Game Page', () => {
-  it('should render game page sections', () => {
+  before(() => {
     cy.visit('/game/sable')
+  })
+  it('should render game page sections', () => {
     cy.getByDataCy('game-info').within(() => {
       cy.findByRole('heading', { name: /sable/i }).should('exist')
       cy.findByText(
@@ -43,5 +45,26 @@ describe('Game Page', () => {
       name: 'You also will like these games',
       highlight: false
     })
+  })
+  it('should add/remove game to cart', () => {
+    cy.getByDataCy('game-info').within(() => {
+      cy.findByRole('button', { name: /add to cart/i }).click()
+      cy.findByRole('button', { name: /remove from cart/i }).should('exist')
+    })
+    cy.findAllByLabelText(/cart items/i)
+      .first()
+      .should('have.text', '1')
+    cy.findAllByLabelText(/cart items/i)
+      .first()
+      .click()
+    cy.getByDataCy('cart-list').within(() => {
+      cy.findByRole('heading', { name: /sable/i }).should('exist')
+    })
+    cy.getByDataCy('dropdown-overlay').click()
+    cy.getByDataCy('game-info').within(() => {
+      cy.findByRole('button', { name: /remove from cart/i }).click()
+      cy.findByRole('button', { name: /add to cart/i }).should('exist')
+    })
+    cy.findAllByLabelText(/cart items/i).should('not.exist')
   })
 })
