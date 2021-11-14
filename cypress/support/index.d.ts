@@ -39,5 +39,15 @@ declare namespace Cypress {
      * @example cy.searchForFields(priceFields)
      */
     searchForFields(fields: Field[]): void
+    /**
+     * Custom command to check if price is greater than a value
+     * @example cy.shouldPriceBeGreaterThan(0)
+     */
+    shouldPriceBeGreaterThan(value: number): Cypress.Chainable<number>
+    /**
+     * Custom command to check if price is less than a value
+     * @example cy.shouldPriceBeLessThan(500)
+     */
+    shouldPriceBeLessThan(value: number): Cypress.Chainable<number>
   }
 }

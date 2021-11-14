@@ -58,7 +58,25 @@ Cypress.Commands.add('shouldRenderShowcase', ({ name, highlight = false }) =>
 )
 
 Cypress.Commands.add('searchForFields', (fields) => {
-  fields.map(({ label }) => {
+  return fields.map(({ label }) => {
     cy.findByText(label).should('exist')
   })
+})
+
+Cypress.Commands.add('shouldPriceBeGreaterThan', (value) => {
+  return cy
+    .findByText(/^\$\d+\.\d{2}/)
+    .invoke('text')
+    .then(($el) => $el.replace('$', ''))
+    .then(parseFloat)
+    .should('be.gt', value)
+})
+
+Cypress.Commands.add('shouldPriceBeLessThan', (value) => {
+  return cy
+    .findByText(/^\$\d+\.\d{2}/)
+    .invoke('text')
+    .then(($el) => $el.replace('$', ''))
+    .then(parseFloat)
+    .should('be.lt', value)
 })
