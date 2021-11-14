@@ -99,3 +99,23 @@ Cypress.Commands.add(
     cy.findByRole('button', { name: /sign in now/i }).click()
   }
 )
+
+Cypress.Commands.add('addToCartByIndex', (index) => {
+  cy.getByDataCy('game-card')
+    .eq(index)
+    .within(() => {
+      cy.findByRole('button', { name: /add to cart/i }).click({ force: true })
+      cy.findByRole('button', { name: /remove from cart/i }).should('exist')
+    })
+})
+
+Cypress.Commands.add('removeFromCartByIndex', (index) => {
+  cy.getByDataCy('game-card')
+    .eq(index)
+    .within(() => {
+      cy.findByRole('button', { name: /remove from cart/i }).click({
+        force: true
+      })
+      cy.findByRole('button', { name: /add to cart/i }).should('exist')
+    })
+})

@@ -65,5 +65,15 @@ declare namespace Cypress {
      * @example cy.signIn(user)
      */
     signIn(user?: User): void
+    /**
+     * Custom command to add game to cart based on index
+     * @example cy.addToCartByIndex(1)
+     */
+    addToCartByIndex(index: number): void
+    /**
+     * Custom command  to remove game from cart based on index
+     * @example cy.removeFromCartByIndex(1)
+     */
+    removeFromCartByIndex(index: number): void
   }
 }
