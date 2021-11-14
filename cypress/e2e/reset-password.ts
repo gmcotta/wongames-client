@@ -36,4 +36,35 @@ describe('Reset password', () => {
     cy.findByRole('button', { name: /reset password/i }).click()
     cy.findByText(/This code is invalid/i).should('exist')
   })
+
+  it('it should complete reset password and sign in to home', () => {
+    cy.intercept('POST', '**/auth/reset-password', (res) => {
+      res.reply({
+        status: '200',
+        body: {
+          user: { email: 'teste@email.com' }
+        }
+      })
+    })
+    cy.intercept('POST', '**/auth/callback/credentials*', (res) => {
+      res.reply({
+        status: '200',
+        body: {
+          user: { email: 'teste@email.com' }
+        }
+      })
+    })
+    cy.intercept('GET', '**/auth/session*', (res) => {
+      res.reply({
+        status: '200',
+        body: { user: { name: 'teste', email: 'teste@email.com' } }
+      })
+    })
+    cy.visit('/reset-password?code=valid')
+    cy.findByPlaceholderText(/^password/i).type('123123')
+    cy.findByPlaceholderText(/^confirm password/i).type('123123')
+    cy.findByRole('button', { name: /reset password/i }).click()
+    cy.location('href').should('eq', `${Cypress.config().baseUrl}/`)
+    cy.findByText(/teste/i).should('exist')
+  })
 })
