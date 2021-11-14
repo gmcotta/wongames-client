@@ -36,12 +36,12 @@ const Wishlist = ({
         )}
         {!loading && !items?.length ? (
           <Empty
-            title={recommendedTitle}
+            title="Your wishlist is empty"
             description="Games added to your wishlist will appear here"
             hasLink
           />
         ) : (
-          <Grid>
+          <Grid data-cy="wishlist-grid">
             {items?.map((game: GameCardProps, index) => (
               <GameCard key={`wishlist-game-${index + 1}`} {...game} />
             ))}
@@ -51,7 +51,7 @@ const Wishlist = ({
         <Divider />
       </Container>
       <Showcase
-        title="You may like these games"
+        title={recommendedTitle}
         games={recommendedGames}
         highlight={recommendedHighlight}
       />

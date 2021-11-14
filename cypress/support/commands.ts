@@ -119,3 +119,25 @@ Cypress.Commands.add('removeFromCartByIndex', (index) => {
       cy.findByRole('button', { name: /add to cart/i }).should('exist')
     })
 })
+
+Cypress.Commands.add('addToWishlistByIndex', (index) => {
+  cy.getByDataCy('game-card')
+    .eq(index)
+    .within(() => {
+      cy.findByLabelText(/add to wishlist/i).click({
+        force: true
+      })
+      cy.findByLabelText(/remove from wishlist/i).should('exist')
+    })
+})
+
+Cypress.Commands.add('removeFromWishlistByIndex', (index) => {
+  cy.getByDataCy('game-card')
+    .eq(index)
+    .within(() => {
+      cy.findByLabelText(/remove from wishlist/i).click({
+        force: true
+      })
+      cy.findByLabelText(/add to wishlist/i).should('exist')
+    })
+})
