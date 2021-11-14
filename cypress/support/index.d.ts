@@ -60,5 +60,10 @@ declare namespace Cypress {
      * @example cy.signUp(user)
      */
     signUp(user: User): void
+    /**
+     * Custom command to sign in an user
+     * @example cy.signIn(user)
+     */
+    signIn(user?: User): void
   }
 }
