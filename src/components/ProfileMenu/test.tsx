@@ -14,8 +14,14 @@ jest.mock('next-auth/client', () => ({
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const useRouter = jest.spyOn(require('next/router'), 'useRouter')
+const push = jest.fn()
+const prefetch = jest.fn(() => Promise.resolve(true))
 useRouter.mockImplementation(() => ({
-  push: jest.fn()
+  push,
+  prefetch,
+  query: '',
+  asPath: '',
+  route: '/'
 }))
 
 describe('<ProfileMenu />', () => {
