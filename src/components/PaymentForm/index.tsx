@@ -24,7 +24,7 @@ export type PaymentFormProps = {
 }
 
 const PaymentForm = ({ session }: PaymentFormProps) => {
-  const { items, clearCart } = useCart()
+  const { items } = useCart()
   const stripe = useStripe()
   const elements = useElements()
   const { push } = useRouter()
@@ -37,7 +37,10 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
   useEffect(() => {
     async function setPaymentMode() {
       if (items?.length) {
-        const data = await createPaymentIntent({ items, token: session?.jwt })
+        const data = await createPaymentIntent({
+          items,
+          token: session?.jwt as string
+        })
         if (data.freeGames) {
           setClientSecret('')
           setFreeGames(true)
@@ -62,10 +65,11 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
     setError(event.error?.message)
   }
   const saveOrder = async (paymentIntent?: PaymentIntent) => {
+    console.log(session?.jwt)
     const data = await createPayment({
       items,
       paymentIntent,
-      token: session?.jwt
+      token: session?.jwt as string
     })
     return data
   }
@@ -74,13 +78,12 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
     setLoading(true)
     if (freeGames) {
       saveOrder()
-      clearCart()
       push('/success')
       return
     }
     const payload = await stripe!.confirmCardPayment(clientSecret, {
       payment_method: {
-        card: elements!.getElement(CardElement) as StripeCardElement
+        card: elements!.getElement(CardElement)! as StripeCardElement
       }
     })
     setLoading(false)
@@ -89,7 +92,6 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
     } else {
       setError('')
       saveOrder(payload.paymentIntent)
-      clearCart()
       push('/success')
     }
   }
