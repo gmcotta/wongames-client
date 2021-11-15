@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { Session } from 'next-auth/client'
+import { Session } from 'next-auth'
 
 import { CartContextDefaultValues, CartContextData } from 'hooks/use-cart'
 

@@ -24,7 +24,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   await apolloClient.query<QueryWishlist, QueryWishlistVariables>({
     query: QUERY_RECOMMENDED,
     variables: {
-      identifier: session.user.email as string
+      identifier: session?.user?.email as string
     }
   })
   const { data } = await apolloClient.query<QueryRecommended>({

@@ -1,6 +1,6 @@
 import { useState, useEffect, FormEvent } from 'react'
 import { useRouter } from 'next/router'
-import { Session } from 'next-auth/client'
+import { Session } from 'next-auth'
 import {
   StripeCardElementChangeEvent,
   StripeCardElement,

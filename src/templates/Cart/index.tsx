@@ -1,4 +1,4 @@
-import { Session } from 'next-auth/client'
+import { Session } from 'next-auth'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 
@@ -16,7 +16,7 @@ import Base from 'templates/Base'
 import * as S from './styles'
 
 export type CartTemplateProps = {
-  session: Session
+  session?: Session
   recommendedTitle: string
   recommendedGames: GameCardProps[]
   recommendedHighlight: HighlightProps
