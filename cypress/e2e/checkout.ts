@@ -6,7 +6,7 @@ import { createUser, User } from '../support/generate'
 describe('Checkout', () => {
   let user: User
 
-  describe.skip('Free Games', () => {
+  describe('Free Games', () => {
     before(() => {
       user = createUser()
     })
@@ -46,7 +46,7 @@ describe('Checkout', () => {
         name: /Your purchase was successful!/i
       }).should('exist')
     })
-    it('should show game order', () => {
+    it.skip('should show game order', () => {
       cy.visit('/profile/orders')
       cy.location('href').should(
         'eq',
@@ -101,7 +101,7 @@ describe('Checkout', () => {
         name: /Your purchase was successful!/i
       }).should('exist')
     })
-    it('should show game order', () => {
+    it.skip('should show game order', () => {
       cy.visit('/profile/orders')
       cy.location('href').should(
         'eq',

@@ -135,7 +135,7 @@ describe('Explore Page', () => {
     cy.findByText(/shooter/i).click()
   })
 
-  it.only('should return empty if no games were found', () => {
+  it('should return empty if no games were found', () => {
     cy.findByText(/mac os/i).click()
     cy.findByText(/sports/i).click()
     cy.getByDataCy('game-card').should('not.exist')
