@@ -69,7 +69,7 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
     const data = await createPayment({
       items,
       paymentIntent,
-      token: session?.jwt as string
+      token: session?.jwt as unknown as string
     })
     return data
   }
