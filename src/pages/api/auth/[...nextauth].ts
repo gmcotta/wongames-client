@@ -1,7 +1,6 @@
 import NextAuth, { User } from 'next-auth'
 import Providers from 'next-auth/providers'
 import { Session } from 'next-auth'
-import { JWT } from 'next-auth/jwt'
 
 type AuthorizeProps = {
   email: string
@@ -42,7 +41,8 @@ const options = {
 
       return Promise.resolve(session)
     },
-    jwt: async (token: JWT, user: User) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    jwt: async (token: any, user: User) => {
       if (user) {
         token.id = user.id
         token.email = user.email
