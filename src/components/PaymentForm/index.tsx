@@ -39,7 +39,7 @@ const PaymentForm = ({ session }: PaymentFormProps) => {
       if (items?.length) {
         const data = await createPaymentIntent({
           items,
-          token: session?.jwt as string
+          token: session?.jwt as unknown as string
         })
         if (data.freeGames) {
           setClientSecret('')

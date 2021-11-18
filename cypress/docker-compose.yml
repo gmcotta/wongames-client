@@ -18,6 +18,6 @@ services:
 
   db:
     container_name: wongames_db
-    image: gmcotta/wongames-db
+    image: gmcotta/wongames-database
     ports:
       - '5432:5432'
