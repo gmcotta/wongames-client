@@ -25,7 +25,7 @@ function createApolloClient(session?: Session | null) {
 
 export function initializeApollo(
   initialState = null,
-  session: Session | null = null
+  session?: Session | null
 ) {
   const apolloClientGlobal = apolloClient ?? createApolloClient(session)
   if (initialState) {
