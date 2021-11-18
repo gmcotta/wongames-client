@@ -1,6 +1,6 @@
-import NextAuth, { User } from 'next-auth'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
-import { Session } from 'next-auth'
 
 type AuthorizeProps = {
   email: string
@@ -35,14 +35,13 @@ const options = {
     })
   ],
   callbacks: {
-    session: async (session: Session, user: User) => {
+    session: async (session: any, user: any) => {
       session.jwt = user.jwt
       session.id = user.id
 
       return Promise.resolve(session)
     },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    jwt: async (token: any, user: User) => {
+    jwt: async (token: any, user: any) => {
       if (user) {
         token.id = user.id
         token.email = user.email
@@ -55,7 +54,6 @@ const options = {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Auth = (req: any, res: any) => NextAuth(req, res, options)
 
 export default Auth
