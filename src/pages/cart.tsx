@@ -18,8 +18,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (!session) {
     return { props: {} }
   }
-  session ? session : undefined
-  const apolloClient = initializeApollo(null, session)
+  const testSession = session ? session : undefined
+  const apolloClient = initializeApollo(null, testSession)
   const { data } = await apolloClient.query<QueryRecommended>({
     query: QUERY_RECOMMENDED
   })
