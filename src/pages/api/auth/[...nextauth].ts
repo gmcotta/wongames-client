@@ -1,6 +1,5 @@
 import NextAuth, { User } from 'next-auth'
 import Providers from 'next-auth/providers'
-import { NextApiRequest, NextApiResponse } from 'next-auth/internals/utils'
 import { Session } from 'next-auth'
 import { JWT } from 'next-auth/jwt'
 
@@ -56,7 +55,7 @@ const options = {
   }
 }
 
-const Auth = (req: NextApiRequest, res: NextApiResponse) =>
-  NextAuth(req, res, options)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Auth = (req: any, res: any) => NextAuth(req, res, options)
 
 export default Auth
