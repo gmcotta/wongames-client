@@ -7,13 +7,12 @@ import { initializeApollo } from 'utils/apollo'
 import { gamesMapper, highlightMapper } from 'utils/mappers'
 import { getImageUrl } from 'utils/getImageUrl'
 
-// import {
-//   QueryGames,
-//   QueryGamesVariables,
-//   QueryGames_games
-// } from 'graphql/generated/QueryGames'
-// import { QUERY_GAMES, QUERY_GAME_BY_SLUG } from 'graphql/queries/games'
-import { QUERY_GAME_BY_SLUG } from 'graphql/queries/games'
+import {
+  QueryGames,
+  QueryGamesVariables,
+  QueryGames_games
+} from 'graphql/generated/QueryGames'
+import { QUERY_GAMES, QUERY_GAME_BY_SLUG } from 'graphql/queries/games'
 import {
   QueryGameBySlug,
   QueryGameBySlugVariables
@@ -32,22 +31,22 @@ export default function Index(props: GameTemplateProps) {
   return <Game {...props} />
 }
 
-// export async function getStaticPaths() {
-//   const apolloClient = initializeApollo()
-//   const { data } = await apolloClient.query<QueryGames, QueryGamesVariables>({
-//     query: QUERY_GAMES,
-//     variables: {
-//       limit: 9
-//     }
-//   })
-//   const paths = data.games.map(({ slug }: QueryGames_games) => ({
-//     params: { slug }
-//   }))
-//   return {
-//     paths,
-//     fallback: true
-//   }
-// }
+export async function getStaticPaths() {
+  const apolloClient = initializeApollo()
+  const { data } = await apolloClient.query<QueryGames, QueryGamesVariables>({
+    query: QUERY_GAMES,
+    variables: {
+      limit: 9
+    }
+  })
+  const paths = data.games.map(({ slug }: QueryGames_games) => ({
+    params: { slug }
+  }))
+  return {
+    paths,
+    fallback: true
+  }
+}
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const apolloClient = initializeApollo()
