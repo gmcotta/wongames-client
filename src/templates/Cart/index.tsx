@@ -1,52 +1,52 @@
+import { Session } from 'next-auth'
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
+
 import CartList, { CartListProps } from 'components/CartList'
 import { Container } from 'components/Container'
 import Divider from 'components/Divider'
-import Empty from 'components/Empty'
 import { GameCardProps } from 'components/GameCard'
 import Heading from 'components/Heading'
 import { HighlightProps } from 'components/Highlight'
-import PaymentOptions, { PaymentOptionsProps } from 'components/PaymentOptions'
+import PaymentForm from 'components/PaymentForm'
 import Showcase from 'components/Showcase'
+
 import Base from 'templates/Base'
+
 import * as S from './styles'
 
 export type CartTemplateProps = {
+  session?: Session
+  recommendedTitle: string
   recommendedGames: GameCardProps[]
   recommendedHighlight: HighlightProps
-} & CartListProps &
-  Pick<PaymentOptionsProps, 'cards'>
+} & CartListProps
+
+const stripe = loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`)
 
 const Cart = ({
+  session,
+  recommendedTitle,
   recommendedGames,
-  recommendedHighlight,
-  items = [],
-  total,
-  cards
+  recommendedHighlight
 }: CartTemplateProps) => {
-  const handlePayment = () => ({})
   return (
     <Base>
       <Container>
         <Heading lineLeft lineColor="secondary">
           My cart
         </Heading>
-        {!items.length ? (
-          <Empty
-            title="Your cart is empty"
-            description="Go back to store and explore great games and offers"
-            hasLink
-          />
-        ) : (
-          <S.Content>
-            <CartList items={items} total={total} />
-            <PaymentOptions cards={cards} handlePayment={handlePayment} />
-          </S.Content>
-        )}
+        <S.Content>
+          <CartList />
+          <Elements stripe={stripe}>
+            <PaymentForm session={session} />
+          </Elements>
+        </S.Content>
 
         <Divider />
       </Container>
       <Showcase
-        title="You may like these games"
+        title={recommendedTitle}
         games={recommendedGames}
         highlight={recommendedHighlight}
       />

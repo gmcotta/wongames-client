@@ -3,6 +3,14 @@ import media from 'styled-media-query'
 
 export const Wrapper = styled.div``
 
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  ${media.greaterThan('medium')`
+    grid-column: 2;
+  `}
+`
+
 export const Form = styled.form`
   ${({ theme }) => css`
     max-width: 100%;

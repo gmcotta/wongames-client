@@ -1,34 +1,26 @@
 import 'match-media-fake'
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import 'session.mock'
+import { screen, render } from 'utils/testUtils'
 
-import gamesMock from 'components/CardGameSlider/mock'
+import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 
 import Wishlist, { WishlistTemplateProps } from '.'
+import { WishlistContextDefaultValues } from 'hooks/use-wishlist'
 
 const props: WishlistTemplateProps = {
-  games: gamesMock.slice(0, 2),
   recommendedGames: gamesMock.slice(0, 2),
-  recommendedHighlight: highlightMock
+  recommendedHighlight: highlightMock,
+  recommendedTitle: 'You also will like these games'
 }
 
-jest.mock('components/Menu', () => {
-  return {
-    __esModule: true,
-    default: function Mock() {
-      return <div data-testid="Menu mock"></div>
-    }
+jest.mock('templates/Base', () => ({
+  __esModule: true,
+  default: function Mock({ children }: { children: React.ReactNode }) {
+    return <div data-testid="Base Mock">{children}</div>
   }
-})
-jest.mock('components/Footer', () => {
-  return {
-    __esModule: true,
-    default: function Mock() {
-      return <div data-testid="Footer mock"></div>
-    }
-  }
-})
+}))
+
 jest.mock('components/Showcase', () => {
   return {
     __esModule: true,
@@ -37,6 +29,7 @@ jest.mock('components/Showcase', () => {
     }
   }
 })
+
 jest.mock('components/Empty', () => {
   return {
     __esModule: true,
@@ -48,22 +41,31 @@ jest.mock('components/Empty', () => {
 
 describe('<Wishlist />', () => {
   it('should render the template', () => {
-    renderWithTheme(<Wishlist {...props} />)
+    const wishlistProviderProps = {
+      ...WishlistContextDefaultValues,
+      items: [gamesMock[0]]
+    }
+    render(<Wishlist {...props} />, { wishlistProviderProps })
     expect(
       screen.getByRole('heading', { name: /Wishlist/i })
     ).toBeInTheDocument()
-    expect(screen.getByTestId(/menu mock/i)).toBeInTheDocument()
-    expect(screen.getByTestId(/footer mock/i)).toBeInTheDocument()
-    expect(screen.getAllByText(/population zero/i)).toHaveLength(2)
+    expect(screen.getByTestId(/base mock/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/population zero/i)).toHaveLength(1)
     expect(screen.getByTestId(/showcase mock/i)).toBeInTheDocument()
   })
 
   it('should render empty component if template has no games', () => {
-    renderWithTheme(
+    const wishlistProviderProps = {
+      ...WishlistContextDefaultValues,
+      items: []
+    }
+    render(
       <Wishlist
+        recommendedTitle={props.recommendedTitle}
         recommendedGames={props.recommendedGames}
         recommendedHighlight={props.recommendedHighlight}
-      />
+      />,
+      { wishlistProviderProps }
     )
     expect(screen.getByTestId(/empty mock/i)).toBeInTheDocument()
     expect(screen.queryByText(/population zero/i)).not.toBeInTheDocument()

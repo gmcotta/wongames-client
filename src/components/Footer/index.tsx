@@ -8,18 +8,18 @@ const Footer = () => (
   <S.Wrapper>
     <Logo color="black" />
     <S.Content>
-      <S.Column>
+      <S.Column aria-label="contact">
         <Heading color="black" size="small" lineBottom lineColor="secondary">
-          CONTATO
+          CONTACT
         </Heading>
         <a href="maito:sac@wongames.com">sac@wongames.com</a>
         <span>+11 94038-0290</span>
       </S.Column>
-      <S.Column>
+      <S.Column aria-labelledby="social-media">
         <Heading color="black" size="small" lineBottom lineColor="secondary">
-          NOS ACOMPANHE
+          FOLLOW US
         </Heading>
-        <nav aria-labelledby="Social Media">
+        <nav id="social-media">
           <a
             href="https://www.instagram.com/won-games"
             target="_blank"
@@ -50,27 +50,25 @@ const Footer = () => (
           </a>
         </nav>
       </S.Column>
-      <S.Column>
+      <S.Column aria-labelledby="footer-resources">
         <Heading color="black" size="small" lineBottom lineColor="secondary">
           LINKS
         </Heading>
-        <nav aria-labelledby="Footer Resources">
-          <Link href="/">Loja</Link>
-          <Link href="/explore">Explorar</Link>
-          <Link href="/search">Buscar</Link>
-          <Link href="/faq">FAQ</Link>
+        <nav id="footer-resources">
+          <Link href="/">Home</Link>
+          <Link href="/explore">Explore</Link>
         </nav>
       </S.Column>
-      <S.Column>
+      <S.Column aria-label="localization">
         <Heading color="black" size="small" lineBottom lineColor="secondary">
-          LOCALIZAÇÃO
+          LOCALIZATION
         </Heading>
         <span>Rua 7 de Maio</span>
         <span>527 - 89020330</span>
         <span>Rio de Janeiro, Brasil</span>
       </S.Column>
     </S.Content>
-    <S.Copyright>Won Games 2020 © Todos os Direitos Reservados</S.Copyright>
+    <S.Copyright>Won Games 2021 © All Rights Reserved</S.Copyright>
   </S.Wrapper>
 )
 

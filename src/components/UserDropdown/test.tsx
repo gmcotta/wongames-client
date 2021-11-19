@@ -1,22 +1,53 @@
-import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { signOut } from 'next-auth/client'
+
+import { render, screen, waitFor } from 'utils/testUtils'
 
 import UserDropdown from '.'
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+jest.mock('next-auth/client', () => ({
+  signOut: jest.fn().mockResolvedValue({
+    url: '/'
+  })
+}))
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const useRouter = jest.spyOn(require('next/router'), 'useRouter')
+const push = jest.fn()
+const prefetch = jest.fn(() => Promise.resolve(true))
+useRouter.mockImplementation(() => ({
+  push,
+  prefetch,
+  query: '',
+  asPath: '',
+  route: '/'
+}))
+
 describe('<UserDropdown />', () => {
   it('should render the username', () => {
-    renderWithTheme(<UserDropdown username="Username" />)
+    render(<UserDropdown username="Username" />)
     expect(screen.getByText(/username/i)).toBeInTheDocument()
   })
 
   it('should render the menu', () => {
-    renderWithTheme(<UserDropdown username="Username" />)
+    render(<UserDropdown username="Username" />)
     userEvent.click(screen.getByText(/username/i))
     expect(
       screen.getByRole('link', { name: /my profile/i })
     ).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /wishlist/i })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /sign out/i })).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: /sign out/i })
+    ).toBeInTheDocument()
+  })
+
+  it('should call signOut', async () => {
+    render(<UserDropdown username="Username" />)
+    userEvent.click(screen.getByText(/username/i))
+    userEvent.click(screen.getByRole('button', { name: /sign out/i }))
+    await waitFor(() => {
+      expect(signOut).toHaveBeenCalled()
+    })
   })
 })

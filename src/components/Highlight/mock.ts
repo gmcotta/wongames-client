@@ -1,6 +1,6 @@
 import { HighlightProps } from '.'
 
-export default {
+const mock: HighlightProps = {
   title: 'Red Dead is back',
   subtitle: "Come and see John's new adventures",
   buttonLabel: 'Buy now',
@@ -8,4 +8,6 @@ export default {
   backgroundImage: '/img/red-dead-img.jpeg',
   floatImage: '',
   contentAlignment: 'right'
-} as HighlightProps
+}
+
+export default mock

@@ -41,11 +41,11 @@ exports[`<Footer /> should render the footer with 4 columns 1`] = `
 .c3 a,
 .c3 span {
   display: block;
-  color: #8F8F8F;
+  color: #2E2F42;
   -webkit-text-decoration: none;
   text-decoration: none;
   margin-bottom: 0.8rem;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 
 .c3 a:hover {
@@ -160,13 +160,14 @@ exports[`<Footer /> should render the footer with 4 columns 1`] = `
     class="c2"
   >
     <div
+      aria-label="contact"
       class="c3"
     >
       <h2
         class="c4 c5"
         color="black"
       >
-        CONTATO
+        CONTACT
       </h2>
       <a
         href="maito:sac@wongames.com"
@@ -178,16 +179,17 @@ exports[`<Footer /> should render the footer with 4 columns 1`] = `
       </span>
     </div>
     <div
+      aria-labelledby="social-media"
       class="c3"
     >
       <h2
         class="c4 c5"
         color="black"
       >
-        NOS ACOMPANHE
+        FOLLOW US
       </h2>
       <nav
-        aria-labelledby="Social Media"
+        id="social-media"
       >
         <a
           href="https://www.instagram.com/won-games"
@@ -220,6 +222,7 @@ exports[`<Footer /> should render the footer with 4 columns 1`] = `
       </nav>
     </div>
     <div
+      aria-labelledby="footer-resources"
       class="c3"
     >
       <h2
@@ -229,38 +232,29 @@ exports[`<Footer /> should render the footer with 4 columns 1`] = `
         LINKS
       </h2>
       <nav
-        aria-labelledby="Footer Resources"
+        id="footer-resources"
       >
         <a
           href="/"
         >
-          Loja
+          Home
         </a>
         <a
           href="/explore"
         >
-          Explorar
-        </a>
-        <a
-          href="/search"
-        >
-          Buscar
-        </a>
-        <a
-          href="/faq"
-        >
-          FAQ
+          Explore
         </a>
       </nav>
     </div>
     <div
+      aria-label="localization"
       class="c3"
     >
       <h2
         class="c4 c5"
         color="black"
       >
-        LOCALIZAÇÃO
+        LOCALIZATION
       </h2>
       <span>
         Rua 7 de Maio
@@ -276,7 +270,7 @@ exports[`<Footer /> should render the footer with 4 columns 1`] = `
   <div
     class="c6"
   >
-    Won Games 2020 © Todos os Direitos Reservados
+    Won Games 2021 © All Rights Reserved
   </div>
 </footer>
 `

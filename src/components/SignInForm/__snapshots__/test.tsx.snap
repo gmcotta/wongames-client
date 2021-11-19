@@ -34,6 +34,10 @@ exports[`<SignInForm /> should render the form 1`] = `
   width: 100%;
 }
 
+.c7:focus {
+  outline: 1px dashed;
+}
+
 .c7:hover {
   background: linear-gradient(180deg,#e35565 0%,#d958a6 50%);
 }
@@ -47,6 +51,7 @@ exports[`<SignInForm /> should render the form 1`] = `
   border-radius: 0.2rem;
   padding: 0 1.6rem;
   border: 0.2rem solid #EAEAEA;
+  height: 5rem;
 }
 
 .c2 svg {
@@ -73,17 +78,10 @@ exports[`<SignInForm /> should render the form 1`] = `
   width: 100%;
 }
 
-.c5 {
-  display: block;
-  font-size: 1.2rem;
-  color: #030517;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  text-align: right;
-}
-
-.c5:hover {
-  color: #8F8F8F;
+.c4:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 2.4rem #EAEAEA inset;
+  -webkit-filter: none;
+  filter: none;
 }
 
 .c0 .c1 {
@@ -112,6 +110,19 @@ exports[`<SignInForm /> should render the form 1`] = `
 .c8 a:hover {
   -webkit-filter: brightness(0.9);
   filter: brightness(0.9);
+}
+
+.c5 {
+  display: block;
+  font-size: 1.2rem;
+  color: #030517;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  text-align: right;
+}
+
+.c5:hover {
+  color: #8F8F8F;
 }
 
 <div
@@ -144,7 +155,7 @@ exports[`<SignInForm /> should render the form 1`] = `
           class="c4"
           name="email"
           placeholder="Email"
-          type="email"
+          type="text"
           value=""
         />
       </div>
@@ -189,15 +200,18 @@ exports[`<SignInForm /> should render the form 1`] = `
     </div>
     <a
       class="c5"
-      href="#"
+      href="/forgot-password"
     >
       Forgot your password?
     </a>
     <button
       class="c6 c7"
+      type="submit"
     >
       <span>
-        Sign in now
+        <span>
+          Sign in now
+        </span>
       </span>
     </button>
     <div

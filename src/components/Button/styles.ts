@@ -61,6 +61,10 @@ export const Wrapper = styled.button<WrapperProps>`
     ${minimal && wrapperModifiers.minimal(theme)};
     ${disabled && wrapperModifiers.disabled()};
 
+    &:focus {
+      outline: 1px dashed;
+    }
+
     &:hover {
       background: ${minimal
         ? 'none'

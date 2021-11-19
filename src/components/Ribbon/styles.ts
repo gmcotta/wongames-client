@@ -40,7 +40,7 @@ export const Wrapper = styled.div<Omit<RibbonProps, 'children'>>`
     ${!!size && wrapperModifiers[size](theme)}
     position: absolute;
     top: ${theme.spacings.xsmall};
-
+    z-index: ${theme.layers.base};
     display: flex;
     align-items: center;
     justify-content: center;

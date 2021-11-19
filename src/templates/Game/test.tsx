@@ -1,12 +1,11 @@
 import 'match-media-fake'
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { screen, render } from 'utils/testUtils'
 
 import galleryMock from 'components/Gallery/mock'
 import textContentMock from 'components/TextContent/mock'
 import gameInfoMock from 'components/GameInfo/mock'
 import gameDetailsMock from 'components/GameDetails/mock'
-import gamesMock from 'components/CardGameSlider/mock'
+import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 
 import Game, { GameTemplateProps } from '.'
@@ -17,27 +16,21 @@ const props: GameTemplateProps = {
   gallery: galleryMock.slice(0, 2),
   description: textContentMock.content,
   details: gameDetailsMock,
+  upcomingTitle: 'Title',
   upcomingGames: gamesMock,
   upcomingHighlight: highlightMock,
-  recommendedGames: gamesMock
+  recommendedTitle: 'Title',
+  recommendedGames: gamesMock,
+  slug: 'slug'
 }
 
-jest.mock('components/Menu', () => {
-  return {
-    __esModule: true,
-    default: function Mock() {
-      return <div data-testid="Menu mock"></div>
-    }
+jest.mock('templates/Base', () => ({
+  __esModule: true,
+  default: function Mock({ children }: { children: React.ReactNode }) {
+    return <div data-testid="Base Mock">{children}</div>
   }
-})
-jest.mock('components/Footer', () => {
-  return {
-    __esModule: true,
-    default: function Mock() {
-      return <div data-testid="Footer mock"></div>
-    }
-  }
-})
+}))
+
 jest.mock('components/GameInfo', () => {
   return {
     __esModule: true,
@@ -85,9 +78,8 @@ jest.mock('components/Showcase', () => {
 
 describe('<Game />', () => {
   it('should render the components', () => {
-    renderWithTheme(<Game {...props} />)
-    expect(screen.getByTestId(/menu mock/i)).toBeInTheDocument()
-    expect(screen.getByTestId(/footer mock/i)).toBeInTheDocument()
+    render(<Game {...props} />)
+    expect(screen.getByTestId(/base mock/i)).toBeInTheDocument()
     expect(screen.getByTestId(/gameinfo mock/i)).toBeInTheDocument()
     expect(screen.getByTestId(/gallery mock/i)).toBeInTheDocument()
     expect(screen.getByTestId(/textcontent mock/i)).toBeInTheDocument()
@@ -96,16 +88,10 @@ describe('<Game />', () => {
   })
 
   it('should render the cover image', () => {
-    renderWithTheme(<Game {...props} />)
-    const cover = screen.getByRole('image', { name: /cover/i })
-    expect(cover).toBeInTheDocument()
-    expect(cover).toHaveStyle({
-      backgroundImage: `url(${props.coverSrc})`,
-      height: '39.5rem'
-    })
-    expect(cover).toHaveStyleRule('height', '70rem', {
-      media: '(min-width: 768px)'
-    })
+    render(<Game {...props} />)
+    const image = screen.getByRole('img', { name: /Borderland 3/i })
+    const cover = image.parentElement
+    expect(image).toHaveAttribute('src', props.coverSrc)
     expect(cover).toHaveStyleRule(
       'clip-path',
       'polygon(0 0,100% 0,100% 100%,0 85%)',
@@ -116,12 +102,12 @@ describe('<Game />', () => {
   })
 
   it('should not render the gallery section if no info was given', () => {
-    renderWithTheme(<Game {...props} gallery={undefined} />)
+    render(<Game {...props} gallery={undefined} />)
     expect(screen.queryByTestId(/gallery mock/i)).not.toBeInTheDocument()
   })
 
   it('should not render the gallery on mobile', () => {
-    renderWithTheme(<Game {...props} />)
+    render(<Game {...props} />)
     expect(screen.getByTestId(/gallery mock/i).parentElement).toHaveStyle({
       display: 'none'
     })

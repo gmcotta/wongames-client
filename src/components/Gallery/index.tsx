@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 import { ArrowBackIos as ArrowLeft } from '@styled-icons/material-outlined'
 import { ArrowForwardIos as ArrowRight } from '@styled-icons/material-outlined'
 import { Close } from '@styled-icons/material-outlined'
@@ -68,7 +69,9 @@ const Gallery = ({ items }: GalleryProps) => {
     <S.Wrapper>
       <Slider ref={slider} settings={settings}>
         {items.map((item, index) => (
-          <img
+          <Image
+            width={295}
+            height={165}
             role="button"
             key={item.src}
             src={item.src}
@@ -91,7 +94,9 @@ const Gallery = ({ items }: GalleryProps) => {
         <S.Content>
           <Slider ref={slider} settings={modalSettings}>
             {items.map((item) => (
-              <img
+              <Image
+                width={1200}
+                height={675}
                 key={item.src}
                 src={item.src}
                 alt={`Image - ${item.label}`}

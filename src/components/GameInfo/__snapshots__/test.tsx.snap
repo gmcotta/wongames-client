@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<GameInfo /> should render the game info 1`] = `
-.c7 {
+.c8 {
   display: inline-block;
   vertical-align: middle;
   overflow: hidden;
 }
 
-.c6 {
+.c7 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -33,19 +33,23 @@ exports[`<GameInfo /> should render the game info 1`] = `
   padding: 1.2rem 5.2rem;
 }
 
-.c6 svg {
+.c7 svg {
   width: 1.5rem;
 }
 
-.c6 svg + span {
+.c7 svg + span {
   margin-left: 0.8rem;
 }
 
-.c6:hover {
+.c7:focus {
+  outline: 1px dashed;
+}
+
+.c7:hover {
   background: linear-gradient(180deg,#e35565 0%,#d958a6 50%);
 }
 
-.c8 {
+.c9 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -73,28 +77,32 @@ exports[`<GameInfo /> should render the game info 1`] = `
   color: #F231A5;
 }
 
-.c8 svg {
+.c9 svg {
   width: 1.5rem;
 }
 
-.c8 svg + span {
+.c9 svg + span {
   margin-left: 0.8rem;
 }
 
-.c8:hover {
+.c9:focus {
+  outline: 1px dashed;
+}
+
+.c9:hover {
   background: none;
   -webkit-filter: brightness(0.9);
   filter: brightness(0.9);
 }
 
-.c1 {
+.c2 {
   color: #030517;
   position: relative;
   margin-bottom: 3.2rem;
   font-size: 2.0rem;
 }
 
-.c1::after {
+.c2::after {
   content: '';
   position: absolute;
   left: 0;
@@ -103,7 +111,7 @@ exports[`<GameInfo /> should render the game info 1`] = `
   border-bottom: 0.5rem solid #F231A5;
 }
 
-.c4 {
+.c5 {
   background-color: #3CD3C1;
   right: -2rem;
   height: 3.6rem;
@@ -111,6 +119,7 @@ exports[`<GameInfo /> should render the game info 1`] = `
   padding: 0.6rem 4rem;
   position: absolute;
   top: 1.6rem;
+  z-index: 10;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -127,19 +136,19 @@ exports[`<GameInfo /> should render the game info 1`] = `
   font-weight: 600;
 }
 
-.c4::after {
+.c5::after {
   color: #3CD3C1;
   -webkit-filter: brightness(0.44);
   filter: brightness(0.44);
 }
 
-.c4::after {
+.c5::after {
   top: 3.6rem;
   border-top-width: 1rem;
   border-right-width: 2rem;
 }
 
-.c4::after {
+.c5::after {
   content: '';
   position: absolute;
   right: 0;
@@ -156,21 +165,25 @@ exports[`<GameInfo /> should render the game info 1`] = `
   padding: 2.4rem;
 }
 
-.c0 .c3 {
+.c0 .c1 {
+  max-width: 72%;
+}
+
+.c0 .c4 {
   right: -1rem;
 }
 
-.c0 .c3::after {
+.c0 .c4::after {
   border-right-width: 1rem;
 }
 
-.c2 {
+.c3 {
   font-size: 1.4rem;
   color: #8F8F8F;
   margin-bottom: 2.4rem;
 }
 
-.c5 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -184,43 +197,49 @@ exports[`<GameInfo /> should render the game info 1`] = `
   align-items: center;
 }
 
-.c5 > button {
+.c6 > button {
   width: 100%;
   margin-bottom: 0.8rem;
 }
 
 @media (min-width:768px) {
-  .c1 {
+  .c2 {
     font-size: 2.8rem;
   }
 }
 
 @media (min-width:768px) {
-  .c0 .c3 {
+  .c0 .c1 {
+    max-width: 78%;
+  }
+}
+
+@media (min-width:768px) {
+  .c0 .c4 {
     right: 2.4rem;
     top: 2.4rem;
     font-size: 1.8rem;
   }
 
-  .c0 .c3::after {
+  .c0 .c4::after {
     border: none;
   }
 }
 
 @media (min-width:768px) {
-  .c2 {
+  .c3 {
     max-width: 77rem;
   }
 }
 
 @media (min-width:768px) {
-  .c5 {
+  .c6 {
     -webkit-flex-direction: row-reverse;
     -ms-flex-direction: row-reverse;
     flex-direction: row-reverse;
   }
 
-  .c5 > button {
+  .c6 > button {
     width: initial;
     margin-bottom: 0;
   }
@@ -228,34 +247,35 @@ exports[`<GameInfo /> should render the game info 1`] = `
 
 <div
   class="c0"
+  data-cy="game-info"
 >
   <h2
-    class="c1"
+    class="c1 c2"
     color="black"
   >
     Borderland 3
   </h2>
   <p
-    class="c2"
+    class="c3"
   >
     game description
   </p>
   <div
-    class="c3 c4"
+    class="c4 c5"
     color="secondary"
   >
-    R$ 
-    210.00
+    $210.00
   </div>
   <div
-    class="c5"
+    class="c6"
   >
     <button
-      class="c6"
+      aria-label="Add to cart"
+      class="c7"
     >
       <svg
         aria-hidden="true"
-        class="c7"
+        class="c8"
         fill="currentColor"
         focusable="false"
         viewBox="0 0 24 24"
@@ -274,11 +294,12 @@ exports[`<GameInfo /> should render the game info 1`] = `
       </span>
     </button>
     <button
-      class="c8"
+      class="c9"
     >
       <svg
         aria-hidden="true"
-        class="c7"
+        aria-label="Add to Wishlist"
+        class="c8"
         fill="currentColor"
         focusable="false"
         viewBox="0 0 24 24"
@@ -293,7 +314,7 @@ exports[`<GameInfo /> should render the game info 1`] = `
         />
       </svg>
       <span>
-        Wish list
+        Add to Wishlist
       </span>
     </button>
   </div>

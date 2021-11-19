@@ -1,5 +1,5 @@
 import 'match-media-fake'
-import { render, screen } from '@testing-library/react'
+import { render, screen } from 'utils/testUtils'
 
 import Slider from '.'
 

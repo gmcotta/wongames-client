@@ -1,18 +1,20 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { screen, render } from 'utils/testUtils'
 
 import Auth from '.'
 
 describe('<Auth />', () => {
   it('should render the auth template', () => {
-    renderWithTheme(
+    render(
       <Auth title="Auth template">
         <form>
           <input type="text" />
         </form>
       </Auth>
     )
-    expect(screen.getAllByRole('img', { name: /won games/i })).toHaveLength(2)
+    expect(screen.getAllByRole('img', { name: /won games/i })).toHaveLength(3)
+    expect(
+      screen.getByRole('img', { name: 'Won Games Auth Page' })
+    ).toBeInTheDocument()
     expect(
       screen.getByRole('heading', {
         name: /All your favorite games in one place/i

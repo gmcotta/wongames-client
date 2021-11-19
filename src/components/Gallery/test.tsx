@@ -1,13 +1,12 @@
 import 'match-media-fake'
-import { screen, fireEvent } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { render, screen, fireEvent } from 'utils/testUtils'
 
 import mock from './mock'
 import Gallery from '.'
 
 describe('<Gallery />', () => {
   it('should render thumbnails as buttons', () => {
-    renderWithTheme(<Gallery items={mock.slice(0, 2)} />)
+    render(<Gallery items={mock.slice(0, 2)} />)
     expect(
       screen.getByRole('button', { name: /thumbnail - gallery image 1/i })
     ).toHaveAttribute('src', mock[0].src)
@@ -17,7 +16,7 @@ describe('<Gallery />', () => {
   })
 
   it('should handle open modal', () => {
-    renderWithTheme(<Gallery items={mock.slice(0, 2)} />)
+    render(<Gallery items={mock.slice(0, 2)} />)
     const modal = screen.getByLabelText('modal')
     expect(modal.getAttribute('aria-hidden')).toBe('true')
     expect(modal).toHaveStyle({ opacity: 0, pointerEvents: 'none' })
@@ -29,7 +28,7 @@ describe('<Gallery />', () => {
   })
 
   it('should open modal with selected image', async () => {
-    renderWithTheme(<Gallery items={mock.slice(0, 2)} />)
+    render(<Gallery items={mock.slice(0, 2)} />)
     fireEvent.click(
       screen.getByRole('button', { name: /thumbnail - gallery image 2/i })
     )
@@ -40,7 +39,7 @@ describe('<Gallery />', () => {
   })
 
   it('should handle close modal', () => {
-    renderWithTheme(<Gallery items={mock.slice(0, 2)} />)
+    render(<Gallery items={mock.slice(0, 2)} />)
     const modal = screen.getByLabelText('modal')
     fireEvent.click(
       screen.getByRole('button', { name: /thumbnail - gallery image 1/i })
@@ -51,7 +50,7 @@ describe('<Gallery />', () => {
   })
 
   it('should close modal if esc key was pressed', () => {
-    const { container } = renderWithTheme(<Gallery items={mock.slice(0, 2)} />)
+    const { container } = render(<Gallery items={mock.slice(0, 2)} />)
     const modal = screen.getByLabelText('modal')
     fireEvent.click(
       screen.getByRole('button', { name: /thumbnail - gallery image 1/i })

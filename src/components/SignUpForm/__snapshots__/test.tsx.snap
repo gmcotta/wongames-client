@@ -34,6 +34,10 @@ exports[`<SignUpForm /> should render the form 1`] = `
   width: 100%;
 }
 
+.c6:focus {
+  outline: 1px dashed;
+}
+
 .c6:hover {
   background: linear-gradient(180deg,#e35565 0%,#d958a6 50%);
 }
@@ -47,6 +51,7 @@ exports[`<SignUpForm /> should render the form 1`] = `
   border-radius: 0.2rem;
   padding: 0 1.6rem;
   border: 0.2rem solid #EAEAEA;
+  height: 5rem;
 }
 
 .c2 svg {
@@ -71,6 +76,12 @@ exports[`<SignUpForm /> should render the form 1`] = `
   border: 0;
   outline: none;
   width: 100%;
+}
+
+.c4:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 2.4rem #EAEAEA inset;
+  -webkit-filter: none;
+  filter: none;
 }
 
 .c0 .c1 {
@@ -129,8 +140,8 @@ exports[`<SignUpForm /> should render the form 1`] = `
         </svg>
         <input
           class="c4"
-          name="name"
-          placeholder="Full Name"
+          name="username"
+          placeholder="Username"
           type="text"
           value=""
         />
@@ -162,7 +173,7 @@ exports[`<SignUpForm /> should render the form 1`] = `
           class="c4"
           name="email"
           placeholder="Email"
-          type="email"
+          type="text"
           value=""
         />
       </div>
@@ -245,9 +256,12 @@ exports[`<SignUpForm /> should render the form 1`] = `
     </div>
     <button
       class="c5 c6"
+      type="submit"
     >
       <span>
-        Sign up now
+        <span>
+          Sign up now
+        </span>
       </span>
     </button>
     <div

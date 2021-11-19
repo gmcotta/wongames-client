@@ -1,18 +1,18 @@
 import 'match-media-fake'
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import { screen, render } from 'utils/testUtils'
 
-import gamesMock from 'components/CardGameSlider/mock'
+import gamesMock from 'components/GameCardSlider/mock'
 import highlightMock from 'components/Highlight/mock'
 import cartListMock from 'components/CartList/mock'
 
 import Cart, { CartTemplateProps } from '.'
+import { CartContextDefaultValues } from 'hooks/use-cart'
 
 const props: CartTemplateProps = {
+  session: undefined,
+  recommendedTitle: 'Title',
   recommendedGames: gamesMock.slice(0, 2),
-  recommendedHighlight: highlightMock,
-  items: cartListMock,
-  total: 'R$ 430,00'
+  recommendedHighlight: highlightMock
 }
 
 jest.mock('templates/Base', () => {
@@ -51,11 +51,11 @@ jest.mock('components/CartList', () => {
   }
 })
 
-jest.mock('components/PaymentOptions', () => {
+jest.mock('components/PaymentForm', () => {
   return {
     __esModule: true,
     default: function Mock() {
-      return <div data-testid="PaymentOptions mock"></div>
+      return <div data-testid="PaymentForm mock"></div>
     }
   }
 })
@@ -70,18 +70,15 @@ jest.mock('components/Empty', () => {
 })
 
 describe('<Cart />', () => {
-  it('should render the heading', () => {
-    renderWithTheme(<Cart {...props} />)
+  it('should render the template', () => {
+    render(<Cart {...props} />, {
+      cartProviderProps: { ...CartContextDefaultValues, items: cartListMock }
+    })
     expect(
       screen.getByRole('heading', { name: /my cart/i })
     ).toBeInTheDocument()
     expect(screen.getByTestId(/Showcase mock/i)).toBeInTheDocument()
     expect(screen.getByTestId(/CartList mock/i)).toBeInTheDocument()
-    expect(screen.getByTestId(/PaymentOptions mock/i)).toBeInTheDocument()
-  })
-
-  it('should render Empty component if tempate has no items', () => {
-    renderWithTheme(<Cart {...props} items={[]} />)
-    expect(screen.getByTestId(/Empty mock/i)).toBeInTheDocument()
+    expect(screen.getByTestId(/PaymentForm mock/i)).toBeInTheDocument()
   })
 })

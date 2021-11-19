@@ -156,6 +156,9 @@ export const CreateAccount = styled.a`
   `}
 `
 export const Profile = styled.div`
+  ${DropdownStyles.Wrapper} {
+    position: sticky;
+  }
   ${DropdownStyles.Title} {
     padding-right: 0;
   }

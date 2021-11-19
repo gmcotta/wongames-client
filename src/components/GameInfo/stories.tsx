@@ -1,4 +1,5 @@
 import { Story, Meta } from '@storybook/react'
+import { CartContextData } from 'hooks/use-cart'
 import GameInfo, { GameInfoProps } from '.'
 
 import gameInfoMock from './mock'
@@ -13,10 +14,25 @@ export default {
   }
 } as Meta
 
-export const Default: Story<GameInfoProps> = (args) => (
+export const Default: Story<GameInfoProps & Pick<CartContextData, 'isInCart'>> =
+  (args) => (
+    <div style={{ maxWidth: '114rem', margin: '0 auto', padding: '1.6rem' }}>
+      <GameInfo {...args} />
+    </div>
+  )
+Default.args = {
+  ...gameInfoMock,
+  isInCart: () => false
+}
+
+export const IsInCart: Story<
+  GameInfoProps & Pick<CartContextData, 'isInCart'>
+> = (args) => (
   <div style={{ maxWidth: '114rem', margin: '0 auto', padding: '1.6rem' }}>
     <GameInfo {...args} />
   </div>
 )
-
-Default.args = gameInfoMock
+IsInCart.args = {
+  ...gameInfoMock,
+  isInCart: () => true
+}

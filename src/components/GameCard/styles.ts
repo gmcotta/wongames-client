@@ -11,8 +11,9 @@ export const Wrapper = styled.article`
   `}
 `
 
-export const ImageBox = styled.div`
-  height: 14rem;
+export const ImageBox = styled.a`
+  min-height: 14rem;
+  position: relative;
   width: 100%;
   background: #f6f7f8;
   background-image: linear-gradient(
@@ -52,8 +53,9 @@ export const Content = styled.div`
   `}
 `
 
-export const Info = styled.div`
+export const Info = styled.a`
   max-width: calc(100% - 2.5rem);
+  text-decoration: none;
 `
 
 export const Title = styled.h3`
@@ -77,7 +79,7 @@ export const FavButton = styled.div`
   ${({ theme }) => css`
     color: ${theme.colors.primary};
     position: absolute;
-    right: 0;
+    right: -1rem;
     top: -0.5rem;
     cursor: pointer;
     svg {

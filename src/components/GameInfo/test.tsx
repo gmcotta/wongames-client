@@ -1,17 +1,18 @@
-import { screen } from '@testing-library/react'
-import { renderWithTheme } from 'utils/tests/helpers'
+import 'session.mock'
+import { screen, render } from 'utils/testUtils'
 
 import GameInfo from '.'
 
 const props = {
+  id: '1',
   title: 'Borderland 3',
   description: 'game description',
-  price: '210.00'
+  price: 210
 }
 
 describe('<GameInfo />', () => {
   it('should render the game info', () => {
-    const { container } = renderWithTheme(<GameInfo {...props} />)
+    const { container } = render(<GameInfo {...props} />)
     expect(
       screen.getByRole('heading', { name: /borderland 3/i })
     ).toBeInTheDocument()
@@ -20,12 +21,12 @@ describe('<GameInfo />', () => {
     expect(container.firstChild).toMatchSnapshot()
   })
   it('should render buttons', () => {
-    renderWithTheme(<GameInfo {...props} />)
+    render(<GameInfo {...props} />)
     expect(
       screen.getByRole('button', { name: /add to cart/i })
     ).toBeInTheDocument()
     expect(
-      screen.getByRole('button', { name: /wish list/i })
+      screen.getByRole('button', { name: /add to wishlist/i })
     ).toBeInTheDocument()
   })
 })

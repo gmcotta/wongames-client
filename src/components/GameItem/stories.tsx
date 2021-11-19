@@ -7,7 +7,7 @@ export default {
   args: {
     img: 'https://source.unsplash.com/user/willianjusten/1042x580',
     title: 'Red Dead Redemption 2',
-    price: 'R$ 215,00'
+    price: '$ 215.00'
   }
 } as Meta
 
